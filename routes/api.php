@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::prefix('api/v1')->get('config', function (Request $request) {
+Route::get('config', function (Request $request) {
 
     return response()->json([
           "description" => "",
