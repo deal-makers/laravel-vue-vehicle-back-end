@@ -18,7 +18,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('config', function (Request $request) {
+Route::get('v1/config/device_group/{id}', function (Request $request, $id) {
+
+    // hardcoded reponses and id checks for now. Wil be properly
+    // modified once the DB and CRUD is done.
+
+    if ($id !== 123 && $id !== 124) {
+        return response()->json([
+            'message' => 'Wrong ID.',
+            'status_code' => 404
+        ], 404);
+    }
 
     return response()->json([
           "description" => "",
