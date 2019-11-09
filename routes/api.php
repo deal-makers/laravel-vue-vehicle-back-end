@@ -18,20 +18,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('v1/config/device_group/{id}', function (Request $request, $id) {
+Route::get('v1/config/device_group/{type}', function (Request $request, $type) {
 
     // hardcoded reponses and id checks for now. Wil be properly
     // modified once the DB and CRUD is done.
 
-    if ($id !== 123 && $id !== 124) {
+    if ($type != 'rfid_trigger') {
         return response()->json([
-            'message' => 'Wrong ID.',
+            'message' => 'Unknown device_group type ' . $type,
             'status_code' => 404
         ], 404);
     }
 
     return response()->json([
-          "description" => "",
+          "description" => "Configuration data for device groups.",
           "device_groups" => [
               [
                 "id" => 123,
