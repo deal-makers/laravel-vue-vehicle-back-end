@@ -9,7 +9,7 @@
 |
 */
 
-Route::prefix('v1/logs')->group(function() {
-        Route::get('get/{device_rfid}', 'LogController@getLogByDeviceRfid');
+Route::prefix('logs')->group(function() {
+        Route::post('get/{device_rfid}', 'LogController@getLogByDeviceRfid');
         Route::post('create/{deviceRfid}', 'LogController@storeLogData');
     });

@@ -8,7 +8,7 @@
 | Look in app/Providers/RouteServiceProvider for more info
 |
 */
-Route::prefix('v1/config')->group(function() {
+Route::prefix('config')->group(function() {
 
     Route::get('device_group/{type}', function (Request $request, $type) {
 

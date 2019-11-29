@@ -46,6 +46,10 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapConfigRoutes();
+
+        $this->mapLogRoutes();
+
         //
     }
 
@@ -86,9 +90,9 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapLogRoutes()
     {
         Route::prefix($this->apiPrefix)
-        ->middleware('api')
-        ->namespace($this->namespace)
-        ->group(base_path('routes/api/log.php'));
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api/log.php'));
     }
 
     /**
@@ -99,8 +103,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapConfigRoutes()
     {
         Route::prefix($this->apiPrefix)
-        ->middleware('api')
-        ->namespace($this->namespace)
-        ->group(base_path('routes/api/device_config.php'));
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api/device_config.php'));
     }
 }

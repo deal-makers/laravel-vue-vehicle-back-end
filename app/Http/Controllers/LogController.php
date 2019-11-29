@@ -11,16 +11,25 @@ class LogController extends Controller
 	* Get Device Log file
 	*
 	* @param $deviceRfid
+	* @param Request $request
 	* @return FILE
 	*
 	**/
-    public function getLogByDeviceRfid($devideRfid)
+    public function getLogByDeviceRfid(Request $request, $devideRfid)
     {
-    	$logs = Log::where('device_rfid', $device_rfid)->sortBy('reported_at', 'DESC')->get();
+    	try {
+	    	$logs = Log::where('device_rfid', $device_rfid)->sortBy('reported_at', 'DESC')->get();
 
-    	return response()->json([
-    		$log[0]->device_rfid => $logs;
-    	], 201);
+	    	return response()->json([
+	    		$log[0]->device_rfid => $logs
+	    	], 201);
+
+    	} catch(\Exception $e) {
+    		return response()->json([
+    			'message' => 'Error handling request!',
+    			'error' => $e->getMessage()
+    		], 500);
+    	}
     }
 
 	/**
@@ -32,7 +41,7 @@ class LogController extends Controller
 	**/
     public function storeLogData($log)
     {
-    	try{
+    	try {
 	    	$newLog = new Log();
 	    	$newLog->group_id = $log->group_id;
 	    	$newLog->device_rfid = $log->device_rfid;
@@ -47,7 +56,7 @@ class LogController extends Controller
     		
 	    } catch(\Exception $e) {
 	    	return response()->json([
-	    		'message' => 'Log not saved!'
+	    		'message' => 'Log not saved!',
 	    		'error' => $e->getMessage()
 	    	], 500);
 	    }
