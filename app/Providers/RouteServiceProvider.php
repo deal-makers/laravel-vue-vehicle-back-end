@@ -17,6 +17,13 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'App\Http\Controllers';
 
     /**
+    * Define your custom API route files prefix here
+    *
+    * @var string
+    **/
+    protected $apiPrefix = 'api/v1';
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
@@ -38,6 +45,10 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+
+        $this->mapConfigRoutes();
+
+        $this->mapLogRoutes();
 
         //
     }
@@ -69,5 +80,31 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define the "api/logs" routes for the application.
+     *
+     * @return void
+     */
+    protected function mapLogRoutes()
+    {
+        Route::prefix($this->apiPrefix)
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api/log.php'));
+    }
+
+    /**
+     * Define the "api/config" routes for the application.
+     *
+     * @return void
+     */
+    protected function mapConfigRoutes()
+    {
+        Route::prefix($this->apiPrefix)
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api/device_config.php'));
     }
 }

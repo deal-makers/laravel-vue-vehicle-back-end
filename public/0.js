@@ -633,6 +633,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -663,7 +665,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      clickNotClose: false,
+      clickNotClose: true,
       // disable close sidebar on outside click
       reduce: false,
       // determines if sidebar is reduce - component property
@@ -2289,52 +2291,6 @@ var render = function() {
                                     "TOGGLE_IS_SIDEBAR_ACTIVE",
                                     false
                                   )
-                                }
-                              }
-                            })
-                          ]
-                        : !_vm.showCloseButton && !_vm.sidebarItemsMin
-                        ? [
-                            _c("feather-icon", {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: !_vm.reduce,
-                                  expression: "!reduce"
-                                }
-                              ],
-                              staticClass: "mr-0 cursor-pointer",
-                              attrs: {
-                                icon: "DiscIcon",
-                                "svg-classes": "stroke-current",
-                                id: "btnSidebarToggler"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.toggleReduce(true)
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("feather-icon", {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.reduce,
-                                  expression: "reduce"
-                                }
-                              ],
-                              staticClass: "mr-0 cursor-pointer",
-                              attrs: {
-                                icon: "CircleIcon",
-                                "svg-classes": "stroke-current",
-                                id: "btnSidebarToggler"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.toggleReduce(false)
                                 }
                               }
                             })
