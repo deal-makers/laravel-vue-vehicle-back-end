@@ -39,18 +39,19 @@ class LogController extends Controller
 	/**
 	* Store device Log file
 	*
-	* @param $log
+	* @param Request $request
 	* @return Response\Json 
 	*
 	**/
-    public function storeLogData($log)
+    public function storeLogData(Request $request)
     {
     	try {
 	    	$newLog = new Log();
-	    	$newLog->group_id = $log->group_id;
-	    	$newLog->device_rfid = $log->device_rfid;
-	    	$newLog->reported_by = ''; // this needs to be defined, incoming request identifier
-	    	$newLog->reported_at = $log->reported_at;
+	    	$newLog->group_id = $request->group_id;
+	    	$newLog->device_id = $request->device_id;
+	    	$newLog->event_desc = $request->event_description;
+	    	$newLog->reported_by = 1;
+	    	$newLog->reported_at = \Carbon\Carbon::parse($request->reported_at);
 	    	$newLog->save();
 
 	    	return response()->json([

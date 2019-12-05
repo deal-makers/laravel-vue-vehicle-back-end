@@ -11,5 +11,5 @@
 
 Route::prefix('logs')->group(function() {
         Route::post('get/{device_rfid}', 'LogController@getLogByDeviceRfid');
-        Route::post('create/{deviceRfid}', 'LogController@storeLogData');
+        Route::post('create', 'LogController@storeLogData');
     });
