@@ -15,9 +15,9 @@ class CreateLogsTable extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreign('group_id');
-            $table->foreign('device_id');
-            $table->foreign('reported_by');
+            $table->integer('group_id');
+            $table->integer('device_id');
+            $table->integer('reported_by');
             $table->text('event_desc');
             $table->datetime('reported_at')->nullable()->default(null); // datetime from device
             $table->timestamps();

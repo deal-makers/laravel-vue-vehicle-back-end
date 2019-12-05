@@ -10,19 +10,23 @@ class LogController extends Controller
 	/**
 	* Get Device Log file
 	*
-	* @param $deviceRfid
+	* @param $device_id
 	* @param Request $request
 	* @return FILE
 	*
 	**/
-    public function getLogByDeviceRfid(Request $request, $devideRfid)
+    public function getLogByDeviceRfid(Request $request, $device_id)
     {
     	try {
-	    	$logs = Log::where('device_rfid', $device_rfid)->sortBy('reported_at', 'DESC')->get();
+	    	$logs = Log::where('device_id', $device_id)->orderBy('reported_at', 'DESC')->get();
 
-	    	return response()->json([
-	    		$log[0]->device_rfid => $logs
-	    	], 201);
+	    	if(count($logs) < 1) {
+	    		return response()->json([
+	    			'Message' => 'No data.'
+	    		], 404);
+	    	} else {
+	    		return response()->json($logs, 201);
+	    	}
 
     	} catch(\Exception $e) {
     		return response()->json([
