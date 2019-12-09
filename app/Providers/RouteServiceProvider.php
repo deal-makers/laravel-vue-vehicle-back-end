@@ -44,11 +44,11 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
-        $this->mapWebRoutes();
-
         $this->mapConfigRoutes();
 
         $this->mapLogRoutes();
+
+        $this->mapWebRoutes();
 
         //
     }
@@ -90,7 +90,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapLogRoutes()
     {
         Route::prefix($this->apiPrefix)
-            //->middleware('api')
+            ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/log.php'));
     }

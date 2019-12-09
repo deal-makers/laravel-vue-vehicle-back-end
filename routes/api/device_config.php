@@ -8,14 +8,17 @@
 | Look in app/Providers/RouteServiceProvider for more info
 |
 */
-Route::prefix('config')->middleware('allowed')->group(function() {
 
-    Route::get('device_group/{type}', function (Request $request, $type) {
+use Illuminate\Http\Request;
+
+Route::prefix('config')->group(function() {
+
+    Route::get('device_group/{type}', function (Request $request) {
 
         // hardcoded reponses and id checks for now. Wil be properly
         // modified once the DB and CRUD is done.
 
-        if ($type != 'rfid_trigger') {
+        if ($request->type != 'rfid_trigger') {
             return response()->json([
                 'message' => 'Unknown device_group type ' . $type,
                 'status_code' => 404
