@@ -26,8 +26,6 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-    Route::post('')
-
     // Registration Routes...
     //Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
     //Route::post('register', 'Auth\RegisterController@register');
