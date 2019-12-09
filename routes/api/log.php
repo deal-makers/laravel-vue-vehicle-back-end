@@ -9,7 +9,7 @@
 |
 */
 
-Route::prefix('logs')->group(function() {
-        Route::post('get/{device_rfid}', 'LogController@getLogByDeviceRfid');
+Route::prefix('logs')->middleware('allowed')->group(function() {
+        Route::post('get/{device_id}', 'LogController@getLogByDeviceRfid');
         Route::post('create', 'LogController@storeLogData');
     });

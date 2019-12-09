@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLogsTable extends Migration
+class CreateDeviceTokensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('logs', function (Blueprint $table) {
+        Schema::create('device_tokens', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('device_group_id')->unsigned();
-            $table->integer('device_id')->unsigned();
-            $table->integer('reported_by')->unsigned();
-            $table->text('event_desc');
-            $table->datetime('reported_at')->nullable()->default(null); // datetime from device
+            $table->string('type');
+            $table->integer('user_id')->nullable()->unsigned();
+            $table->integer('device_id')->nullable()->unsigned();
+            $table->string('api_token')->unique()->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logs');
+        Schema::dropIfExists('device_tokens');
     }
 }

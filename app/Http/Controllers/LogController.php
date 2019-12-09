@@ -40,25 +40,25 @@ class LogController extends Controller
 	* Store device Log file
 	*
 	* @param Request $request
-	* @return Response\Json 
+	* @return Response\Json
 	*
 	**/
     public function storeLogData(Request $request)
     {
     	try {
 	    	$newLog = new Log();
-	    	$newLog->group_id = $request->group_id;
+	    	$newLog->group_id = $request->device_group_id;
 	    	$newLog->device_id = $request->device_id;
 	    	$newLog->event_desc = $request->event_description;
 	    	$newLog->reported_by = 1;
-	    	$newLog->reported_at = \Carbon\Carbon::parse($request->reported_at);
+	    	$newLog->reported_at = \Carbon\Carbon::parse($request->event_time);
 	    	$newLog->save();
 
 	    	return response()->json([
     			'message' => 'Log saved successfully!',
     			'status_code' => 201
     		], 201);
-    		
+
 	    } catch(\Exception $e) {
 	    	return response()->json([
 	    		'message' => 'Log not saved!',
