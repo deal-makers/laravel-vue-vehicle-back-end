@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/{any}', 'ApplicationController')->where('any', '.*');
+Route::get('/{any}', 'API\Admin\ApplicationController')->where('any', '.*');

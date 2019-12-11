@@ -17,6 +17,7 @@ class CreateDevicesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('device_group_id');
+            $table->string('device_rfid');
             $table->string('description');
             $table->string('api_token');
             $table->timestamps();

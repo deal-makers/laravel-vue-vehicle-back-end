@@ -18,6 +18,8 @@ class CreateDeviceGroupsTable extends Migration
             $table->boolean('enabled');
             $table->string('type');
             $table->string('name');
+            $table->string('trigger_duration_ms');
+            $table->string('time_between_trigger');
             $table->timestamps();
         });
     }

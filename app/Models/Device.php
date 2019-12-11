@@ -15,4 +15,9 @@ class Device extends Model
     {
         return $this->hasMany(Log::class);
     }
+
+    public function deviceGroup()
+    {
+        return $this->hasOne(DeviceGroup::class);
+    }
 }

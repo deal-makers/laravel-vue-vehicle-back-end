@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\RPI;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Log;
 
@@ -12,10 +14,10 @@ class LogController extends Controller
 	*
 	* @param $device_id
 	* @param Request $request
-	* @return FILE
+	* @return JsonResponse
 	*
 	**/
-    public function getLogByDeviceRfid(Request $request, $device_id)
+    public function getLogByDeviceId(Request $request, $device_id)
     {
     	try {
 	    	$logs = Log::where('device_id', $device_id)->orderBy('reported_at', 'DESC')->get();
@@ -40,7 +42,7 @@ class LogController extends Controller
 	* Store device Log file
 	*
 	* @param Request $request
-	* @return Response\Json
+	* @return JsonResponse
 	*
 	**/
     public function storeLogData(Request $request)
