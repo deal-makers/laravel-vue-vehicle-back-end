@@ -13,7 +13,7 @@ class LogsTableSeeder extends Seeder
     {
     	for($i=0;$i<=10;$i++) {
     		DB::table('logs')->insert([
-	            'group_id' => mt_rand(1,10),
+	            'device_group_id' => mt_rand(1,10),
 	            'device_id' => mt_rand(1,10),
 	            'reported_by' => mt_rand(1,3),
 	            'event_desc' => Str::random(20),

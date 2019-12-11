@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeviceGroupsTable extends Migration
+class CreateDeviceTokensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateDeviceGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('device_groups', function (Blueprint $table) {
+        Schema::create('device_tokens', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean('enabled');
             $table->string('type');
-            $table->string('name');
-            $table->string('trigger_duration_ms');
-            $table->string('time_between_trigger');
+            $table->integer('user_id')->nullable()->unsigned();
+            $table->integer('device_id')->nullable()->unsigned();
+            $table->string('api_token')->unique()->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateDeviceGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('device_groups');
+        Schema::dropIfExists('device_tokens');
     }
 }

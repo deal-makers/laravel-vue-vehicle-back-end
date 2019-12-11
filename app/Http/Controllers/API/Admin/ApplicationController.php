@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\Admin;
 
-use App\User;
 use App\Http\Controllers\Controller;
 
 class ApplicationController extends Controller

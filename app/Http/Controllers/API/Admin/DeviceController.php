@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DeviceGroupController extends Controller
+class DeviceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +14,9 @@ class DeviceGroupController extends Controller
      */
     public function index()
     {
-        $deviceGroups = DeviceGroup::all();
+        $devices = Device::all();
 
-        return $deviceGroups;
+        return $devices;
     }
 
     /**
@@ -36,11 +37,10 @@ class DeviceGroupController extends Controller
      */
     public function store(Request $request)
     {
-        $newDeviceGroup = new DeviceGroup();
-        $newDeviceGroup->enabled = ($request->enabled === true || $request->enabled === false) ? $request->enabled : false;
-        $newDeviceGroup->type = $request->type;
-        $newDeviceGroup->name = $request->name;
-        $newDeviceGroup->save();
+        $newDevice = new Device();
+        $newDevice->device_group_id = $request->device_group_id;
+        $newDevice->description = $request->description;
+        $newDevice->save();
 
         return true;
     }
@@ -76,11 +76,10 @@ class DeviceGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $editDeviceGroup = DeviceGroup::findOrFail($id);
-        $editDeviceGroup->enabled = ($request->enabled === true || $request->enabled === false) ? $request->enabled : $editDeviceGroup->enabled;
-        $editDeviceGroup->type = $request->type;
-        $editDeviceGroup->name = $request->name;
-        $editDeviceGroup->save();
+        $device = Device::findOrFail($id);
+        $device->device_group_id = $request->device_group_id;
+        $device->description = $request->description;
+        $device->save();
 
         return true;
     }
@@ -93,8 +92,8 @@ class DeviceGroupController extends Controller
      */
     public function destroy($id)
     {
-        $deviceGroup = DeviceGroup::findOrFail($id);
-        $deviceGroup->delete();
+        $device = Device::findOrFail($id);
+        $device->delete();
 
         return true;
     }
