@@ -31,54 +31,16 @@ class DeviceGroupConfigController extends Controller
         foreach($deviceGroups as $dg) {
             $response['device_groups'][] = [
                 'id' => $dg->id,
+                'name' => $dg->name,
                 'enabled' => $dg->enabled,
                 'type' => $dg->type,
                 'trigger_duration_ms' => $dg->trigger_duration_ms,
                 'time_between_trigger_seconds' => $dg->time_between_trigger,
-                'devices' => []
+                'devices' => [$dg->devices]
             ];
-            foreach($dg->devices() as $groupDevice) {
-                $response['device_groups'][]['devices'] = ['bla' => 'blaa'];
-            }
         }
 
-        return response()->json($response);
+        return response()->json($response, 200);
 
-        return response()->json([
-            "description" => $description,
-            "device_groups" => [
-                [
-                    "id" => 123,
-                    "enabled" => 1,
-                    "type" => "rfid_trigger",
-                    "name" => "Large Forklifts",
-                    "trigger_duration_ms" => 5000,
-                    "time_between_trigger_seconds" => 86400,
-                    "devices" => [[
-                        "name" => "Blue forklift #1",
-                        "rfid" => "293012938209198321038"
-                    ],[
-                        "name" => "Blue forklift #2",
-                        "rfid" => "102938283850391832938"
-                    ]]
-                ],
-                [
-                    "id" => 124,
-                    "enabled" => 1,
-                    "type" => "rfid_trigger",
-                    "name" => "Scissor Lifts",
-                    "trigger_duration_ms" => 9000,
-                    "time_between_trigger_seconds" => 86400,
-                    "devices" => [[
-                        "name" => "Lift #1",
-                        "rfid" => "873274789238498748378"
-                    ],
-                        [
-                            "name" => "Lift #35",
-                            "rfid" => "129388380298483747437"
-                        ]]
-                ]
-            ]
-        ]);
     }
 }

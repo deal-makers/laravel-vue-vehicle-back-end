@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
         	UsersTableSeeder::class,
         	LogsTableSeeder::class,
-            DeviceTableSeeder::class
+            DeviceTableSeeder::class,
+            DeviceGroupSeeder::class
         ]);
     }
 }
