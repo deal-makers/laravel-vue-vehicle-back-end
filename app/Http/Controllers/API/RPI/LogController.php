@@ -20,7 +20,7 @@ class LogController extends Controller
     	try {
 	    	$logs = Log::where('device_id', $device_id)->orderBy('reported_at', 'DESC')->get();
 
-	    	if(count($logs) < 1) {
+	    	if(is_null($logs) || count($logs) < 1) {
 	    		return response()->json([
 	    			'Message' => 'No data.'
 	    		], 404);
