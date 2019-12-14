@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Device;
+use App\Models\DeviceAttribute;
 use App\Models\DeviceToken;
 use App\Models\User;
 use Closure;
@@ -25,7 +26,7 @@ class CheckApiToken
         }
 
         $checkUser = User::where('api_token', $request->api_token)->first();
-        $checkDevice = Device::where('api_token', $request->api_token)->first();
+        $checkDevice = DeviceAttribute::where('name', 'api_token')->where('value', $request->api_token)->first();
 
         if(!$checkUser && !$checkDevice) {
             return response()->json([

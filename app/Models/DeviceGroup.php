@@ -15,4 +15,9 @@ class DeviceGroup extends Model
     {
         return $this->hasMany(Device::class);
     }
+
+    public function options()
+    {
+        return $this->hasMany(DeviceGroupOption::class);
+    }
 }

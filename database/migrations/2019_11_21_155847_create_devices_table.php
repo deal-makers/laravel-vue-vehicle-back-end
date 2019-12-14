@@ -15,11 +15,10 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->integer('device_group_id');
-            $table->string('device_rfid');
-            $table->string('description');
-            $table->string('api_token');
+            $table->string('name')->nullable()->default(null);
+            $table->integer('device_group_id')->nullable()->default(null);
+            $table->string('device_rfid')->nullable()->default(null);
+            $table->string('description')->nullable()->default(null);
             $table->timestamps();
         });
     }

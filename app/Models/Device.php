@@ -20,4 +20,9 @@ class Device extends Model
     {
         return $this->hasOne(DeviceGroup::class);
     }
+
+    public function attributes()
+    {
+        return $this->hasMany(DeviceAttribute::class);
+    }
 }

@@ -12,11 +12,10 @@ class DeviceTableSeeder extends Seeder
     public function run()
     {
         DB::table('devices')->insert([
-            'name' => 'Test12',
-            'device_group_id' => 2,
-            'device_rfid' => 312312,
-            'description' => Str::random('20'),
-            'api_token' => Str::random(15),
+            'name' => 'RPi',
+            'device_group_id' => null,
+            'device_rfid' => null,
+            'description' => null,
         ]);
 
         DB::table('devices')->insert([
@@ -24,14 +23,12 @@ class DeviceTableSeeder extends Seeder
             'device_group_id' => 1,
             'device_rfid' => '0007935148',
             'description' => Str::random('20'),
-            'api_token' => Str::random(15),
         ]);
         DB::table('devices')->insert([
             'name' => 'random2',
             'device_group_id' => 1,
             'device_rfid' => '0007939547',
             'description' => Str::random('20'),
-            'api_token' => Str::random(15),
         ]);
     }
 }
