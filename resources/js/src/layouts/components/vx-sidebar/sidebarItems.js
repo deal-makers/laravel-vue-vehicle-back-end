@@ -6,34 +6,15 @@ export default [
     icon: "HomeIcon",
   },
   {
-    url: null,
-    name: "Orders",
+    url: "/devices",
+    name: "Devices",
+    slug: "devices",
     icon: "FileIcon",
-    submenu: [
-      {
-        url: "/narudzbe/nova",
-        name: "New Order",
-        slug: "new order",
-        icon: "HomeIcon",
-      },
-      {
-        url: "/narudzbe/kalendar",
-        name: "Kalendar",
-        slug: "kalendar",
-        icon: "HomeIcon",
-      },
-      {
-        url: "/narudzbe/pretraga",
-        name: "Pretraga narudžbi",
-        slug: "pretraga narudzbi",
-        icon: "HomeIcon",
-      },
-      {
-        url: "/narudzbe/reklamacije",
-        name: "Pregled Reklamacija",
-        slug: "pregled reklamacija",
-        icon: "HomeIcon",
-      },
-    ]
+  },
+  {
+    url: "/devices_groups",
+    name: "Devices groups",
+    slug: "devices groups",
+    icon: "FileIcon",
   },
 ]
