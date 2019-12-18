@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DeviceGroup;
 use Illuminate\Http\Request;
 
 class DeviceGroupController extends Controller
@@ -16,17 +17,7 @@ class DeviceGroupController extends Controller
     {
         $deviceGroups = DeviceGroup::all();
 
-        return $deviceGroups;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json($deviceGroups,200);
     }
 
     /**
@@ -37,13 +28,24 @@ class DeviceGroupController extends Controller
      */
     public function store(Request $request)
     {
-        $newDeviceGroup = new DeviceGroup();
-        $newDeviceGroup->enabled = ($request->enabled === true || $request->enabled === false) ? $request->enabled : false;
-        $newDeviceGroup->type = $request->type;
-        $newDeviceGroup->name = $request->name;
-        $newDeviceGroup->save();
+        try {
+            $newDeviceGroup = new DeviceGroup();
+            $newDeviceGroup->enabled = ($request->has('enabled')) ? $request->enabled : false;
+            $newDeviceGroup->type = $request->type;
+            $newDeviceGroup->name = $request->name;
+            $newDeviceGroup->trigger_duration_ms = $request->trigger_duration_ms;
+            $newDeviceGroup->time_between_trigger = $request->time_between_trigger;
+            $newDeviceGroup->save();
 
-        return true;
+            return response()->json([
+                'Message' => 'Device group created successfully!'
+            ],200);
+
+        } catch(\Exception $e) {
+            return response()->json([
+                'Error' =>  $e->getMessage()
+            ],$e->getCode());
+        }
     }
 
     /**
@@ -54,18 +56,9 @@ class DeviceGroupController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $deviceGroup = DeviceGroup::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json($deviceGroup,200);
     }
 
     /**
@@ -77,13 +70,22 @@ class DeviceGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $editDeviceGroup = DeviceGroup::findOrFail($id);
-        $editDeviceGroup->enabled = ($request->enabled === true || $request->enabled === false) ? $request->enabled : $editDeviceGroup->enabled;
-        $editDeviceGroup->type = $request->type;
-        $editDeviceGroup->name = $request->name;
-        $editDeviceGroup->save();
+        try {
+            $editDeviceGroup = DeviceGroup::findOrFail($id);
+            $editDeviceGroup->enabled = ($request->has('enabled')) ? $request->enabled : $editDeviceGroup->enabled;
+            $editDeviceGroup->type = $request->type;
+            $editDeviceGroup->name = $request->name;
+            $editDeviceGroup->save();
 
-        return true;
+            return response()->json([
+                'Message' => 'Device group created successfully!'
+            ],200);
+
+        } catch(\Exception $e) {
+            return response()->json([
+                'Error' =>  $e->getMessage()
+            ],$e->getCode());
+        }
     }
 
     /**
@@ -94,9 +96,18 @@ class DeviceGroupController extends Controller
      */
     public function destroy($id)
     {
-        $deviceGroup = DeviceGroup::findOrFail($id);
-        $deviceGroup->delete();
+        try {
+            $device = DeviceGroup::findOrFail($id);
+            $device->delete();
 
-        return true;
+            return response()->json([
+                'Message' => 'Device group removed successfully!'
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'Error' => $e->getMessage()
+            ], $e->getCode());
+        }
     }
 }

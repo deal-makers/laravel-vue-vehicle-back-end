@@ -15,17 +15,17 @@ Route::prefix('admin')->group(function() {
      * DEVICE management routes
      */
     Route::get('devices', 'API\Admin\DeviceController@index');
-    Route::get('device/{id}', 'API\Admin\DeviceController@getDevice');
-    Route::post('test', 'API\Admin\DeviceController@create');
-    Route::post('test1', 'API\Admin\DeviceController@update');
-    Route::delete('test3', 'API\Admin\DeviceController@delete');
+    Route::get('device/{id}', 'API\Admin\DeviceController@show');
+    Route::post('device/store', 'API\Admin\DeviceController@store');
+    Route::put('device/update/{id}', 'API\Admin\DeviceController@update');
+    Route::delete('device/delete/{id}', 'API\Admin\DeviceController@delete');
 
     /*
      * DEVICE GROUPS management routes
      */
     Route::get('device_groups', 'API\Admin\DeviceGroupController@index');
-    Route::get('device_group/{id}', 'API\Admin\DeviceGroupController@getDeviceGroup');
-    Route::post('tes', 'API\Admin\DeviceGroupController@create');
-    Route::post('tes1', 'API\Admin\DeviceGroupController@update');
-    Route::delete('tes3', 'API\Admin\DeviceGroupController@delete');
+    Route::get('device_group/{id}', 'API\Admin\DeviceGroupController@show');
+    Route::post('device_group/store', 'API\Admin\DeviceGroupController@store');
+    Route::put('device_group/update/{id}', 'API\Admin\DeviceGroupController@update');
+    Route::delete('device_group/delete/{id}', 'API\Admin\DeviceGroupController@delete');
 });

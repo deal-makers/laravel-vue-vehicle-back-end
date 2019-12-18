@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Device;
 use Illuminate\Http\Request;
 
 class DeviceController extends Controller
@@ -16,17 +17,7 @@ class DeviceController extends Controller
     {
         $devices = Device::all();
 
-        return $devices;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json($devices, 200);
     }
 
     /**
@@ -37,12 +28,23 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        $newDevice = new Device();
-        $newDevice->device_group_id = $request->device_group_id;
-        $newDevice->description = $request->description;
-        $newDevice->save();
+        try {
+            $newDevice = new Device();
+            $newDevice->name = $request->name;
+            $newDevice->device_group_id = $request->device_group_id;
+            $newDevice->device_rfid = $request->device_rfid;
+            $newDevice->description = $request->description;
+            $newDevice->save();
 
-        return true;
+            return response()->json([
+                'Message' => 'Device stored successfully!'
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'Error' => $e->getMessage()
+            ], $e->getCode());
+        }
     }
 
     /**
@@ -53,18 +55,9 @@ class DeviceController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $device = Device::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json($device,200);
     }
 
     /**
@@ -76,12 +69,22 @@ class DeviceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $device = Device::findOrFail($id);
-        $device->device_group_id = $request->device_group_id;
-        $device->description = $request->description;
-        $device->save();
+        try {
+            $device = Device::findOrFail($id);
+            $device->name = $request->name;
+            $device->device_group_id = $request->device_group_id;
+            $device->device_rfid = $request->device_rfid;
+            $device->description = $request->description;
+            $device->save();
 
-        return true;
+            return response()->json([
+               'Message' => 'Device updated successfully!'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'Error' => $e->getMessage()
+            ], $e->getCode());
+        }
     }
 
     /**
@@ -92,9 +95,18 @@ class DeviceController extends Controller
      */
     public function destroy($id)
     {
-        $device = Device::findOrFail($id);
-        $device->delete();
+        try {
+            $device = Device::findOrFail($id);
+            $device->delete();
 
-        return true;
+            return response()->json([
+                'Message' => 'Device removed successfully!'
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'Error' => $e->getMessage()
+            ], $e->getCode());
+        }
     }
 }
