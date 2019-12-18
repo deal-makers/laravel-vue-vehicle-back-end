@@ -29,25 +29,29 @@ class DeviceGroupConfigController extends Controller
             'description' => $description,
             'device_groups' => []
         ];
-        foreach($deviceGroups as $dg) {
-            $response['device_groups'][] = [
-                'name' => $dg->name,
-                'enabled' => $dg->enabled,
-                'type' => $dg->type,
-                'trigger_duration_ms' => $dg->trigger_duration_ms,
-                'time_between_trigger_seconds' => $dg->time_between_trigger,
-                'devices' => [$dg->devices->map(function ($item,$index) {
-                    return [
-                        'name' => $item['name'],
-                        'device_group_id' => $item['device_group_id'],
-                        'device_rfid' => $item['device_rfid'],
-                        'description' => $item['description']
-                    ];
-                })]
-            ];
+        try {
+            foreach($deviceGroups as $dg) {
+                $response['device_groups'][] = [
+                    'name' => $dg->name,
+                    'enabled' => $dg->enabled,
+                    'type' => $dg->type,
+                    'trigger_duration_ms' => $dg->trigger_duration_ms,
+                    'time_between_trigger_seconds' => $dg->time_between_trigger,
+                    'devices' => [$dg->devices->map(function ($item,$index) {
+                        return [
+                            'name' => $item['name'],
+                            'device_group_id' => $item['device_group_id'],
+                            'device_rfid' => $item['device_rfid'],
+                            'description' => $item['description']
+                        ];
+                    })]
+                ];
+            }
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                "Errors" => $e->getMessage()
+            ], $e->getCode());
         }
-
-        return response()->json($response, 200);
-
     }
 }
