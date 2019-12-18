@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\API\RPI;
 
 use App\Http\Controllers\Controller;
+use App\Models\Device;
+use App\Models\DeviceAttribute;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Log;
+use Illuminate\Support\Facades\Validator;
 
 class LogController extends Controller
 {
@@ -20,14 +23,14 @@ class LogController extends Controller
     public function getLogByDeviceId(Request $request, $device_id)
     {
     	try {
-	    	$logs = Log::where('device_id', $device_id)->orderBy('reported_at', 'DESC')->get();
+	    	$logs = Log::where('device_id', $device_id)->orderBy('created_at', 'DESC')->get();
 
 	    	if(is_null($logs) || count($logs) < 1) {
 	    		return response()->json([
 	    			'Message' => 'No data.'
 	    		], 404);
 	    	} else {
-	    		return response()->json($logs, 201);
+	    		return response()->json(['Logs:', $logs], 201);
 	    	}
 
     	} catch(\Exception $e) {
@@ -47,13 +50,26 @@ class LogController extends Controller
 	**/
     public function storeLogData(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'device_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'Errors' => $validator->errors()
+            ], 400);
+        }
+
+        // Getting the request sender's ID
+        $reportedBy = DeviceAttribute::where('value', $request->api_token)->pluck('device_id');
+
     	try {
 	    	$newLog = new Log();
-	    	$newLog->group_id = $request->device_group_id;
+	    	$newLog->device_group_id = $request->device_group_id;
 	    	$newLog->device_id = $request->device_id;
 	    	$newLog->event_desc = $request->event_description;
-	    	$newLog->reported_by = 1;
-	    	$newLog->reported_at = \Carbon\Carbon::parse($request->event_time);
+	    	$newLog->reported_by = $reportedBy[0];
+	    	$newLog->reported_at = ($request->event_tim) ? \Carbon\Carbon::parse($request->event_time) : null;
 	    	$newLog->save();
 
 	    	return response()->json([

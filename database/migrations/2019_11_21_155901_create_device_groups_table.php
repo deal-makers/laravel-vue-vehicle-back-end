@@ -15,11 +15,11 @@ class CreateDeviceGroupsTable extends Migration
     {
         Schema::create('device_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean('enabled');
-            $table->string('type');
-            $table->string('name');
-            $table->string('trigger_duration_ms');
-            $table->string('time_between_trigger');
+            $table->boolean('enabled')->default(0);
+            $table->string('type')->nullable();
+            $table->string('name')->nullable();
+            $table->string('trigger_duration_ms')->nullable();
+            $table->string('time_between_trigger')->nullable();
             $table->timestamps();
         });
     }

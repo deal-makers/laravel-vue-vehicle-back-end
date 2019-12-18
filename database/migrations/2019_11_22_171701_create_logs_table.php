@@ -15,10 +15,10 @@ class CreateLogsTable extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('device_group_id')->unsigned();
-            $table->integer('device_id')->unsigned();
-            $table->integer('reported_by')->unsigned();
-            $table->text('event_desc');
+            $table->integer('device_group_id')->unsigned()->nullable();
+            $table->integer('device_id')->unsigned()->nullable();
+            $table->integer('reported_by')->unsigned()->nullable();
+            $table->text('event_desc')->nullable();
             $table->datetime('reported_at')->nullable()->default(null); // datetime from device
             $table->timestamps();
         });
