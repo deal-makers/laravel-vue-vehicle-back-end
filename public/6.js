@@ -54,6 +54,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -276,7 +277,16 @@ var render = function() {
                   { staticClass: "mr-3 mb-2", on: { click: _vm.postRequest } },
                   [_vm._v("Save")]
                 )
-              : _vm._e()
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "vs-button",
+              {
+                staticClass: "mr-3 mb-2",
+                attrs: { to: "/devices", color: "danger" }
+              },
+              [_vm._v("Cancel")]
+            )
           ],
           1
         )

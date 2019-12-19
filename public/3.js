@@ -58,6 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -229,6 +230,7 @@ var render = function() {
                               staticClass: "w-full no-icon-border",
                               attrs: {
                                 icon: "icon icon-user",
+                                type: "email",
                                 "icon-pack": "feather",
                                 "label-placeholder": "Email"
                               },
@@ -248,6 +250,23 @@ var render = function() {
                                 icon: "icon icon-lock",
                                 "icon-pack": "feather",
                                 "label-placeholder": "Password"
+                              },
+                              on: {
+                                keyup: function($event) {
+                                  if (
+                                    !$event.type.indexOf("key") &&
+                                    _vm._k(
+                                      $event.keyCode,
+                                      "enter",
+                                      13,
+                                      $event.key,
+                                      "Enter"
+                                    )
+                                  ) {
+                                    return null
+                                  }
+                                  return _vm.postRequest()
+                                }
                               },
                               model: {
                                 value: _vm.password,

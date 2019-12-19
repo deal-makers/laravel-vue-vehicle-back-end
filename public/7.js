@@ -52,6 +52,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -221,20 +222,29 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "vx-row" }, [
-        _vm.data.device.name.length >= 3
-          ? _c(
-              "div",
-              { staticClass: "vx-col w-full" },
-              [
-                _c(
+        _c(
+          "div",
+          { staticClass: "vx-col w-full" },
+          [
+            _vm.data.device.name.length >= 3
+              ? _c(
                   "vs-button",
                   { staticClass: "mr-3 mb-2", on: { click: _vm.postRequest } },
                   [_vm._v("Save")]
                 )
-              ],
-              1
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "vs-button",
+              {
+                staticClass: "mr-3 mb-2",
+                attrs: { to: "/devices", color: "danger" }
+              },
+              [_vm._v("Cancel")]
             )
-          : _vm._e()
+          ],
+          1
+        )
       ])
     ],
     1
