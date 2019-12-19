@@ -37,6 +37,7 @@
 	  <div class="vx-row">
 	    <div class="vx-col w-full">
 	      <vs-button v-on:click="postRequest" class="mr-3 mb-2" v-if="data.name.length >= 3">Save</vs-button>
+				<vs-button to="/devices" class="mr-3 mb-2" color="danger">Cancel</vs-button>
 	    </div>
 	  </div>
 	</div>

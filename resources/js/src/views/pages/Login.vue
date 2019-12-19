@@ -18,12 +18,13 @@
                                 </div>
                                 <vs-input
                                     icon="icon icon-user"
+                                    type="email"
                                     icon-pack="feather"
                                     label-placeholder="Email"
                                     v-model="email"
                                     class="w-full no-icon-border"/>
 
-                                <vs-input
+                                <vs-input v-on:keyup.enter="postRequest()"
                                     type="password"
                                     icon="icon icon-lock"
                                     icon-pack="feather"

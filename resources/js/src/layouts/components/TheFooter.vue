@@ -1,6 +1,6 @@
 <template functional>
     <footer class="the-footer flex-wrap justify-between" :class="classes">
-        <span>COPYRIGHT @ {{ new Date().getFullYear() }} <a href="#" target="_blank" rel="nofollow">CrossDev Tech</a>, All rights Reserved</span>
+        <span>COPYRIGHT @ {{ new Date().getFullYear() }} <a href="http://www.oneblinktech.com" target="_blank" rel="nofollow">One Blink Technology Group</a>, All rights Reserved</span>
     </footer>
 </template>
 
