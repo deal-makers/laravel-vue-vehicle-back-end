@@ -28,6 +28,7 @@ class DeviceGroupController extends Controller
      */
     public function store(Request $request)
     {
+      //TODO: trigger not saving
         try {
             $newDeviceGroup = new DeviceGroup();
             $newDeviceGroup->enabled = ($request->has('enabled')) ? $request->enabled : false;

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\RPI;
 use App\Http\Controllers\Controller;
 use App\Models\DeviceGroup;
 use Illuminate\Http\Request;
-use function foo\func;
 
 class DeviceGroupConfigController extends Controller
 {

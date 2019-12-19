@@ -18,7 +18,7 @@ Route::prefix('admin')->group(function() {
     Route::get('device/{id}', 'API\Admin\DeviceController@show');
     Route::post('device/store', 'API\Admin\DeviceController@store');
     Route::put('device/update/{id}', 'API\Admin\DeviceController@update');
-    Route::delete('device/delete/{id}', 'API\Admin\DeviceController@delete');
+    Route::delete('device/delete/{id}', 'API\Admin\DeviceController@destroy');
 
     /*
      * DEVICE GROUPS management routes
@@ -27,5 +27,5 @@ Route::prefix('admin')->group(function() {
     Route::get('device_group/{id}', 'API\Admin\DeviceGroupController@show');
     Route::post('device_group/store', 'API\Admin\DeviceGroupController@store');
     Route::put('device_group/update/{id}', 'API\Admin\DeviceGroupController@update');
-    Route::delete('device_group/delete/{id}', 'API\Admin\DeviceGroupController@delete');
+    Route::delete('device_group/delete/{id}', 'API\Admin\DeviceGroupController@destroy');
 });

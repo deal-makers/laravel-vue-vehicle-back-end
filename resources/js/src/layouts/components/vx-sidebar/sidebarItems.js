@@ -12,9 +12,9 @@ export default [
     icon: "FileIcon",
   },
   {
-    url: "/devices_groups",
-    name: "Devices groups",
-    slug: "devices groups",
+    url: "/device_groups",
+    name: "Device Groups",
+    slug: "device groups",
     icon: "FileIcon",
   },
 ]

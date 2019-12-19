@@ -25,7 +25,7 @@ const router = new Router({
           {
             path: '/devices',
             name: 'devices',
-            component: () => import('./views/devices/devices-list.vue'),
+            component: () => import('./views/devices/device-list.vue'),
           },
           {
             path: '/devices/add',
@@ -33,24 +33,24 @@ const router = new Router({
             component: () => import('./views/devices/add-device.vue'),
           },
           {
-            path: '/devices/edit',
+            path: '/devices/edit/:id',
             name: 'edit_device',
             component: () => import('./views/devices/edit-device.vue'),
           },
           {
-            path: '/devices_groups',
-            name: 'devices_groups',
-            component: () => import('./views/devices-groups/devices-groups-list.vue'),
+            path: '/device_groups',
+            name: 'device_groups',
+            component: () => import('./views/device-groups/device-groups-list.vue'),
           },
           {
-            path: '/devices_groups/add',
-            name: 'add_devices_group',
-            component: () => import('./views/devices-groups/add-devices-group.vue'),
+            path: '/device_groups/add',
+            name: 'add_device_group',
+            component: () => import('./views/device-groups/add-device-group.vue'),
           },
           {
-            path: '/devices_groups/edit',
-            name: 'edit_devices_group',
-            component: () => import('./views/devices-groups/edit-devices-group.vue'),
+            path: '/device_groups/edit/:id',
+            name: 'edit_device_group',
+            component: () => import('./views/device-groups/edit-device-group.vue'),
           },
         ],
       },
