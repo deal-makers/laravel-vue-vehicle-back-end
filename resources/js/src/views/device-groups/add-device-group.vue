@@ -66,7 +66,7 @@ export default {
 					},
 				})
 				.then((res) =>{
-					window.location.href = "/app/devices_groups"
+					window.location.href = "/app/device_groups"
 				}).catch((err) => {
 					console.log(err);
 				})

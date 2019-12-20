@@ -75,7 +75,7 @@ __webpack_require__.r(__webpack_exports__);
           'api_token': token
         }
       }).then(function (res) {
-        window.location.href = "/app/devices_groups";
+        window.location.href = "/app/device_groups";
       })["catch"](function (err) {
         console.log(err);
       });
