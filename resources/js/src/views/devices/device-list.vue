@@ -32,50 +32,50 @@
 import axios from 'axios'
 
 export default {
-  data(){
+data(){
     return {
-      popupActive:false,
-      id:'',
-      data:[]
+        popupActive:false,
+        id:'',
+        data:[]
     }
-  },
-    methods:{
-      getData(){
+},
+methods:{
+    getData(){
         let user = JSON.parse(localStorage.user)
         let token = user.api_token
         axios.get('/api/admin/devices', {params:{api_token:token}}).then((res) =>{
-          this.data = res.data
+            this.data = res.data
         }).catch((err) => {
-          console.log(err);
+            console.log(err);
         })
-      },
-      edit(id){
+    },
+    edit(id){
         window.location.href = "/app/devices/edit/" + id
-      },
-      openPopup(id){
+    },
+    openPopup(id){
         this.id = id
         this.popupActive = true
-      },
-      deleteDevice(){
-        let user = JSON.parse(localStorage.user)
-  			let token = user.api_token
-  			let url = '/api/admin/device/delete/' + this.id
-  			axios({
-  				method: 'DELETE',
-                  url: url,
-  								params: {
-  									'api_token': token
-  								},
-  			}).then((res) =>{
-          this.popupActive = false
-          this.getData()
-        }).catch((err) => {
-          console.log(err);
-        })
-      }
     },
+    deleteDevice() {
+        let user = JSON.parse(localStorage.user)
+        let token = user.api_token
+        let url = '/api/admin/device/delete/' + this.id
+        axios({
+            method: 'DELETE',
+            url: url,
+            params: {
+                'api_token': token
+            },
+        }).then((res) =>{
+            this.popupActive = false
+            this.getData()
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+},
     beforeMount(){
-      this.getData()
+        this.getData()
     },
 }
 </script>

@@ -309,12 +309,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
@@ -1852,9 +1846,7 @@ var render = function() {
                   [
                     _c("p", { staticClass: "font-semibold" }, [
                       _vm._v(_vm._s(_vm.user.name))
-                    ]),
-                    _vm._v(" "),
-                    _c("small", [_vm._v("Available")])
+                    ])
                   ]
                 ),
                 _vm._v(" "),
@@ -1882,124 +1874,33 @@ var render = function() {
                       "vs-dropdown-menu",
                       { staticClass: "vx-navbar-dropdown" },
                       [
-                        _c(
-                          "ul",
-                          { staticStyle: { "min-width": "9rem" } },
-                          [
-                            _c(
-                              "li",
-                              {
-                                staticClass:
-                                  "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                              },
-                              [
-                                _c("feather-icon", {
-                                  attrs: {
-                                    icon: "UserIcon",
-                                    svgClasses: "w-4 h-4"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "ml-2" }, [
-                                  _vm._v("Profile")
-                                ])
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "li",
-                              {
-                                staticClass:
-                                  "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                              },
-                              [
-                                _c("feather-icon", {
-                                  attrs: {
-                                    icon: "MailIcon",
-                                    svgClasses: "w-4 h-4"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "ml-2" }, [
-                                  _vm._v("Inbox")
-                                ])
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "li",
-                              {
-                                staticClass:
-                                  "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                              },
-                              [
-                                _c("feather-icon", {
-                                  attrs: {
-                                    icon: "CheckSquareIcon",
-                                    svgClasses: "w-4 h-4"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "ml-2" }, [
-                                  _vm._v("Tasks")
-                                ])
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "li",
-                              {
-                                staticClass:
-                                  "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                              },
-                              [
-                                _c("feather-icon", {
-                                  attrs: {
-                                    icon: "MessageSquareIcon",
-                                    svgClasses: "w-4 h-4"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "ml-2" }, [
-                                  _vm._v("Chat")
-                                ])
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("vs-divider", { staticClass: "m-1" }),
-                            _vm._v(" "),
-                            _c(
-                              "li",
-                              {
-                                staticClass:
-                                  "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.logOut()
-                                  }
+                        _c("ul", { staticStyle: { "min-width": "9rem" } }, [
+                          _c(
+                            "li",
+                            {
+                              staticClass:
+                                "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
+                              on: {
+                                click: function($event) {
+                                  return _vm.logOut()
                                 }
-                              },
-                              [
-                                _c("feather-icon", {
-                                  attrs: {
-                                    icon: "LogOutIcon",
-                                    svgClasses: "w-4 h-4"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "ml-2" }, [
-                                  _vm._v("Logout")
-                                ])
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
+                              }
+                            },
+                            [
+                              _c("feather-icon", {
+                                attrs: {
+                                  icon: "LogOutIcon",
+                                  svgClasses: "w-4 h-4"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "ml-2" }, [
+                                _vm._v("Logout")
+                              ])
+                            ],
+                            1
+                          )
+                        ])
                       ]
                     )
                   ],

@@ -45,33 +45,33 @@
 import axios from 'axios'
 
 export default {
-  data(){
-    return {
-			data:{
-				device:{
-					name:''
-				}
-			}
+    data(){
+        return {
+            data:{
+                device:{
+                    name:''
+                }
+            }
+        }
+    },
+    methods: {
+        postRequest(){
+            let user = JSON.parse(localStorage.user)
+            let token = user.api_token
+            axios({
+                method: 'POST',
+                url: '/api/admin/device/store',
+                data: this.data.device,
+                params: {
+                    'api_token': token
+                },
+            })
+            .then((res) =>{
+                window.location.href = "/app/devices"
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
     }
-  },
-	methods: {
-		postRequest(){
-				let user = JSON.parse(localStorage.user)
-				let token = user.api_token
-				axios({
-					method: 'POST',
-					url: '/api/admin/device/store',
-					data: this.data.device,
-					params: {
-						'api_token': token
-					},
-				})
-				.then((res) =>{
-					window.location.href = "/app/devices"
-				}).catch((err) => {
-					console.log(err);
-				})
-		}
-	}
 }
 </script>
