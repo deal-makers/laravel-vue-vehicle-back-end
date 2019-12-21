@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Device;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DeviceController extends Controller
 {
@@ -28,9 +29,18 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+           'device_id' => 'required',
+           'name' => 'required|min:3'
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
         try {
             $newDevice = new Device();
             $newDevice->name = $request->name;
+            $newDevice->device_id = $request->device_id;
             $newDevice->device_group_id = $request->device_group_id;
             $newDevice->device_rfid = $request->device_rfid;
             $newDevice->description = $request->description;
@@ -43,7 +53,7 @@ class DeviceController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'Error' => $e->getMessage()
-            ], $e->getCode());
+            ], 500);
         }
     }
 
@@ -69,9 +79,18 @@ class DeviceController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'device_id' => 'required',
+            'name' => 'required|min:3'
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
         try {
             $device = Device::findOrFail($id);
             $device->name = $request->name;
+            $device->device_id = $request->device_id;
             $device->device_group_id = $request->device_group_id;
             $device->device_rfid = $request->device_rfid;
             $device->description = $request->description;

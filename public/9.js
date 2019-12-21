@@ -56,6 +56,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -63,7 +76,8 @@ __webpack_require__.r(__webpack_exports__);
       data: {
         name: ''
       },
-      alert: ''
+      alert: '',
+      errors: null
     };
   },
   methods: {
@@ -79,7 +93,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this.data = res.data;
       })["catch"](function (err) {
-        console.log(err);
+        _this.errors = err;
       });
     },
     postRequest: function postRequest() {
@@ -98,8 +112,8 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this2.alert = 'Device successfully updated';
       })["catch"](function (err) {
-        _this2.alert = 'Device failed to updates';
-        console.log(err);
+        _this2.errors = null;
+        _this2.errors = err.response.data;
       });
     }
   },
@@ -129,7 +143,7 @@ var render = function() {
     "div",
     { staticClass: "max-width-500" },
     [
-      _vm.data.name.length < 3
+      _vm.data.name.length < 3 && _vm.data.name !== ""
         ? _c(
             "vs-alert",
             {
@@ -138,7 +152,7 @@ var render = function() {
             },
             [
               _vm._v(
-                "\n  \t\tDevice name must me longer that three letters!\n\t\t"
+                "\n  \t\t    Device name must me longer that three letters!\n\t\t"
               )
             ]
           )
@@ -151,8 +165,28 @@ var render = function() {
               staticStyle: { "margin-bottom": "20px" },
               attrs: { color: "success" }
             },
-            [_vm._v("\n  \t\t" + _vm._s(_vm.alert) + "\n\t\t")]
+            [_vm._v("\n  \t\t    " + _vm._s(_vm.alert) + "\n\t\t")]
           )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.errors !== null
+        ? _c("vs-alert", { attrs: { color: "danger" } }, [
+            _c("b", [_vm._v("Please correct the following error(s):")]),
+            _vm._v(" "),
+            _c(
+              "ul",
+              _vm._l(_vm.errors, function(error) {
+                return _c("li", [
+                  _vm._v(
+                    "\n                    - " +
+                      _vm._s(error[0]) +
+                      "\n                "
+                  )
+                ])
+              }),
+              0
+            )
+          ])
         : _vm._e(),
       _vm._v(" "),
       _c("h2", { staticClass: "style-title" }, [_vm._v("Edit device")]),
@@ -221,6 +255,27 @@ var render = function() {
           [
             _c("vs-input", {
               staticClass: "w-full",
+              attrs: { type: "text", label: "Device ID" },
+              model: {
+                value: _vm.data.device_id,
+                callback: function($$v) {
+                  _vm.$set(_vm.data, "device_id", $$v)
+                },
+                expression: "data.device_id"
+              }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "vx-row mb-6" }, [
+        _c(
+          "div",
+          { staticClass: "vx-col w-full" },
+          [
+            _c("vs-input", {
+              staticClass: "w-full",
               attrs: { type: "text", label: "Description" },
               model: {
                 value: _vm.data.description,
@@ -261,13 +316,11 @@ var render = function() {
           "div",
           { staticClass: "vx-col w-full" },
           [
-            _vm.data.name.length >= 3
-              ? _c(
-                  "vs-button",
-                  { staticClass: "mr-3 mb-2", on: { click: _vm.postRequest } },
-                  [_vm._v("Save")]
-                )
-              : _vm._e(),
+            _c(
+              "vs-button",
+              { staticClass: "mr-3 mb-2", on: { click: _vm.postRequest } },
+              [_vm._v("Save")]
+            ),
             _vm._v(" "),
             _c(
               "vs-button",
