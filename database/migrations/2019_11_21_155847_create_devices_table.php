@@ -15,6 +15,7 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigIncrements('device_id');
             $table->string('name')->nullable()->default(null);
             $table->integer('device_group_id')->nullable()->default(null);
             $table->string('device_rfid')->nullable()->default(null);
