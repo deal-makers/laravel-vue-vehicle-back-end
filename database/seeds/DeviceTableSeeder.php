@@ -15,6 +15,7 @@ class DeviceTableSeeder extends Seeder
             'name' => 'RPi',
             'device_group_id' => null,
             'device_rfid' => null,
+            'device_id' => 111,
             'description' => null,
         ]);
 
@@ -22,12 +23,14 @@ class DeviceTableSeeder extends Seeder
             'name' => 'random1',
             'device_group_id' => 1,
             'device_rfid' => '0007935148',
+            'device_id' => 22,
             'description' => Str::random('20'),
         ]);
         DB::table('devices')->insert([
             'name' => 'random2',
             'device_group_id' => 1,
             'device_rfid' => '0007939547',
+            'device_id' => 123,
             'description' => Str::random('20'),
         ]);
     }

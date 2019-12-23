@@ -53,19 +53,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       data: {
         device: {
-          name: ''
+          device_group_id: '',
+          name: '',
+          device_id: '',
+          description: '',
+          device_rfid: ''
         }
-      }
+      },
+      errors: null
     };
   },
   methods: {
     postRequest: function postRequest() {
+      var _this = this;
+
       var user = JSON.parse(localStorage.user);
       var token = user.api_token;
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
@@ -78,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         window.location.href = "/app/devices";
       })["catch"](function (err) {
-        console.log(err);
+        _this.errors = err.response.data;
       });
     }
   }
@@ -105,7 +125,7 @@ var render = function() {
     "div",
     { staticClass: "max-width-500" },
     [
-      _vm.data.device.name.length < 3
+      _vm.data.device.name !== "" && _vm.data.device.name.length < 3
         ? _c(
             "vs-alert",
             {
@@ -114,10 +134,30 @@ var render = function() {
             },
             [
               _vm._v(
-                "\n  \t\tDevice name must me longer that three letters!\n\t\t"
+                "\n  \t\t    Device name must me longer that three letters!\n\t\t"
               )
             ]
           )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.errors !== null
+        ? _c("vs-alert", { attrs: { color: "danger" } }, [
+            _c("b", [_vm._v("Please correct the following error(s):")]),
+            _vm._v(" "),
+            _c(
+              "ul",
+              _vm._l(_vm.errors, function(error) {
+                return _c("li", [
+                  _vm._v(
+                    "\n                    - " +
+                      _vm._s(error[0]) +
+                      "\n                "
+                  )
+                ])
+              }),
+              0
+            )
+          ])
         : _vm._e(),
       _vm._v(" "),
       _c("h2", { staticClass: "style-title" }, [_vm._v("New device")]),
@@ -186,6 +226,27 @@ var render = function() {
           [
             _c("vs-input", {
               staticClass: "w-full",
+              attrs: { type: "text", label: "Device ID", required: "" },
+              model: {
+                value: _vm.data.device.device_id,
+                callback: function($$v) {
+                  _vm.$set(_vm.data.device, "device_id", $$v)
+                },
+                expression: "data.device.device_id"
+              }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "vx-row mb-6" }, [
+        _c(
+          "div",
+          { staticClass: "vx-col w-full" },
+          [
+            _c("vs-input", {
+              staticClass: "w-full",
               attrs: { type: "text", label: "Description" },
               model: {
                 value: _vm.data.device.description,
@@ -226,13 +287,11 @@ var render = function() {
           "div",
           { staticClass: "vx-col w-full" },
           [
-            _vm.data.device.name.length >= 3
-              ? _c(
-                  "vs-button",
-                  { staticClass: "mr-3 mb-2", on: { click: _vm.postRequest } },
-                  [_vm._v("Save")]
-                )
-              : _vm._e(),
+            _c(
+              "vs-button",
+              { staticClass: "mr-3 mb-2", on: { click: _vm.postRequest } },
+              [_vm._v("Save")]
+            ),
             _vm._v(" "),
             _c(
               "vs-button",
