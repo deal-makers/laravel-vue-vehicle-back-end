@@ -28,4 +28,6 @@ Route::prefix('admin')->group(function() {
     Route::post('device_group/store', 'API\Admin\DeviceGroupController@store');
     Route::put('device_group/update/{id}', 'API\Admin\DeviceGroupController@update');
     Route::delete('device_group/delete/{id}', 'API\Admin\DeviceGroupController@destroy');
+
+    Route::get('logs', 'API\Admin\LogController@searchLogs');
 });

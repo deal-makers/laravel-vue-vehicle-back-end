@@ -12,7 +12,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, ".back-to-top-fade-enter-active, \n.back-to-top-fade-leave-active {\n  transition: opacity .7s;\n}\n.back-to-top-fade-enter, \n.back-to-top-fade-leave-to {\n  opacity: 0;\n}\n.vue-back-to-top {\n  cursor:pointer;\n  position: fixed;\n  z-index: 1000;\n}\n.vue-back-to-top .default {\n  background-color: #f5c85c;\n  border-radius: 3px;\n  color: #ffffff;\n  height: 30px;\n  line-height: 30px;\n  text-align: center;\n  width: 160px;\n}\n.vue-back-to-top .default span{\n  color:#ffffff;\n}\n.vue-back-to-top--is-footer {\n  bottom: 50% !important;\n  position: absolute;\n  transform: translateY(50%);\n}", ""]);
+exports.push([module.i, ".back-to-top-fade-enter-active, \n.back-to-top-fade-leave-active {\n  -webkit-transition: opacity .7s;\n  transition: opacity .7s;\n}\n.back-to-top-fade-enter, \n.back-to-top-fade-leave-to {\n  opacity: 0;\n}\n.vue-back-to-top {\n  cursor:pointer;\n  position: fixed;\n  z-index: 1000;\n}\n.vue-back-to-top .default {\n  background-color: #f5c85c;\n  border-radius: 3px;\n  color: #ffffff;\n  height: 30px;\n  line-height: 30px;\n  text-align: center;\n  width: 160px;\n}\n.vue-back-to-top .default span{\n  color:#ffffff;\n}\n.vue-back-to-top--is-footer {\n  bottom: 50% !important;\n  position: absolute;\n  -webkit-transform: translateY(50%);\n          transform: translateY(50%);\n}", ""]);
 
 // exports
 
@@ -32,7 +32,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Sortable", function() { return Sortable; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Swap", function() { return SwapPlugin; });
 /**!
- * Sortable 1.10.0
+ * Sortable 1.10.1
  * @author	RubaXa   <trash@rubaxa.org>
  * @author	owenm    <owen23355@gmail.com>
  * @license MIT
@@ -159,12 +159,14 @@ function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance");
 }
 
-var version = "1.10.0";
+var version = "1.10.1";
 
 function userAgent(pattern) {
-  return !!
-  /*@__PURE__*/
-  navigator.userAgent.match(pattern);
+  if (typeof window !== 'undefined' && window.navigator) {
+    return !!
+    /*@__PURE__*/
+    navigator.userAgent.match(pattern);
+  }
 }
 
 var IE11OrLess = userAgent(/(?:Trident.*rv[ :]?11\.|msie|iemobile|Windows Phone)/i);
@@ -999,10 +1001,6 @@ function _dispatchEvent(info) {
   }, info));
 }
 
-if (typeof window === "undefined" || !window.document) {
-  throw new Error("Sortable.js requires a window with a document");
-}
-
 var dragEl,
     parentEl,
     ghostEl,
@@ -1040,12 +1038,14 @@ _silent = false,
     savedInputChecked = [];
 /** @const */
 
-var PositionGhostAbsolutely = IOS,
+var documentExists = typeof document !== 'undefined',
+    PositionGhostAbsolutely = IOS,
     CSSFloatProperty = Edge || IE11OrLess ? 'cssFloat' : 'float',
     // This will not pass for IE9, because IE9 DnD only works on anchors
-supportDraggable = !ChromeForAndroid && !IOS && 'draggable' in document.createElement('div'),
+supportDraggable = documentExists && !ChromeForAndroid && !IOS && 'draggable' in document.createElement('div'),
     supportCssPointerEvents = function () {
-  // false when <= IE11
+  if (!documentExists) return; // false when <= IE11
+
   if (IE11OrLess) {
     return false;
   }
@@ -1159,15 +1159,17 @@ _detectNearestEmptySortable = function _detectNearestEmptySortable(x, y) {
 }; // #1184 fix - Prevent click event on fallback if dragged but item not changed position
 
 
-document.addEventListener('click', function (evt) {
-  if (ignoreNextClick) {
-    evt.preventDefault();
-    evt.stopPropagation && evt.stopPropagation();
-    evt.stopImmediatePropagation && evt.stopImmediatePropagation();
-    ignoreNextClick = false;
-    return false;
-  }
-}, true);
+if (documentExists) {
+  document.addEventListener('click', function (evt) {
+    if (ignoreNextClick) {
+      evt.preventDefault();
+      evt.stopPropagation && evt.stopPropagation();
+      evt.stopImmediatePropagation && evt.stopImmediatePropagation();
+      ignoreNextClick = false;
+      return false;
+    }
+  }, true);
+}
 
 var nearestEmptyInsertDetectEvent = function nearestEmptyInsertDetectEvent(evt) {
   if (dragEl) {
@@ -2627,11 +2629,14 @@ function _cancelNextTick(id) {
 } // Fixed #973:
 
 
-on(document, 'touchmove', function (evt) {
-  if ((Sortable.active || awaitingDragStarted) && evt.cancelable) {
-    evt.preventDefault();
-  }
-}); // Export utils
+if (documentExists) {
+  on(document, 'touchmove', function (evt) {
+    if ((Sortable.active || awaitingDragStarted) && evt.cancelable) {
+      evt.preventDefault();
+    }
+  });
+} // Export utils
+
 
 Sortable.utils = {
   on: on,
@@ -2933,6 +2938,7 @@ var drop = function drop(_ref) {
       dispatchSortableEvent = _ref.dispatchSortableEvent,
       hideGhostForTarget = _ref.hideGhostForTarget,
       unhideGhostForTarget = _ref.unhideGhostForTarget;
+  if (!originalEvent) return;
   var toSortable = putSortable || activeSortable;
   hideGhostForTarget();
   var touch = originalEvent.changedTouches && originalEvent.changedTouches.length ? originalEvent.changedTouches[0] : originalEvent;
@@ -6743,10 +6749,15 @@ function _nonIterableSpread() {
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
 }
+// EXTERNAL MODULE: external {"commonjs":"sortablejs","commonjs2":"sortablejs","amd":"sortablejs","root":"Sortable"}
+var external_commonjs_sortablejs_commonjs2_sortablejs_amd_sortablejs_root_Sortable_ = __webpack_require__("a352");
+var external_commonjs_sortablejs_commonjs2_sortablejs_amd_sortablejs_root_Sortable_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_sortablejs_commonjs2_sortablejs_amd_sortablejs_root_Sortable_);
+
 // EXTERNAL MODULE: ./src/util/helper.js
 var helper = __webpack_require__("c649");
 
 // CONCATENATED MODULE: ./src/vuedraggable.js
+
 
 
 
@@ -7001,10 +7012,7 @@ var draggableComponent = {
     });
 
     !("draggable" in options) && (options.draggable = ">*");
-
-    var Sortable = __webpack_require__("a352").default;
-
-    this._sortable = new Sortable(this.rootContainer, options);
+    this._sortable = new external_commonjs_sortablejs_commonjs2_sortablejs_amd_sortablejs_root_Sortable_default.a(this.rootContainer, options);
     this.computeIndexes();
   },
   beforeDestroy: function beforeDestroy() {
