@@ -618,10 +618,12 @@
 }
 
 .flex {
+  display: -webkit-box !important;
   display: flex !important
 }
 
 .inline-flex {
+  display: -webkit-inline-box !important;
   display: inline-flex !important
 }
 
@@ -642,19 +644,27 @@
 }
 
 .flex-row {
-  flex-direction: row !important
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: normal !important;
+          flex-direction: row !important
 }
 
 .flex-row-reverse {
-  flex-direction: row-reverse !important
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: reverse !important;
+          flex-direction: row-reverse !important
 }
 
 .flex-col {
-  flex-direction: column !important
+  -webkit-box-orient: vertical !important;
+  -webkit-box-direction: normal !important;
+          flex-direction: column !important
 }
 
 .flex-col-reverse {
-  flex-direction: column-reverse !important
+  -webkit-box-orient: vertical !important;
+  -webkit-box-direction: reverse !important;
+          flex-direction: column-reverse !important
 }
 
 .flex-wrap {
@@ -670,23 +680,28 @@
 }
 
 .items-start {
-  align-items: flex-start !important
+  -webkit-box-align: start !important;
+          align-items: flex-start !important
 }
 
 .items-end {
-  align-items: flex-end !important
+  -webkit-box-align: end !important;
+          align-items: flex-end !important
 }
 
 .items-center {
-  align-items: center !important
+  -webkit-box-align: center !important;
+          align-items: center !important
 }
 
 .items-baseline {
-  align-items: baseline !important
+  -webkit-box-align: baseline !important;
+          align-items: baseline !important
 }
 
 .items-stretch {
-  align-items: stretch !important
+  -webkit-box-align: stretch !important;
+          align-items: stretch !important
 }
 
 .self-auto {
@@ -710,19 +725,23 @@
 }
 
 .justify-start {
-  justify-content: flex-start !important
+  -webkit-box-pack: start !important;
+          justify-content: flex-start !important
 }
 
 .justify-end {
-  justify-content: flex-end !important
+  -webkit-box-pack: end !important;
+          justify-content: flex-end !important
 }
 
 .justify-center {
-  justify-content: center !important
+  -webkit-box-pack: center !important;
+          justify-content: center !important
 }
 
 .justify-between {
-  justify-content: space-between !important
+  -webkit-box-pack: justify !important;
+          justify-content: space-between !important
 }
 
 .justify-around {
@@ -750,27 +769,33 @@
 }
 
 .flex-1 {
-  flex: 1 1 0% !important
+  -webkit-box-flex: 1 !important;
+          flex: 1 1 0% !important
 }
 
 .flex-auto {
-  flex: 1 1 auto !important
+  -webkit-box-flex: 1 !important;
+          flex: 1 1 auto !important
 }
 
 .flex-initial {
-  flex: 0 1 auto !important
+  -webkit-box-flex: 0 !important;
+          flex: 0 1 auto !important
 }
 
 .flex-none {
-  flex: none !important
+  -webkit-box-flex: 0 !important;
+          flex: none !important
 }
 
 .flex-grow-0 {
-  flex-grow: 0 !important
+  -webkit-box-flex: 0 !important;
+          flex-grow: 0 !important
 }
 
 .flex-grow {
-  flex-grow: 1 !important
+  -webkit-box-flex: 1 !important;
+          flex-grow: 1 !important
 }
 
 .flex-shrink-0 {
@@ -782,111 +807,138 @@
 }
 
 .order-1 {
-  order: 1 !important
+  -webkit-box-ordinal-group: 2 !important;
+          order: 1 !important
 }
 
 .order-2 {
-  order: 2 !important
+  -webkit-box-ordinal-group: 3 !important;
+          order: 2 !important
 }
 
 .order-3 {
-  order: 3 !important
+  -webkit-box-ordinal-group: 4 !important;
+          order: 3 !important
 }
 
 .order-4 {
-  order: 4 !important
+  -webkit-box-ordinal-group: 5 !important;
+          order: 4 !important
 }
 
 .order-5 {
-  order: 5 !important
+  -webkit-box-ordinal-group: 6 !important;
+          order: 5 !important
 }
 
 .order-6 {
-  order: 6 !important
+  -webkit-box-ordinal-group: 7 !important;
+          order: 6 !important
 }
 
 .order-first {
-  order: -1 !important
+  -webkit-box-ordinal-group: 0 !important;
+          order: -1 !important
 }
 
 .order-last {
-  order: 999 !important
+  -webkit-box-ordinal-group: 1000 !important;
+          order: 999 !important
 }
 
 .order-normal {
-  order: 0 !important
+  -webkit-box-ordinal-group: 1 !important;
+          order: 0 !important
 }
 
 .hover\:order-1:hover {
-  order: 1 !important
+  -webkit-box-ordinal-group: 2 !important;
+          order: 1 !important
 }
 
 .hover\:order-2:hover {
-  order: 2 !important
+  -webkit-box-ordinal-group: 3 !important;
+          order: 2 !important
 }
 
 .hover\:order-3:hover {
-  order: 3 !important
+  -webkit-box-ordinal-group: 4 !important;
+          order: 3 !important
 }
 
 .hover\:order-4:hover {
-  order: 4 !important
+  -webkit-box-ordinal-group: 5 !important;
+          order: 4 !important
 }
 
 .hover\:order-5:hover {
-  order: 5 !important
+  -webkit-box-ordinal-group: 6 !important;
+          order: 5 !important
 }
 
 .hover\:order-6:hover {
-  order: 6 !important
+  -webkit-box-ordinal-group: 7 !important;
+          order: 6 !important
 }
 
 .hover\:order-first:hover {
-  order: -1 !important
+  -webkit-box-ordinal-group: 0 !important;
+          order: -1 !important
 }
 
 .hover\:order-last:hover {
-  order: 999 !important
+  -webkit-box-ordinal-group: 1000 !important;
+          order: 999 !important
 }
 
 .hover\:order-normal:hover {
-  order: 0 !important
+  -webkit-box-ordinal-group: 1 !important;
+          order: 0 !important
 }
 
 .focus\:order-1:focus {
-  order: 1 !important
+  -webkit-box-ordinal-group: 2 !important;
+          order: 1 !important
 }
 
 .focus\:order-2:focus {
-  order: 2 !important
+  -webkit-box-ordinal-group: 3 !important;
+          order: 2 !important
 }
 
 .focus\:order-3:focus {
-  order: 3 !important
+  -webkit-box-ordinal-group: 4 !important;
+          order: 3 !important
 }
 
 .focus\:order-4:focus {
-  order: 4 !important
+  -webkit-box-ordinal-group: 5 !important;
+          order: 4 !important
 }
 
 .focus\:order-5:focus {
-  order: 5 !important
+  -webkit-box-ordinal-group: 6 !important;
+          order: 5 !important
 }
 
 .focus\:order-6:focus {
-  order: 6 !important
+  -webkit-box-ordinal-group: 7 !important;
+          order: 6 !important
 }
 
 .focus\:order-first:focus {
-  order: -1 !important
+  -webkit-box-ordinal-group: 0 !important;
+          order: -1 !important
 }
 
 .focus\:order-last:focus {
-  order: 999 !important
+  -webkit-box-ordinal-group: 1000 !important;
+          order: 999 !important
 }
 
 .focus\:order-normal:focus {
-  order: 0 !important
+  -webkit-box-ordinal-group: 1 !important;
+          order: 0 !important
 }
 
 .float-right {
@@ -3722,10 +3774,12 @@
   }
 
   .sm\:flex {
+    display: -webkit-box !important;
     display: flex !important
   }
 
   .sm\:inline-flex {
+    display: -webkit-inline-box !important;
     display: inline-flex !important
   }
 
@@ -3746,19 +3800,27 @@
   }
 
   .sm\:flex-row {
-    flex-direction: row !important
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+            flex-direction: row !important
   }
 
   .sm\:flex-row-reverse {
-    flex-direction: row-reverse !important
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: reverse !important;
+            flex-direction: row-reverse !important
   }
 
   .sm\:flex-col {
-    flex-direction: column !important
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+            flex-direction: column !important
   }
 
   .sm\:flex-col-reverse {
-    flex-direction: column-reverse !important
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: reverse !important;
+            flex-direction: column-reverse !important
   }
 
   .sm\:flex-wrap {
@@ -3774,23 +3836,28 @@
   }
 
   .sm\:items-start {
-    align-items: flex-start !important
+    -webkit-box-align: start !important;
+            align-items: flex-start !important
   }
 
   .sm\:items-end {
-    align-items: flex-end !important
+    -webkit-box-align: end !important;
+            align-items: flex-end !important
   }
 
   .sm\:items-center {
-    align-items: center !important
+    -webkit-box-align: center !important;
+            align-items: center !important
   }
 
   .sm\:items-baseline {
-    align-items: baseline !important
+    -webkit-box-align: baseline !important;
+            align-items: baseline !important
   }
 
   .sm\:items-stretch {
-    align-items: stretch !important
+    -webkit-box-align: stretch !important;
+            align-items: stretch !important
   }
 
   .sm\:self-auto {
@@ -3814,19 +3881,23 @@
   }
 
   .sm\:justify-start {
-    justify-content: flex-start !important
+    -webkit-box-pack: start !important;
+            justify-content: flex-start !important
   }
 
   .sm\:justify-end {
-    justify-content: flex-end !important
+    -webkit-box-pack: end !important;
+            justify-content: flex-end !important
   }
 
   .sm\:justify-center {
-    justify-content: center !important
+    -webkit-box-pack: center !important;
+            justify-content: center !important
   }
 
   .sm\:justify-between {
-    justify-content: space-between !important
+    -webkit-box-pack: justify !important;
+            justify-content: space-between !important
   }
 
   .sm\:justify-around {
@@ -3854,27 +3925,33 @@
   }
 
   .sm\:flex-1 {
-    flex: 1 1 0% !important
+    -webkit-box-flex: 1 !important;
+            flex: 1 1 0% !important
   }
 
   .sm\:flex-auto {
-    flex: 1 1 auto !important
+    -webkit-box-flex: 1 !important;
+            flex: 1 1 auto !important
   }
 
   .sm\:flex-initial {
-    flex: 0 1 auto !important
+    -webkit-box-flex: 0 !important;
+            flex: 0 1 auto !important
   }
 
   .sm\:flex-none {
-    flex: none !important
+    -webkit-box-flex: 0 !important;
+            flex: none !important
   }
 
   .sm\:flex-grow-0 {
-    flex-grow: 0 !important
+    -webkit-box-flex: 0 !important;
+            flex-grow: 0 !important
   }
 
   .sm\:flex-grow {
-    flex-grow: 1 !important
+    -webkit-box-flex: 1 !important;
+            flex-grow: 1 !important
   }
 
   .sm\:flex-shrink-0 {
@@ -3886,111 +3963,138 @@
   }
 
   .sm\:order-1 {
-    order: 1 !important
+    -webkit-box-ordinal-group: 2 !important;
+            order: 1 !important
   }
 
   .sm\:order-2 {
-    order: 2 !important
+    -webkit-box-ordinal-group: 3 !important;
+            order: 2 !important
   }
 
   .sm\:order-3 {
-    order: 3 !important
+    -webkit-box-ordinal-group: 4 !important;
+            order: 3 !important
   }
 
   .sm\:order-4 {
-    order: 4 !important
+    -webkit-box-ordinal-group: 5 !important;
+            order: 4 !important
   }
 
   .sm\:order-5 {
-    order: 5 !important
+    -webkit-box-ordinal-group: 6 !important;
+            order: 5 !important
   }
 
   .sm\:order-6 {
-    order: 6 !important
+    -webkit-box-ordinal-group: 7 !important;
+            order: 6 !important
   }
 
   .sm\:order-first {
-    order: -1 !important
+    -webkit-box-ordinal-group: 0 !important;
+            order: -1 !important
   }
 
   .sm\:order-last {
-    order: 999 !important
+    -webkit-box-ordinal-group: 1000 !important;
+            order: 999 !important
   }
 
   .sm\:order-normal {
-    order: 0 !important
+    -webkit-box-ordinal-group: 1 !important;
+            order: 0 !important
   }
 
   .sm\:hover\:order-1:hover {
-    order: 1 !important
+    -webkit-box-ordinal-group: 2 !important;
+            order: 1 !important
   }
 
   .sm\:hover\:order-2:hover {
-    order: 2 !important
+    -webkit-box-ordinal-group: 3 !important;
+            order: 2 !important
   }
 
   .sm\:hover\:order-3:hover {
-    order: 3 !important
+    -webkit-box-ordinal-group: 4 !important;
+            order: 3 !important
   }
 
   .sm\:hover\:order-4:hover {
-    order: 4 !important
+    -webkit-box-ordinal-group: 5 !important;
+            order: 4 !important
   }
 
   .sm\:hover\:order-5:hover {
-    order: 5 !important
+    -webkit-box-ordinal-group: 6 !important;
+            order: 5 !important
   }
 
   .sm\:hover\:order-6:hover {
-    order: 6 !important
+    -webkit-box-ordinal-group: 7 !important;
+            order: 6 !important
   }
 
   .sm\:hover\:order-first:hover {
-    order: -1 !important
+    -webkit-box-ordinal-group: 0 !important;
+            order: -1 !important
   }
 
   .sm\:hover\:order-last:hover {
-    order: 999 !important
+    -webkit-box-ordinal-group: 1000 !important;
+            order: 999 !important
   }
 
   .sm\:hover\:order-normal:hover {
-    order: 0 !important
+    -webkit-box-ordinal-group: 1 !important;
+            order: 0 !important
   }
 
   .sm\:focus\:order-1:focus {
-    order: 1 !important
+    -webkit-box-ordinal-group: 2 !important;
+            order: 1 !important
   }
 
   .sm\:focus\:order-2:focus {
-    order: 2 !important
+    -webkit-box-ordinal-group: 3 !important;
+            order: 2 !important
   }
 
   .sm\:focus\:order-3:focus {
-    order: 3 !important
+    -webkit-box-ordinal-group: 4 !important;
+            order: 3 !important
   }
 
   .sm\:focus\:order-4:focus {
-    order: 4 !important
+    -webkit-box-ordinal-group: 5 !important;
+            order: 4 !important
   }
 
   .sm\:focus\:order-5:focus {
-    order: 5 !important
+    -webkit-box-ordinal-group: 6 !important;
+            order: 5 !important
   }
 
   .sm\:focus\:order-6:focus {
-    order: 6 !important
+    -webkit-box-ordinal-group: 7 !important;
+            order: 6 !important
   }
 
   .sm\:focus\:order-first:focus {
-    order: -1 !important
+    -webkit-box-ordinal-group: 0 !important;
+            order: -1 !important
   }
 
   .sm\:focus\:order-last:focus {
-    order: 999 !important
+    -webkit-box-ordinal-group: 1000 !important;
+            order: 999 !important
   }
 
   .sm\:focus\:order-normal:focus {
-    order: 0 !important
+    -webkit-box-ordinal-group: 1 !important;
+            order: 0 !important
   }
 
   .sm\:float-right {
@@ -6796,10 +6900,12 @@
   }
 
   .md\:flex {
+    display: -webkit-box !important;
     display: flex !important
   }
 
   .md\:inline-flex {
+    display: -webkit-inline-box !important;
     display: inline-flex !important
   }
 
@@ -6820,19 +6926,27 @@
   }
 
   .md\:flex-row {
-    flex-direction: row !important
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+            flex-direction: row !important
   }
 
   .md\:flex-row-reverse {
-    flex-direction: row-reverse !important
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: reverse !important;
+            flex-direction: row-reverse !important
   }
 
   .md\:flex-col {
-    flex-direction: column !important
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+            flex-direction: column !important
   }
 
   .md\:flex-col-reverse {
-    flex-direction: column-reverse !important
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: reverse !important;
+            flex-direction: column-reverse !important
   }
 
   .md\:flex-wrap {
@@ -6848,23 +6962,28 @@
   }
 
   .md\:items-start {
-    align-items: flex-start !important
+    -webkit-box-align: start !important;
+            align-items: flex-start !important
   }
 
   .md\:items-end {
-    align-items: flex-end !important
+    -webkit-box-align: end !important;
+            align-items: flex-end !important
   }
 
   .md\:items-center {
-    align-items: center !important
+    -webkit-box-align: center !important;
+            align-items: center !important
   }
 
   .md\:items-baseline {
-    align-items: baseline !important
+    -webkit-box-align: baseline !important;
+            align-items: baseline !important
   }
 
   .md\:items-stretch {
-    align-items: stretch !important
+    -webkit-box-align: stretch !important;
+            align-items: stretch !important
   }
 
   .md\:self-auto {
@@ -6888,19 +7007,23 @@
   }
 
   .md\:justify-start {
-    justify-content: flex-start !important
+    -webkit-box-pack: start !important;
+            justify-content: flex-start !important
   }
 
   .md\:justify-end {
-    justify-content: flex-end !important
+    -webkit-box-pack: end !important;
+            justify-content: flex-end !important
   }
 
   .md\:justify-center {
-    justify-content: center !important
+    -webkit-box-pack: center !important;
+            justify-content: center !important
   }
 
   .md\:justify-between {
-    justify-content: space-between !important
+    -webkit-box-pack: justify !important;
+            justify-content: space-between !important
   }
 
   .md\:justify-around {
@@ -6928,27 +7051,33 @@
   }
 
   .md\:flex-1 {
-    flex: 1 1 0% !important
+    -webkit-box-flex: 1 !important;
+            flex: 1 1 0% !important
   }
 
   .md\:flex-auto {
-    flex: 1 1 auto !important
+    -webkit-box-flex: 1 !important;
+            flex: 1 1 auto !important
   }
 
   .md\:flex-initial {
-    flex: 0 1 auto !important
+    -webkit-box-flex: 0 !important;
+            flex: 0 1 auto !important
   }
 
   .md\:flex-none {
-    flex: none !important
+    -webkit-box-flex: 0 !important;
+            flex: none !important
   }
 
   .md\:flex-grow-0 {
-    flex-grow: 0 !important
+    -webkit-box-flex: 0 !important;
+            flex-grow: 0 !important
   }
 
   .md\:flex-grow {
-    flex-grow: 1 !important
+    -webkit-box-flex: 1 !important;
+            flex-grow: 1 !important
   }
 
   .md\:flex-shrink-0 {
@@ -6960,111 +7089,138 @@
   }
 
   .md\:order-1 {
-    order: 1 !important
+    -webkit-box-ordinal-group: 2 !important;
+            order: 1 !important
   }
 
   .md\:order-2 {
-    order: 2 !important
+    -webkit-box-ordinal-group: 3 !important;
+            order: 2 !important
   }
 
   .md\:order-3 {
-    order: 3 !important
+    -webkit-box-ordinal-group: 4 !important;
+            order: 3 !important
   }
 
   .md\:order-4 {
-    order: 4 !important
+    -webkit-box-ordinal-group: 5 !important;
+            order: 4 !important
   }
 
   .md\:order-5 {
-    order: 5 !important
+    -webkit-box-ordinal-group: 6 !important;
+            order: 5 !important
   }
 
   .md\:order-6 {
-    order: 6 !important
+    -webkit-box-ordinal-group: 7 !important;
+            order: 6 !important
   }
 
   .md\:order-first {
-    order: -1 !important
+    -webkit-box-ordinal-group: 0 !important;
+            order: -1 !important
   }
 
   .md\:order-last {
-    order: 999 !important
+    -webkit-box-ordinal-group: 1000 !important;
+            order: 999 !important
   }
 
   .md\:order-normal {
-    order: 0 !important
+    -webkit-box-ordinal-group: 1 !important;
+            order: 0 !important
   }
 
   .md\:hover\:order-1:hover {
-    order: 1 !important
+    -webkit-box-ordinal-group: 2 !important;
+            order: 1 !important
   }
 
   .md\:hover\:order-2:hover {
-    order: 2 !important
+    -webkit-box-ordinal-group: 3 !important;
+            order: 2 !important
   }
 
   .md\:hover\:order-3:hover {
-    order: 3 !important
+    -webkit-box-ordinal-group: 4 !important;
+            order: 3 !important
   }
 
   .md\:hover\:order-4:hover {
-    order: 4 !important
+    -webkit-box-ordinal-group: 5 !important;
+            order: 4 !important
   }
 
   .md\:hover\:order-5:hover {
-    order: 5 !important
+    -webkit-box-ordinal-group: 6 !important;
+            order: 5 !important
   }
 
   .md\:hover\:order-6:hover {
-    order: 6 !important
+    -webkit-box-ordinal-group: 7 !important;
+            order: 6 !important
   }
 
   .md\:hover\:order-first:hover {
-    order: -1 !important
+    -webkit-box-ordinal-group: 0 !important;
+            order: -1 !important
   }
 
   .md\:hover\:order-last:hover {
-    order: 999 !important
+    -webkit-box-ordinal-group: 1000 !important;
+            order: 999 !important
   }
 
   .md\:hover\:order-normal:hover {
-    order: 0 !important
+    -webkit-box-ordinal-group: 1 !important;
+            order: 0 !important
   }
 
   .md\:focus\:order-1:focus {
-    order: 1 !important
+    -webkit-box-ordinal-group: 2 !important;
+            order: 1 !important
   }
 
   .md\:focus\:order-2:focus {
-    order: 2 !important
+    -webkit-box-ordinal-group: 3 !important;
+            order: 2 !important
   }
 
   .md\:focus\:order-3:focus {
-    order: 3 !important
+    -webkit-box-ordinal-group: 4 !important;
+            order: 3 !important
   }
 
   .md\:focus\:order-4:focus {
-    order: 4 !important
+    -webkit-box-ordinal-group: 5 !important;
+            order: 4 !important
   }
 
   .md\:focus\:order-5:focus {
-    order: 5 !important
+    -webkit-box-ordinal-group: 6 !important;
+            order: 5 !important
   }
 
   .md\:focus\:order-6:focus {
-    order: 6 !important
+    -webkit-box-ordinal-group: 7 !important;
+            order: 6 !important
   }
 
   .md\:focus\:order-first:focus {
-    order: -1 !important
+    -webkit-box-ordinal-group: 0 !important;
+            order: -1 !important
   }
 
   .md\:focus\:order-last:focus {
-    order: 999 !important
+    -webkit-box-ordinal-group: 1000 !important;
+            order: 999 !important
   }
 
   .md\:focus\:order-normal:focus {
-    order: 0 !important
+    -webkit-box-ordinal-group: 1 !important;
+            order: 0 !important
   }
 
   .md\:float-right {
@@ -9870,10 +10026,12 @@
   }
 
   .lg\:flex {
+    display: -webkit-box !important;
     display: flex !important
   }
 
   .lg\:inline-flex {
+    display: -webkit-inline-box !important;
     display: inline-flex !important
   }
 
@@ -9894,19 +10052,27 @@
   }
 
   .lg\:flex-row {
-    flex-direction: row !important
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+            flex-direction: row !important
   }
 
   .lg\:flex-row-reverse {
-    flex-direction: row-reverse !important
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: reverse !important;
+            flex-direction: row-reverse !important
   }
 
   .lg\:flex-col {
-    flex-direction: column !important
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+            flex-direction: column !important
   }
 
   .lg\:flex-col-reverse {
-    flex-direction: column-reverse !important
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: reverse !important;
+            flex-direction: column-reverse !important
   }
 
   .lg\:flex-wrap {
@@ -9922,23 +10088,28 @@
   }
 
   .lg\:items-start {
-    align-items: flex-start !important
+    -webkit-box-align: start !important;
+            align-items: flex-start !important
   }
 
   .lg\:items-end {
-    align-items: flex-end !important
+    -webkit-box-align: end !important;
+            align-items: flex-end !important
   }
 
   .lg\:items-center {
-    align-items: center !important
+    -webkit-box-align: center !important;
+            align-items: center !important
   }
 
   .lg\:items-baseline {
-    align-items: baseline !important
+    -webkit-box-align: baseline !important;
+            align-items: baseline !important
   }
 
   .lg\:items-stretch {
-    align-items: stretch !important
+    -webkit-box-align: stretch !important;
+            align-items: stretch !important
   }
 
   .lg\:self-auto {
@@ -9962,19 +10133,23 @@
   }
 
   .lg\:justify-start {
-    justify-content: flex-start !important
+    -webkit-box-pack: start !important;
+            justify-content: flex-start !important
   }
 
   .lg\:justify-end {
-    justify-content: flex-end !important
+    -webkit-box-pack: end !important;
+            justify-content: flex-end !important
   }
 
   .lg\:justify-center {
-    justify-content: center !important
+    -webkit-box-pack: center !important;
+            justify-content: center !important
   }
 
   .lg\:justify-between {
-    justify-content: space-between !important
+    -webkit-box-pack: justify !important;
+            justify-content: space-between !important
   }
 
   .lg\:justify-around {
@@ -10002,27 +10177,33 @@
   }
 
   .lg\:flex-1 {
-    flex: 1 1 0% !important
+    -webkit-box-flex: 1 !important;
+            flex: 1 1 0% !important
   }
 
   .lg\:flex-auto {
-    flex: 1 1 auto !important
+    -webkit-box-flex: 1 !important;
+            flex: 1 1 auto !important
   }
 
   .lg\:flex-initial {
-    flex: 0 1 auto !important
+    -webkit-box-flex: 0 !important;
+            flex: 0 1 auto !important
   }
 
   .lg\:flex-none {
-    flex: none !important
+    -webkit-box-flex: 0 !important;
+            flex: none !important
   }
 
   .lg\:flex-grow-0 {
-    flex-grow: 0 !important
+    -webkit-box-flex: 0 !important;
+            flex-grow: 0 !important
   }
 
   .lg\:flex-grow {
-    flex-grow: 1 !important
+    -webkit-box-flex: 1 !important;
+            flex-grow: 1 !important
   }
 
   .lg\:flex-shrink-0 {
@@ -10034,111 +10215,138 @@
   }
 
   .lg\:order-1 {
-    order: 1 !important
+    -webkit-box-ordinal-group: 2 !important;
+            order: 1 !important
   }
 
   .lg\:order-2 {
-    order: 2 !important
+    -webkit-box-ordinal-group: 3 !important;
+            order: 2 !important
   }
 
   .lg\:order-3 {
-    order: 3 !important
+    -webkit-box-ordinal-group: 4 !important;
+            order: 3 !important
   }
 
   .lg\:order-4 {
-    order: 4 !important
+    -webkit-box-ordinal-group: 5 !important;
+            order: 4 !important
   }
 
   .lg\:order-5 {
-    order: 5 !important
+    -webkit-box-ordinal-group: 6 !important;
+            order: 5 !important
   }
 
   .lg\:order-6 {
-    order: 6 !important
+    -webkit-box-ordinal-group: 7 !important;
+            order: 6 !important
   }
 
   .lg\:order-first {
-    order: -1 !important
+    -webkit-box-ordinal-group: 0 !important;
+            order: -1 !important
   }
 
   .lg\:order-last {
-    order: 999 !important
+    -webkit-box-ordinal-group: 1000 !important;
+            order: 999 !important
   }
 
   .lg\:order-normal {
-    order: 0 !important
+    -webkit-box-ordinal-group: 1 !important;
+            order: 0 !important
   }
 
   .lg\:hover\:order-1:hover {
-    order: 1 !important
+    -webkit-box-ordinal-group: 2 !important;
+            order: 1 !important
   }
 
   .lg\:hover\:order-2:hover {
-    order: 2 !important
+    -webkit-box-ordinal-group: 3 !important;
+            order: 2 !important
   }
 
   .lg\:hover\:order-3:hover {
-    order: 3 !important
+    -webkit-box-ordinal-group: 4 !important;
+            order: 3 !important
   }
 
   .lg\:hover\:order-4:hover {
-    order: 4 !important
+    -webkit-box-ordinal-group: 5 !important;
+            order: 4 !important
   }
 
   .lg\:hover\:order-5:hover {
-    order: 5 !important
+    -webkit-box-ordinal-group: 6 !important;
+            order: 5 !important
   }
 
   .lg\:hover\:order-6:hover {
-    order: 6 !important
+    -webkit-box-ordinal-group: 7 !important;
+            order: 6 !important
   }
 
   .lg\:hover\:order-first:hover {
-    order: -1 !important
+    -webkit-box-ordinal-group: 0 !important;
+            order: -1 !important
   }
 
   .lg\:hover\:order-last:hover {
-    order: 999 !important
+    -webkit-box-ordinal-group: 1000 !important;
+            order: 999 !important
   }
 
   .lg\:hover\:order-normal:hover {
-    order: 0 !important
+    -webkit-box-ordinal-group: 1 !important;
+            order: 0 !important
   }
 
   .lg\:focus\:order-1:focus {
-    order: 1 !important
+    -webkit-box-ordinal-group: 2 !important;
+            order: 1 !important
   }
 
   .lg\:focus\:order-2:focus {
-    order: 2 !important
+    -webkit-box-ordinal-group: 3 !important;
+            order: 2 !important
   }
 
   .lg\:focus\:order-3:focus {
-    order: 3 !important
+    -webkit-box-ordinal-group: 4 !important;
+            order: 3 !important
   }
 
   .lg\:focus\:order-4:focus {
-    order: 4 !important
+    -webkit-box-ordinal-group: 5 !important;
+            order: 4 !important
   }
 
   .lg\:focus\:order-5:focus {
-    order: 5 !important
+    -webkit-box-ordinal-group: 6 !important;
+            order: 5 !important
   }
 
   .lg\:focus\:order-6:focus {
-    order: 6 !important
+    -webkit-box-ordinal-group: 7 !important;
+            order: 6 !important
   }
 
   .lg\:focus\:order-first:focus {
-    order: -1 !important
+    -webkit-box-ordinal-group: 0 !important;
+            order: -1 !important
   }
 
   .lg\:focus\:order-last:focus {
-    order: 999 !important
+    -webkit-box-ordinal-group: 1000 !important;
+            order: 999 !important
   }
 
   .lg\:focus\:order-normal:focus {
-    order: 0 !important
+    -webkit-box-ordinal-group: 1 !important;
+            order: 0 !important
   }
 
   .lg\:float-right {
@@ -12944,10 +13152,12 @@
   }
 
   .xl\:flex {
+    display: -webkit-box !important;
     display: flex !important
   }
 
   .xl\:inline-flex {
+    display: -webkit-inline-box !important;
     display: inline-flex !important
   }
 
@@ -12968,19 +13178,27 @@
   }
 
   .xl\:flex-row {
-    flex-direction: row !important
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+            flex-direction: row !important
   }
 
   .xl\:flex-row-reverse {
-    flex-direction: row-reverse !important
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: reverse !important;
+            flex-direction: row-reverse !important
   }
 
   .xl\:flex-col {
-    flex-direction: column !important
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+            flex-direction: column !important
   }
 
   .xl\:flex-col-reverse {
-    flex-direction: column-reverse !important
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: reverse !important;
+            flex-direction: column-reverse !important
   }
 
   .xl\:flex-wrap {
@@ -12996,23 +13214,28 @@
   }
 
   .xl\:items-start {
-    align-items: flex-start !important
+    -webkit-box-align: start !important;
+            align-items: flex-start !important
   }
 
   .xl\:items-end {
-    align-items: flex-end !important
+    -webkit-box-align: end !important;
+            align-items: flex-end !important
   }
 
   .xl\:items-center {
-    align-items: center !important
+    -webkit-box-align: center !important;
+            align-items: center !important
   }
 
   .xl\:items-baseline {
-    align-items: baseline !important
+    -webkit-box-align: baseline !important;
+            align-items: baseline !important
   }
 
   .xl\:items-stretch {
-    align-items: stretch !important
+    -webkit-box-align: stretch !important;
+            align-items: stretch !important
   }
 
   .xl\:self-auto {
@@ -13036,19 +13259,23 @@
   }
 
   .xl\:justify-start {
-    justify-content: flex-start !important
+    -webkit-box-pack: start !important;
+            justify-content: flex-start !important
   }
 
   .xl\:justify-end {
-    justify-content: flex-end !important
+    -webkit-box-pack: end !important;
+            justify-content: flex-end !important
   }
 
   .xl\:justify-center {
-    justify-content: center !important
+    -webkit-box-pack: center !important;
+            justify-content: center !important
   }
 
   .xl\:justify-between {
-    justify-content: space-between !important
+    -webkit-box-pack: justify !important;
+            justify-content: space-between !important
   }
 
   .xl\:justify-around {
@@ -13076,27 +13303,33 @@
   }
 
   .xl\:flex-1 {
-    flex: 1 1 0% !important
+    -webkit-box-flex: 1 !important;
+            flex: 1 1 0% !important
   }
 
   .xl\:flex-auto {
-    flex: 1 1 auto !important
+    -webkit-box-flex: 1 !important;
+            flex: 1 1 auto !important
   }
 
   .xl\:flex-initial {
-    flex: 0 1 auto !important
+    -webkit-box-flex: 0 !important;
+            flex: 0 1 auto !important
   }
 
   .xl\:flex-none {
-    flex: none !important
+    -webkit-box-flex: 0 !important;
+            flex: none !important
   }
 
   .xl\:flex-grow-0 {
-    flex-grow: 0 !important
+    -webkit-box-flex: 0 !important;
+            flex-grow: 0 !important
   }
 
   .xl\:flex-grow {
-    flex-grow: 1 !important
+    -webkit-box-flex: 1 !important;
+            flex-grow: 1 !important
   }
 
   .xl\:flex-shrink-0 {
@@ -13108,111 +13341,138 @@
   }
 
   .xl\:order-1 {
-    order: 1 !important
+    -webkit-box-ordinal-group: 2 !important;
+            order: 1 !important
   }
 
   .xl\:order-2 {
-    order: 2 !important
+    -webkit-box-ordinal-group: 3 !important;
+            order: 2 !important
   }
 
   .xl\:order-3 {
-    order: 3 !important
+    -webkit-box-ordinal-group: 4 !important;
+            order: 3 !important
   }
 
   .xl\:order-4 {
-    order: 4 !important
+    -webkit-box-ordinal-group: 5 !important;
+            order: 4 !important
   }
 
   .xl\:order-5 {
-    order: 5 !important
+    -webkit-box-ordinal-group: 6 !important;
+            order: 5 !important
   }
 
   .xl\:order-6 {
-    order: 6 !important
+    -webkit-box-ordinal-group: 7 !important;
+            order: 6 !important
   }
 
   .xl\:order-first {
-    order: -1 !important
+    -webkit-box-ordinal-group: 0 !important;
+            order: -1 !important
   }
 
   .xl\:order-last {
-    order: 999 !important
+    -webkit-box-ordinal-group: 1000 !important;
+            order: 999 !important
   }
 
   .xl\:order-normal {
-    order: 0 !important
+    -webkit-box-ordinal-group: 1 !important;
+            order: 0 !important
   }
 
   .xl\:hover\:order-1:hover {
-    order: 1 !important
+    -webkit-box-ordinal-group: 2 !important;
+            order: 1 !important
   }
 
   .xl\:hover\:order-2:hover {
-    order: 2 !important
+    -webkit-box-ordinal-group: 3 !important;
+            order: 2 !important
   }
 
   .xl\:hover\:order-3:hover {
-    order: 3 !important
+    -webkit-box-ordinal-group: 4 !important;
+            order: 3 !important
   }
 
   .xl\:hover\:order-4:hover {
-    order: 4 !important
+    -webkit-box-ordinal-group: 5 !important;
+            order: 4 !important
   }
 
   .xl\:hover\:order-5:hover {
-    order: 5 !important
+    -webkit-box-ordinal-group: 6 !important;
+            order: 5 !important
   }
 
   .xl\:hover\:order-6:hover {
-    order: 6 !important
+    -webkit-box-ordinal-group: 7 !important;
+            order: 6 !important
   }
 
   .xl\:hover\:order-first:hover {
-    order: -1 !important
+    -webkit-box-ordinal-group: 0 !important;
+            order: -1 !important
   }
 
   .xl\:hover\:order-last:hover {
-    order: 999 !important
+    -webkit-box-ordinal-group: 1000 !important;
+            order: 999 !important
   }
 
   .xl\:hover\:order-normal:hover {
-    order: 0 !important
+    -webkit-box-ordinal-group: 1 !important;
+            order: 0 !important
   }
 
   .xl\:focus\:order-1:focus {
-    order: 1 !important
+    -webkit-box-ordinal-group: 2 !important;
+            order: 1 !important
   }
 
   .xl\:focus\:order-2:focus {
-    order: 2 !important
+    -webkit-box-ordinal-group: 3 !important;
+            order: 2 !important
   }
 
   .xl\:focus\:order-3:focus {
-    order: 3 !important
+    -webkit-box-ordinal-group: 4 !important;
+            order: 3 !important
   }
 
   .xl\:focus\:order-4:focus {
-    order: 4 !important
+    -webkit-box-ordinal-group: 5 !important;
+            order: 4 !important
   }
 
   .xl\:focus\:order-5:focus {
-    order: 5 !important
+    -webkit-box-ordinal-group: 6 !important;
+            order: 5 !important
   }
 
   .xl\:focus\:order-6:focus {
-    order: 6 !important
+    -webkit-box-ordinal-group: 7 !important;
+            order: 6 !important
   }
 
   .xl\:focus\:order-first:focus {
-    order: -1 !important
+    -webkit-box-ordinal-group: 0 !important;
+            order: -1 !important
   }
 
   .xl\:focus\:order-last:focus {
-    order: 999 !important
+    -webkit-box-ordinal-group: 1000 !important;
+            order: 999 !important
   }
 
   .xl\:focus\:order-normal:focus {
-    order: 0 !important
+    -webkit-box-ordinal-group: 1 !important;
+            order: 0 !important
   }
 
   .xl\:float-right {
