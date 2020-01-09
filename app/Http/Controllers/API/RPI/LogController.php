@@ -64,13 +64,13 @@ class LogController extends Controller
         $reportedBy = DeviceAttribute::where('value', $request->api_token)->pluck('device_id');
 
     	try {
-	    	$newLog = new Log();
-	    	$newLog->device_group_id = $request->device_group_id;
-	    	$newLog->device_id = $request->device_id;
-	    	$newLog->event_desc = $request->event_description;
-	    	$newLog->reported_by = $reportedBy[0];
-	    	$newLog->reported_at = ($request->event_tim) ? \Carbon\Carbon::parse($request->event_time) : null;
-	    	$newLog->save();
+            $newLog = new Log();
+            $newLog->device_group_id = $request->json('device_group_id');
+            $newLog->device_id = $request->json('device_id');
+            $newLog->event_desc = $request->json('event_description');
+            $newLog->reported_by = $reportedBy[0];
+            $newLog->reported_at = ($request->json('event_time')) ? \Carbon\Carbon::parse($request->json('event_time')) : null;
+            $newLog->save();
 
 	    	return response()->json([
     			'message' => 'Log saved successfully!',
