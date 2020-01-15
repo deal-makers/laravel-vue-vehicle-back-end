@@ -26,14 +26,21 @@ class LogController extends Controller
             : Carbon::now();
 
         $deviceGroup = $request->device_group_id;
+        $device = $request->device_id;
 
         if ($deviceGroup === null) {
             $logs = Log::where('created_at', '>=', $dateFrom)
                 ->where('created_at', '<=', $dateTo)
                 ->get();
+        } elseif($deviceGroup !== null || $device === null) {
+            $logs = Log::where('device_group_id', intval($deviceGroup))
+                ->where('created_at', '>=', $dateFrom)
+                ->where('created_at', '<=', $dateTo)
+                ->get();
         } else {
-            $logs = Log::where('device_group_id', $deviceGroup)
-                ->where('created_at', '=>', $dateFrom)
+            $logs = Log::where('device_group_id', intval($deviceGroup))
+                ->where('device_id', intval($device))
+                ->where('created_at', '>=', $dateFrom)
                 ->where('created_at', '<=', $dateTo)
                 ->get();
         }

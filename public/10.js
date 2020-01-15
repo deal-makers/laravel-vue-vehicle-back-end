@@ -54,45 +54,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -112,6 +73,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     search: function search() {
+      var _this = this;
+
       var user = JSON.parse(localStorage.user);
       var token = user.api_token;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/admin/logs', {
@@ -122,10 +85,16 @@ __webpack_require__.r(__webpack_exports__);
           device_group_id: this.search_params.device_group_id
         }
       }).then(function (res) {
-        console.log(res);
+        _this.data = res.data;
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    clear: function clear() {
+      this.search_params.date_from = '';
+      this.search_params.date_to = '';
+      this.search_params.device_group_id = '';
+      this.search();
     }
   },
   beforeMount: function beforeMount() {
@@ -222,6 +191,16 @@ var render = function() {
               on: { click: _vm.search }
             },
             [_vm._v("Search")]
+          ),
+          _vm._v(" "),
+          _c(
+            "vs-button",
+            {
+              staticClass: "mr-3 mb-2",
+              attrs: { color: "danger" },
+              on: { click: _vm.clear }
+            },
+            [_vm._v("Clear")]
           )
         ],
         1
@@ -250,115 +229,26 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          [
-            _c(
+          _vm._l(_vm.data, function(item) {
+            return _c(
               "vs-tr",
+              { key: item.id },
               [
-                _c("vs-td", [_vm._v("234")]),
+                _c("vs-td", [_vm._v(_vm._s(item.id))]),
                 _vm._v(" "),
-                _c("vs-td", [_vm._v("324")]),
+                _c("vs-td", [_vm._v(_vm._s(item.device_group_id))]),
                 _vm._v(" "),
-                _c("vs-td", [_vm._v("546")]),
+                _c("vs-td", [_vm._v(_vm._s(item.device_id))]),
                 _vm._v(" "),
-                _c("vs-td", [_vm._v("dfdfsdfds")]),
+                _c("vs-td", [_vm._v(_vm._s(item.event_desc))]),
                 _vm._v(" "),
-                _c("vs-td", [_vm._v("Ivan")]),
+                _c("vs-td", [_vm._v(_vm._s(item.reported_by))]),
                 _vm._v(" "),
-                _c("vs-td", [_vm._v("12:24")])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "vs-tr",
-              [
-                _c("vs-td", [_vm._v("234")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("324")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("546")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("dfdfsdfds")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("Ivan")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("12:24")])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "vs-tr",
-              [
-                _c("vs-td", [_vm._v("234")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("324")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("546")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("dfdfsdfds")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("Ivan")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("12:24")])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "vs-tr",
-              [
-                _c("vs-td", [_vm._v("234")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("324")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("546")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("dfdfsdfds")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("Ivan")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("12:24")])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "vs-tr",
-              [
-                _c("vs-td", [_vm._v("234")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("324")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("546")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("dfdfsdfds")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("Ivan")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("12:24")])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "vs-tr",
-              [
-                _c("vs-td", [_vm._v("234")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("324")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("546")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("dfdfsdfds")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("Ivan")]),
-                _vm._v(" "),
-                _c("vs-td", [_vm._v("12:24")])
+                _c("vs-td", [_vm._v(_vm._s(item.reported_at))])
               ],
               1
             )
-          ]
+          })
         ],
         2
       )

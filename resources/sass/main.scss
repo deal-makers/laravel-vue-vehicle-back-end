@@ -23,3 +23,28 @@
 .style-title{
   margin-bottom: 20px;
 }
+.logs-search{
+  display: inline-flex;
+  margin-bottom: 10px;
+}
+.logs-search p {
+  margin: 7px 10px;
+}
+.logs-search-items{
+   width: 110px;
+}
+.search-button{
+  margin-left:20px;
+}
+@media screen and (max-width: 900px) {
+  .logs-search-items{
+     width: 300px;
+  }
+  .search-button{
+    margin-top: 10px;
+    margin-left: 0;
+  }
+  .logs-search{
+    display: block;
+  }
+}

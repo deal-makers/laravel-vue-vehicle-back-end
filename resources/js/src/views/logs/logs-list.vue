@@ -14,6 +14,7 @@
         <vs-select-item key="2" value="2" text="2"/>
       </vs-select>
       <vs-button v-on:click="search" class="mr-3 mb-2 search-button">Search</vs-button>
+      <vs-button v-on:click="clear" class="mr-3 mb-2" color="danger">Clear</vs-button>
     </div>
     <vs-table data="users">
       <template slot="thead">
@@ -26,53 +27,13 @@
       </template>
 
       <template>
-        <vs-tr>
-          <vs-td>234</vs-td>
-  				<vs-td>324</vs-td>
-  				<vs-td>546</vs-td>
-          <vs-td>dfdfsdfds</vs-td>
-          <vs-td>Ivan</vs-td>
-          <vs-td>12:24</vs-td>
-        </vs-tr>
-        <vs-tr>
-          <vs-td>234</vs-td>
-  				<vs-td>324</vs-td>
-  				<vs-td>546</vs-td>
-          <vs-td>dfdfsdfds</vs-td>
-          <vs-td>Ivan</vs-td>
-          <vs-td>12:24</vs-td>
-        </vs-tr>
-        <vs-tr>
-          <vs-td>234</vs-td>
-  				<vs-td>324</vs-td>
-  				<vs-td>546</vs-td>
-          <vs-td>dfdfsdfds</vs-td>
-          <vs-td>Ivan</vs-td>
-          <vs-td>12:24</vs-td>
-        </vs-tr>
-        <vs-tr>
-          <vs-td>234</vs-td>
-  				<vs-td>324</vs-td>
-  				<vs-td>546</vs-td>
-          <vs-td>dfdfsdfds</vs-td>
-          <vs-td>Ivan</vs-td>
-          <vs-td>12:24</vs-td>
-        </vs-tr>
-        <vs-tr>
-          <vs-td>234</vs-td>
-  				<vs-td>324</vs-td>
-  				<vs-td>546</vs-td>
-          <vs-td>dfdfsdfds</vs-td>
-          <vs-td>Ivan</vs-td>
-          <vs-td>12:24</vs-td>
-        </vs-tr>
-        <vs-tr>
-          <vs-td>234</vs-td>
-  				<vs-td>324</vs-td>
-  				<vs-td>546</vs-td>
-          <vs-td>dfdfsdfds</vs-td>
-          <vs-td>Ivan</vs-td>
-          <vs-td>12:24</vs-td>
+        <vs-tr v-for="item in data" v-bind:key="item.id">
+          <vs-td>{{item.id}}</vs-td>
+  				<vs-td>{{item.device_group_id}}</vs-td>
+  				<vs-td>{{item.device_id}}</vs-td>
+          <vs-td>{{item.event_desc}}</vs-td>
+          <vs-td>{{item.reported_by}}</vs-td>
+          <vs-td>{{item.reported_at}}</vs-td>
         </vs-tr>
       </template>
 
@@ -99,24 +60,25 @@ export default {
   components: {
     Datepicker
   },
-    methods:{
-        search(){
-            let user = JSON.parse(localStorage.user)
-            let token = user.api_token
-            axios.get('/api/admin/logs', {params:{
-                api_token:token,
-                date_from: this.search_params.date_from,
-                date_to: this.search_params.date_to,
-                device_group_id: this.search_params.device_group_id}})
-                .then((res) =>{
-                    console.log(res);
-                }).catch((err) => {
-                    console.log(err);
-                })
-        },
+  methods:{
+    search(){
+      let user = JSON.parse(localStorage.user)
+      let token = user.api_token
+      axios.get('/api/admin/logs', {params:{api_token:token, date_from: this.search_params.date_from, date_to: this.search_params.date_to, device_group_id: this.search_params.device_group_id}}).then((res) =>{
+        this.data = res.data
+      }).catch((err) => {
+        console.log(err);
+      })
     },
-    beforeMount(){
-        this.search()
+    clear(){
+      this.search_params.date_from = ''
+      this.search_params.date_to = ''
+      this.search_params.device_group_id = ''
+      this.search()
     }
+  },
+  beforeMount(){
+   this.search()
+  },
 }
 </script>
