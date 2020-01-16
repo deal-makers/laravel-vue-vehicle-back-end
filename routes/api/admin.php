@@ -19,6 +19,7 @@ Route::prefix('admin')->group(function() {
     Route::post('device/store', 'API\Admin\DeviceController@store');
     Route::put('device/update/{id}', 'API\Admin\DeviceController@update');
     Route::delete('device/delete/{id}', 'API\Admin\DeviceController@destroy');
+    Route::get('devices/{device_group}', 'API\Admin\DeviceController@getDevicesByGroup');
 
     /*
      * DEVICE GROUPS management routes
@@ -30,4 +31,8 @@ Route::prefix('admin')->group(function() {
     Route::delete('device_group/delete/{id}', 'API\Admin\DeviceGroupController@destroy');
 
     Route::get('logs', 'API\Admin\LogController@searchLogs');
+
+    Route::prefix('export')->group(function () {
+        Route::get('logs/{type}', 'API\Admin\LogController@export');
+    });
 });

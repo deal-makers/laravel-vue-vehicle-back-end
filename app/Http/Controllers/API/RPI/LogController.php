@@ -65,7 +65,6 @@ class LogController extends Controller
 
     	try {
             $newLog = new Log();
-            $newLog->device_group_id = $request->json('device_group_id');
             $newLog->device_id = $request->json('device_id');
             $newLog->event_desc = $request->json('event_description');
             $newLog->reported_by = $reportedBy[0];
