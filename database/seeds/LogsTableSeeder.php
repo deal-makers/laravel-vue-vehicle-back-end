@@ -13,9 +13,8 @@ class LogsTableSeeder extends Seeder
     {
     	for($i=0;$i<=10;$i++) {
     		DB::table('logs')->insert([
-	            'device_group_id' => mt_rand(1,10),
-	            'device_id' => mt_rand(1,10),
-	            'reported_by' => mt_rand(1,3),
+	            'device_id' => mt_rand(2,3),
+	            'reported_by' => mt_rand(1,2),
 	            'event_desc' => Str::random(20),
 	            'reported_at' => \Carbon\Carbon::now()->subDays($i),
 	            'created_at' => \Carbon\Carbon::now(),
