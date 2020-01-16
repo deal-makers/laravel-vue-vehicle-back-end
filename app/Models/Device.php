@@ -18,7 +18,7 @@ class Device extends Model
 
     public function deviceGroup()
     {
-        return $this->hasOne(DeviceGroup::class);
+        return $this->belongsTo(DeviceGroup::class);
     }
 
     public function attributes()

@@ -17,10 +17,8 @@
 				<vs-select
 					class="w-full"
 					label="Device group"
-					v-model="data.device.device_group_id"
 					>
-					<vs-select-item key="1" value="1" text="1"/>
-					<vs-select-item key="2" value="2" text="2"/>
+					<vs-select-item v-for="device_group in data.device_groups" :key="device_group.id" :value="device_group.id" :text="device_group.name"/>
 				</vs-select>
 			</div>
 		</div>
@@ -67,12 +65,28 @@ export default {
                     device_id: '',
                     description: '',
                     device_rfid: ''
-                }
+                },
+                device_groups: []
             },
             errors: null
         }
     },
     methods: {
+        getDeviceGroups() {
+            let user = JSON.parse(localStorage.user)
+            let token = user.api_token
+
+            axios({
+                method: 'GET',
+                url: '/api/admin/device_groups',
+                params: {
+                    'api_token': token
+                }
+            })
+            .then((res) => {
+                this.data.device_groups = res.data;
+            })
+        },
         postRequest(){
             let user = JSON.parse(localStorage.user)
             let token = user.api_token
@@ -90,6 +104,9 @@ export default {
                 this.errors = err.response.data
             })
         }
+    },
+    beforeMount() {
+        this.getDeviceGroups();
     }
 }
 </script>
