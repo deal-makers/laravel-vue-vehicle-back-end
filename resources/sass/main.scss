@@ -27,14 +27,18 @@
   display: inline-flex;
   margin-bottom: 10px;
 }
+.logs-search-buttons{
+  display: inline-flex;
+  margin: 10px 7px;
+}
 .logs-search p {
   margin: 7px 10px;
 }
 .logs-search-items{
    width: 110px;
 }
-.search-button{
-  margin-left:20px;
+.smaller-button{
+  padding: 10px 20px !important;
 }
 @media screen and (max-width: 900px) {
   .logs-search-items{
