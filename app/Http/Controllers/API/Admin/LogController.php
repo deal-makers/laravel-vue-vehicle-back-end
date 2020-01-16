@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Device;
 use App\Models\DeviceGroup;
 use App\Models\Log;
+use App\Utilities\LogExporter;
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Exception;
 
 class LogController extends Controller
 {
@@ -82,6 +84,14 @@ class LogController extends Controller
 
     public function export(Request $request, $type)
     {
+        $csv = new LogExporter($request->date_from, $request->date_to, $request->device_group_id, $request->device_id);
 
+        try {
+            return $csv->exportCsv($request->logs);
+        } catch (Exception $e) {
+            return response()->json([
+                'Error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

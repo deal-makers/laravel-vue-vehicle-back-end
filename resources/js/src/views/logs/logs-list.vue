@@ -103,9 +103,25 @@ export default {
         exportData(){
             let user = JSON.parse(localStorage.user)
             let token = user.api_token
-            axios.get('/api/admin/export', {params:{api_token:token, date_from: this.search_params.date_from, date_to: this.search_params.date_to, device_group_id: this.search_params.device_group_id, device_id: this.search_params.device_id}}).then((res) =>{
-            }).catch((err) => {
-                console.log(err);
+            axios({
+                method: 'GET',
+                url: '/api/admin/export/logs/csv',
+                responseType: 'blob',
+                params: {
+                    api_token:token,
+                    date_from: this.search_params.date_from,
+                    date_to: this.search_params.date_to,
+                    device_group_id: this.search_params.device_group_id,
+                    device_id: this.search_params.device_id,
+                    logs: this.data
+                },
+            }).then((res) => {
+                const url = window.URL.createObjectURL(new Blob([res.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'LogsReport.xls');
+                document.body.appendChild(link);
+                link.click();
             })
         },
         findDevices(){
