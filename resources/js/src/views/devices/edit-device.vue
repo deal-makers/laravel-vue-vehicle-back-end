@@ -97,18 +97,20 @@ export default {
             let user = JSON.parse(localStorage.user)
             let token = user.api_token
 
-            axios({
-                method: 'POST',
-                url: '/api/admin/device/renew_api_token',
-                params: {
-                    api_token: token,
-                    device_id: this.data.device_id
-                }
-            }).then((res) => {
-                console.log(res.data);
-            }).catch((err) => {
-                console.log(err)
-            })
+            if(confirm("Do you really want to generate new API token?")) {
+                axios({
+                    method: 'POST',
+                    url: '/api/admin/device/renew_api_token',
+                    params: {
+                        api_token: token,
+                        device_id: this.data.device_id
+                    }
+                }).then((res) => {
+                    this.data.api_token = res.data
+                }).catch((err) => {
+                    console.log(err)
+                })
+            }
         },
         getData(){
             let user = JSON.parse(localStorage.user)
