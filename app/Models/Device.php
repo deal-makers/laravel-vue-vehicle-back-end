@@ -25,4 +25,10 @@ class Device extends Model
     {
         return $this->hasMany(DeviceAttribute::class);
     }
+
+    public static function generateApiToken()
+    {
+        //TODO Implement proper api_token generation
+        return \Str::random(15);
+    }
 }

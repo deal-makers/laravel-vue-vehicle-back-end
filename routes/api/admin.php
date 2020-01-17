@@ -20,6 +20,7 @@ Route::prefix('admin')->group(function() {
     Route::put('device/update/{id}', 'API\Admin\DeviceController@update');
     Route::delete('device/delete/{id}', 'API\Admin\DeviceController@destroy');
     Route::get('devices/{device_group}', 'API\Admin\DeviceController@getDevicesByGroup');
+    Route::post('device/renew_api_token', 'API\Admin\DeviceController@renewApiToken');
 
     /*
      * DEVICE GROUPS management routes

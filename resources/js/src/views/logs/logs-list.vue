@@ -7,16 +7,18 @@
       <p>To:</p>
       <datepicker v-model="search_params.date_to" class="logs-search-items" style="z-index:1000"></datepicker>
       <p>Device group:</p>
-      <vs-select
-        v-model="search_params.device_group_id" @change="findDevices" class="logs-search-items"
+        <vs-select
+            v-model="search_params.device_group_id" @change="findDevices" class="logs-search-items"
         >
-        <vs-select-item v-for="data in device_groups" v-bind:key="data.id" v-bind:value="data.id" v-bind:text="data.name"/>
-      </vs-select>
+            <vs-select-item key="blank" value="" text="-none-"/>
+            <vs-select-item v-for="data in device_groups" v-bind:key="data.id" v-bind:value="data.id" v-bind:text="data.name"/>
+        </vs-select>
       <p v-if="devices.length > 0">Device:</p>
       <p v-if="devices.length < 1 && search_params.device_group_id ">No devices found</p>
       <vs-select
         v-if="devices.length > 0" v-model="search_params.device_id" class="logs-search-items"
         >
+          <vs-select-item key="blank" value="" text="-none-"/>
         <vs-select-item v-for="data in devices" v-bind:key="data.id" v-bind:value="data.id" v-bind:text="data.name"/>
       </vs-select>
     </div>
@@ -41,7 +43,7 @@
   				<vs-td>{{item.device.device_group.name}}</vs-td>
   				<vs-td>{{item.device.name}}</vs-td>
           <vs-td>{{item.event_desc}}</vs-td>
-          <vs-td>{{item.reported_by}}</vs-td>
+          <vs-td>{{item.device.name}}</vs-td>
           <vs-td>{{item.reported_at}}</vs-td>
         </vs-tr>
       </template>
@@ -92,8 +94,8 @@ export default {
         },
         clear(){
             this.search_params = {
-                date_from:'',
-                date_to:'',
+                date_from:null,
+                date_to:null,
                 device_group_id:'',
                 device_id:''
             }
@@ -125,6 +127,7 @@ export default {
             })
         },
         findDevices(){
+            this.devices = []
             this.search_params.device_id = ''
             let user = JSON.parse(localStorage.user)
             let token = user.api_token

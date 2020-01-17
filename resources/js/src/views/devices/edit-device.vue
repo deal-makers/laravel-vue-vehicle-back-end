@@ -15,18 +15,16 @@
             </ul>
         </vs-alert>
 		<h2 class="style-title">Edit device</h2>
-		<div class="vx-row mb-6">
-			<div class="vx-col w-full">
-				<vs-select
-					class="w-full"
-					label="Device group"
-					v-model="data.device_group_id"
-					>
-					<vs-select-item key="1" value="1" text="1"/>
-					<vs-select-item key="2" value="2" text="2"/>
-				</vs-select>
-			</div>
-		</div>
+        <div class="vx-row mb-6">
+            <div class="vx-col w-full">
+                <vs-select
+                    class="w-full"
+                    label="Device group"
+                >
+                    <vs-select-item v-for="device_group in device_groups" :key="device_group.id" :value="device_group.id" :text="device_group.name"/>
+                </vs-select>
+            </div>
+        </div>
         <div class="vx-row mb-6">
             <div class="vx-col w-full">
                 <vs-input v-model="data.name" class="w-full" type="text" label="Device name" />
@@ -47,6 +45,12 @@
                 <vs-input v-model="data.device_rfid" class="w-full" type="text" label="RFID" />
             </div>
         </div>
+        <div class="vx-row mb-6">
+            <div class="vx-col">
+                <vs-button v-on:click="generateApiToken" class="mr-3 mb-2">Generate API token</vs-button>
+                <vs-input class="mr-3 mb-2" v-model="data.api_token" disabled="true"/>
+            </div>
+        </div>
         <div class="vx-row">
             <div class="vx-col w-full">
                 <vs-button v-on:click="postRequest" class="mr-3 mb-2">Save</vs-button>
@@ -64,19 +68,55 @@ export default {
     data(){
         return {
             data:{
-                name:'',
+                name: '',
+                api_token: '',
             },
+            device_groups: [],
             alert:'',
-            errors: null
+            errors: null,
         }
     },
 	methods: {
+        getDeviceGroups() {
+            let user = JSON.parse(localStorage.user)
+            let token = user.api_token
+
+            axios({
+                method: 'GET',
+                url: '/api/admin/device_groups',
+                params: {
+                    'api_token': token
+                }
+            }).then((res) => {
+                this.device_groups = res.data
+            }).catch((err) => {
+                console.log(err)
+            })
+        },
+        generateApiToken() {
+            let user = JSON.parse(localStorage.user)
+            let token = user.api_token
+
+            axios({
+                method: 'POST',
+                url: '/api/admin/device/renew_api_token',
+                params: {
+                    api_token: token,
+                    device_id: this.data.device_id
+                }
+            }).then((res) => {
+                console.log(res.data);
+            }).catch((err) => {
+                console.log(err)
+            })
+        },
         getData(){
             let user = JSON.parse(localStorage.user)
             let token = user.api_token
             axios.get('/api/admin/device/' + this.$route.params.id, {params:{'api_token':token}})
                 .then((res) =>{
                     this.data = res.data
+                    this.data.api_token = res.data.api_token
                 }).catch((err) => {
                     this.errors = err
                 })
@@ -103,6 +143,7 @@ export default {
 	},
     beforeMount(){
         this.getData()
+        this.getDeviceGroups()
     }
 }
 </script>

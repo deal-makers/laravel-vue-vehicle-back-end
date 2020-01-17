@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Device;
+use App\Models\DeviceAttribute;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -47,6 +48,14 @@ class DeviceController extends Controller
             $newDevice->description = $request->description;
             $newDevice->save();
 
+            if($request->has('api_token')) {
+                $addAttribute = new DeviceAttribute();
+                $addAttribute->device_id = $newDevice->id;
+                $addAttribute->name = 'api_token';
+                $addAttribute->value = Device::generateApiToken();
+                $addAttribute->save();
+            }
+
             return response()->json([
                 'Message' => 'Device stored successfully!'
             ], 200);
@@ -67,6 +76,10 @@ class DeviceController extends Controller
     public function show($id)
     {
         $device = Device::findOrFail($id);
+        $token = $device->attributes->where('name', 'api_token')->first();
+        if($token !== null) {
+            $device->api_token = $device->attributes->where('name', 'api_token')->first()->value;
+        }
 
         return response()->json($device,200);
     }
@@ -96,6 +109,12 @@ class DeviceController extends Controller
             $device->device_rfid = $request->device_rfid;
             $device->description = $request->description;
             $device->save();
+
+            if ($request->has('api_token')) {
+                $addAttribute = DeviceAttribute::where('device_id', $device->id)->where('name', 'api_token')->first();
+                $addAttribute->value =Device::generateApiToken();
+                $addAttribute->save();
+            }
 
             return response()->json([
                'Message' => 'Device updated successfully!'
@@ -146,6 +165,48 @@ class DeviceController extends Controller
             return response()->json([
                 'Error' => $e->getMessage()
             ], $e->getCode());
+        }
+    }
+
+    public function generateApiTokenForDevice(Request $request)
+    {
+        $setToken = new DeviceAttribute();
+        $setToken->device_id = $request->device_id;
+        $setToken->name = 'api_token';
+        $setToken->value = Device::generateApiToken();
+        $setToken->save();
+    }
+
+    public function renewApiToken(Request $request)
+    {
+        $device = Device::where('device_id', $request->device_id)->first();
+
+        if(!$device) {
+            return response()->json([
+                'Message:' => 'No devices found for the given parameters.'
+            ], 403);
+        }
+
+        $newToken = Device::generateApiToken();
+
+        $attribute = DeviceAttribute::where('device_id', $device->id)->where('name', 'api_token')->first();
+
+        if (!$attribute) {
+            return response()->json([
+                'Message' => 'This device does not have API token.'
+            ], 403);
+        } else {
+            try {
+                $attribute->value = $newToken;
+                $attribute->save();
+
+                return $newToken;
+
+            } catch (\Exception $e) {
+                return response()->json([
+                    'Error:' => $e->getMessage()
+                ], 501);
+            }
         }
     }
 }

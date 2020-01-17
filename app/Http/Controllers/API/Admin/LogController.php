@@ -24,11 +24,11 @@ class LogController extends Controller
     {
         // Handle datetimes if selected or not
         $dateFrom = ($request->date_from !== null)
-            ? Carbon::parse($request->date_from)->format('Y-m-d H:i:s')
+            ? Carbon::createFromTimeString($request->date_from)->setHour(0)->setMinute(0)->setSecond(0)
             : Carbon::now()->subYears(100);
 
         $dateTo = ($request->date_to !== null)
-            ? Carbon::parse($request->date_to)->format('Y-m-d H:i:s')
+            ? Carbon::createFromTimeString($request->date_to)->setHour(23)->setMinute(59)->setSecond(59)
             : Carbon::now();
 
         // store parameters
@@ -42,8 +42,8 @@ class LogController extends Controller
         if ($device_group === null) {
 
             $logs = Log::whereNotIn('device_id', $devices)
-                ->where('created_at', '>=', $dateFrom)
-                ->where('created_at', '<=', $dateTo)
+                ->where('reported_at', '>=', $dateFrom)
+                ->where('reported_at', '<=', $dateTo)
                 ->with('device')
                 ->with('device.deviceGroup')
                 ->get();
@@ -51,8 +51,8 @@ class LogController extends Controller
         } elseif($device_group !== null && $device === null) {
 
             $logs = Log::whereNotIn('device_id', $devices)
-                ->where('created_at', '>=', $dateFrom)
-                ->where('created_at', '<=', $dateTo)
+                ->where('reported_at', '>=', $dateFrom)
+                ->where('reported_at', '<=', $dateTo)
                 ->with('device')
                 ->with('device.deviceGroup')
                 ->whereHas('device.deviceGroup', function($q) use ($device_group){
@@ -64,8 +64,8 @@ class LogController extends Controller
 
             $logs = Log::whereNotIn('device_id', $devices)
                 ->where('device_id', intval($device))
-                ->where('created_at', '>=', $dateFrom)
-                ->where('created_at', '<=', $dateTo)
+                ->where('reported_at', '>=', $dateFrom)
+                ->where('reported_at', '<=', $dateTo)
                 ->with('device')
                 ->with('device.deviceGroup')
                 ->whereHas('device.deviceGroup', function($q) use ($device_group){

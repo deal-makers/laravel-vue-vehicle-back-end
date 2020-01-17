@@ -42,8 +42,8 @@ class User extends Authenticatable
         return $this->hasMany(Log::class);
     }
 
-    public function apiToken()
+    public static function checkApiToken($api_token)
     {
-        return $this->hasOne(DeviceToken::class);
+        return self::where('api_token', $api_token)->first();
     }
 }
