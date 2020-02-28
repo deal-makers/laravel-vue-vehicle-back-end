@@ -76,6 +76,8 @@ class DeviceGroupController extends Controller
             $editDeviceGroup->enabled = ($request->has('enabled')) ? $request->enabled : $editDeviceGroup->enabled;
             $editDeviceGroup->type = $request->type;
             $editDeviceGroup->name = $request->name;
+            $editDeviceGroup->trigger_duration_ms = $request->trigger_duration_ms;
+            $editDeviceGroup->time_between_trigger = $request->time_between_trigger;
             $editDeviceGroup->save();
 
             return response()->json([

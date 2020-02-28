@@ -42,13 +42,13 @@
         </div>
         <div class="vx-row mb-6">
             <div class="vx-col w-full">
-                <vs-input v-model="data.device_rfid" class="w-full" type="text" label="RFID" />
+                <vs-input v-model="data.attrr.rfid_tag" class="w-full" type="text" label="RFID" />
             </div>
         </div>
         <div class="vx-row mb-6">
             <div class="vx-col">
                 <vs-button v-on:click="generateApiToken" class="mr-3 mb-2">Generate API token</vs-button>
-                <vs-input class="mr-3 mb-2" v-model="data.api_token" disabled="true"/>
+                <vs-input class="mr-3 mb-2" v-model="data.attrr.api_token" disabled="true"/>
             </div>
         </div>
         <div class="vx-row">
@@ -70,6 +70,7 @@ export default {
             data:{
                 name: '',
                 api_token: '',
+                attrr: ''
             },
             device_groups: [],
             alert:'',
@@ -106,7 +107,7 @@ export default {
                         device_id: this.data.device_id
                     }
                 }).then((res) => {
-                    this.data.api_token = res.data
+                    this.data.attrr.api_token = res.data
                 }).catch((err) => {
                     console.log(err)
                 })
@@ -116,9 +117,8 @@ export default {
             let user = JSON.parse(localStorage.user)
             let token = user.api_token
             axios.get('/api/admin/device/' + this.$route.params.id, {params:{'api_token':token}})
-                .then((res) =>{
+                .then((res) => {
                     this.data = res.data
-                    this.data.api_token = res.data.api_token
                 }).catch((err) => {
                     this.errors = err
                 })

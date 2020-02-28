@@ -75,17 +75,20 @@ class DeviceController extends Controller
      */
     public function show($id)
     {
-        $device = Device::findOrFail($id);
-        $token = $device->attributes->where('name', 'api_token')->first();
-        if($token !== null) {
-            $device->api_token = $device->attributes->where('name', 'api_token')->first()->value;
+        $device = Device::with('attributes')->findOrFail($id);
+        $attr = [];
+
+        foreach ($device->attributes as $key => $value) {
+            $attr[$value->name] = $value->value;
         }
+
+        $device['attrr'] = $attr;
 
         return response()->json($device,200);
     }
 
     /**
-     * Update the specified resource in storage.
+     *  Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -106,14 +109,13 @@ class DeviceController extends Controller
             $device->name = $request->name;
             $device->device_id = $request->device_id;
             $device->device_group_id = $request->device_group_id;
-            $device->device_rfid = $request->device_rfid;
             $device->description = $request->description;
             $device->save();
 
-            if ($request->has('api_token')) {
-                $addAttribute = DeviceAttribute::where('device_id', $device->id)->where('name', 'api_token')->first();
-                $addAttribute->value =Device::generateApiToken();
-                $addAttribute->save();
+            foreach ($request->attrr as $key => $value) {
+                $atr = DeviceAttribute::where('device_id', $id)->where('name', $key)->first();
+                $atr->value = $value;
+                $atr->save();
             }
 
             return response()->json([
@@ -122,7 +124,7 @@ class DeviceController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'Error' => $e->getMessage()
-            ], $e->getCode());
+            ], 500);
         }
     }
 
@@ -168,13 +170,15 @@ class DeviceController extends Controller
         }
     }
 
-    public function generateApiTokenForDevice(Request $request)
+    public function generateApiTokenForDevice($device_id, $token)
     {
         $setToken = new DeviceAttribute();
-        $setToken->device_id = $request->device_id;
+        $setToken->device_id = $device_id;
         $setToken->name = 'api_token';
-        $setToken->value = Device::generateApiToken();
+        $setToken->value = $token;
         $setToken->save();
+
+        return $token;
     }
 
     public function renewApiToken(Request $request)
@@ -192,9 +196,17 @@ class DeviceController extends Controller
         $attribute = DeviceAttribute::where('device_id', $device->id)->where('name', 'api_token')->first();
 
         if (!$attribute) {
-            return response()->json([
-                'Message' => 'This device does not have API token.'
-            ], 403);
+            try {
+                $newToken = $this->generateApiTokenForDevice($device->id, $newToken);
+
+                return $newToken;
+
+            } catch (\Exception $e) {
+                return response()->json([
+                    'Error:' => $e->getMessage()
+                ], 501);
+            }
+
         } else {
             try {
                 $attribute->value = $newToken;

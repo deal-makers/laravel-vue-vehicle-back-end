@@ -8,9 +8,9 @@
                             <img src="@assets/images/pages/login.png" alt="login" class="mx-auto">
                         </div>
                         <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
-                          <div v-if="alert" class="alert-danger">
-                            Korisničko ime ili lozinka nisu ispravni. Pokušajte ponovno, kontaktirajte administratora ili resetirajte lozinku.
-                          </div>
+                            <div v-if="alert" class="alert-danger">
+                                  Bad Credentials. Please try again or contact administrator!
+                            </div>
                             <div class="p-8">
                                 <div class="vx-card__title mb-8">
                                     <h4 class="mb-4">Login</h4>
@@ -35,6 +35,7 @@
                                 <div class="flex flex-wrap justify-between my-5">
                                     <router-link to="#">Forgot Password?</router-link>
                                 </div>
+
                                 <vs-button @click="postRequest()">Login</vs-button>
 
                             </div>
