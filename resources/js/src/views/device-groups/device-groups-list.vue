@@ -18,8 +18,8 @@
           <vs-td>{{item.enabled ? 'True' : 'False'}}</vs-td>
   				<vs-td>{{item.type}}</vs-td>
   				<vs-td>{{item.name}}</vs-td>
-          <vs-td>{{item.trigger_duration_ms}} ms</vs-td>
-          <vs-td>{{item.time_between_trigger}} ms</vs-td>
+          <vs-td>{{item.trigger_duration_seconds}} sec</vs-td>
+          <vs-td>{{item.time_between_trigger}} sec</vs-td>
           <vs-td><vs-button v-on:click="edit(item.id)" class="mr-3 mb-2">Edit</vs-button><vs-button color="danger" @click="openPopup(item.id)"  class="mr-3 mb-2">Delete</vs-button></vs-td>
         </vs-tr>
       </template>

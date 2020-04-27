@@ -34,7 +34,7 @@ class DeviceGroupController extends Controller
             $newDeviceGroup->enabled = ($request->has('enabled')) ? $request->enabled : false;
             $newDeviceGroup->type = $request->type;
             $newDeviceGroup->name = $request->name;
-            $newDeviceGroup->trigger_duration_ms = $request->trigger_duration_ms;
+            $newDeviceGroup->trigger_duration_seconds = $request->trigger_duration_seconds;
             $newDeviceGroup->time_between_trigger = $request->time_between_trigger;
             $newDeviceGroup->save();
 
@@ -76,7 +76,7 @@ class DeviceGroupController extends Controller
             $editDeviceGroup->enabled = ($request->has('enabled')) ? $request->enabled : $editDeviceGroup->enabled;
             $editDeviceGroup->type = $request->type;
             $editDeviceGroup->name = $request->name;
-            $editDeviceGroup->trigger_duration_ms = $request->trigger_duration_ms;
+            $editDeviceGroup->trigger_duration_seconds = $request->trigger_duration_seconds;
             $editDeviceGroup->time_between_trigger = $request->time_between_trigger;
             $editDeviceGroup->save();
 

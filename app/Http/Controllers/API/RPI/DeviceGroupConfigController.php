@@ -35,7 +35,7 @@ class DeviceGroupConfigController extends Controller
                     'name' => $dg->name,
                     'enabled' => $dg->enabled,
                     'type' => $dg->type,
-                    'trigger_duration_ms' => $dg->trigger_duration_ms,
+                    'trigger_duration_seconds' => $dg->trigger_duration_seconds,
                     'time_between_trigger_seconds' => $dg->time_between_trigger,
                     'devices' => $dg->devices->map(function ($item,$index) {
                         return [

@@ -15,15 +15,15 @@ class DeviceGroupSeeder extends Seeder
             'name' => 'group1',
             'enabled' => 1,
             'type' => 'rfid_trigger',
-            'trigger_duration_ms' => '5000',
+            'trigger_duration_seconds' => '5',
             'time_between_trigger' => '120'
         ]);
         DB::table('device_groups')->insert([
             'name' => 'test',
             'enabled' => 1,
             'type' => 'rfid_trigger',
-            'trigger_duration_ms' => '85000',
-            'time_between_trigger' => '21120'
+            'trigger_duration_seconds' => '5',
+            'time_between_trigger' => '120'
         ]);
     }
 }

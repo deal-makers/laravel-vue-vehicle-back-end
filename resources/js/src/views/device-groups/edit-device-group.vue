@@ -25,7 +25,7 @@
 	  </div>
 		<div class="vx-row mb-6">
 	    <div class="vx-col w-full">
-	      <vs-input v-model="data.trigger_duration_ms" class="w-full" type="number" label="Trigger duration ms" />
+	      <vs-input v-model="data.trigger_duration_seconds" class="w-full" type="number" label="Trigger duration seconds" />
 	    </div>
 	  </div>
 		<div class="vx-row mb-6">
