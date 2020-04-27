@@ -25,7 +25,7 @@ class RenameMsToSeconds extends Migration
      */
     public function down()
     {
-        Schema::table('devices', function (Blueprint $table) {
+        Schema::table('device_groups', function (Blueprint $table) {
             $table->renameColumn('trigger_duration_seconds', 'trigger_duration_ms');
         });
     }
