@@ -13,12 +13,6 @@ class DeviceAttribute extends Model
 
     public static function checkApiToken($api_token)
     {
-        $token = self::where('name', 'api_token')->where('value', $api_token)->first();
-
-        if(!is_null($token)) {
-            return $token;
-        } else {
-            return false;
-        }
+        return self::where('name', 'api_token')->where('value', $api_token)->exists();
     }
 }

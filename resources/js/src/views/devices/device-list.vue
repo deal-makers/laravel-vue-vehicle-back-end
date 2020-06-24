@@ -50,7 +50,7 @@ methods:{
         })
     },
     edit(id){
-        window.location.href = "/app/devices/edit/" + id
+        this.$router.push({name:'edit_device', params: {id}})
     },
     openPopup(id){
         this.id = id

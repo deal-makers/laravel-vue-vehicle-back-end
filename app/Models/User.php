@@ -44,6 +44,6 @@ class User extends Authenticatable
 
     public static function checkApiToken($api_token)
     {
-        return self::where('api_token', $api_token)->first();
+        return self::where('api_token', $api_token)->exists();
     }
 }

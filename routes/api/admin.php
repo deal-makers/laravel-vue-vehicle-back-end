@@ -36,4 +36,14 @@ Route::prefix('admin')->group(function() {
     Route::prefix('export')->group(function () {
         Route::get('logs/{type}', 'API\Admin\LogController@export');
     });
+
+    /*
+     * ROLES management routes
+     */
+    Route::get('roles', 'API\Admin\RolesController@index');
+
+    /*
+     * REMOTE IOT DEVICES management routes
+     */
+    Route::apiResource('remote_devices', 'API\Admin\RemoteDevicesController');
 });
