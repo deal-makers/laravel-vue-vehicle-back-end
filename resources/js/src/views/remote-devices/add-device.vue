@@ -53,8 +53,9 @@
             </div>
         </div>
         <div class="vx-row mb-6">
-            <div class="vx-col w-full">
-                <vs-checkbox color="success" v-model="data.device.active">Active</vs-checkbox>
+            <div class="vx-col w-full" style="display: inline-flex;">
+                <vs-switch v-model="data.device.active"/>
+                <p style="margin-left: 10px;">Active</p>
             </div>
         </div>
         <div class="vx-row">

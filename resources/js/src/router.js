@@ -18,54 +18,59 @@ const router = new Router({
                 // Theme Routes
                 // =============================================================================
                 {
-                    path: '/',
+                    path: '',
                     name: 'home',
                     component: () => import('./views/Home.vue'),
                 },
                 {
-                    path: '/devices',
+                    path: 'devices',
                     name: 'devices',
                     component: () => import('./views/devices/device-list.vue'),
                 },
                 {
-                    path: '/devices/add',
+                    path: 'devices/add',
                     name: 'add_device',
                     component: () => import('./views/devices/add-device.vue'),
                 },
                 {
-                    path: '/devices/edit/:id',
+                    path: 'devices/edit/:id',
                     name: 'edit_device',
                     component: () => import('./views/devices/edit-device.vue'),
                 },
                 {
-                    path: '/device_groups',
+                    path: 'device_groups',
                     name: 'device_groups',
                     component: () => import('./views/device-groups/device-groups-list.vue'),
                 },
                 {
-                    path: '/device_groups/add',
+                    path: 'device_groups/add',
                     name: 'add_device_group',
                     component: () => import('./views/device-groups/add-device-group.vue'),
                 },
                 {
-                    path: '/device_groups/edit/:id',
+                    path: 'device_groups/edit/:id',
                     name: 'edit_device_group',
                     component: () => import('./views/device-groups/edit-device-group.vue'),
                 },
                 {
-                    path: '/logs',
+                    path: 'logs',
                     name: 'logs',
                     component: () => import('./views/logs/logs-list'),
                 },
                 {
-                    path: '/remote_devices',
+                    path: 'remote_devices',
                     name: 'remote_devices',
                     component: () => import('./views/remote-devices/device-list.vue'),
                 },
                 {
-                    path: '/remote_devices/add',
+                    path: 'remote_devices/add',
                     name: 'add_remote_device',
                     component: () => import('./views/remote-devices/add-device.vue'),
+                },
+                {
+                    path: 'remote_devices/edit/:id',
+                    name: 'edit_remote_device',
+                    component: () => import('./views/remote-devices/edit-device.vue'),
                 },
             ]
         },
