@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RemoteDeviceStoreRequest;
-use App\Models\RemoteIOTDevice;
+use App\Models\DeviceType;
 
 /**
  * Class RemoteDevicesController
@@ -19,7 +19,7 @@ class RemoteDevicesController extends Controller
      */
     public function index()
     {
-        return response()->json(RemoteIOTDevice::with(['roles:id,name', 'device_group:id,name'])->get());
+        return response()->json(DeviceType::with(['roles:id,name', 'device_group:id,name'])->get());
     }
 
     /**
@@ -32,11 +32,7 @@ class RemoteDevicesController extends Controller
      */
     public function save(RemoteDeviceStoreRequest $request, $id = null)
     {
-        $request->save(
-            $request->method() == 'POST'
-                ? new RemoteIOTDevice()
-                : RemoteIOTDevice::findOrFail($id)
-        )
+        $request->save($id)
             ->roles()->sync($request->role_id);
 
         return response()->json(['message' => "Remote IoT Device saved successfully!"]);
@@ -50,7 +46,7 @@ class RemoteDevicesController extends Controller
      */
     public function show($id)
     {
-        $device = RemoteIOTDevice::with('roles')->findOrFail($id);
+        $device = DeviceType::with('roles')->findOrFail($id);
 
         $device->role_id = optional($device->roles->first())->id;
 
@@ -65,7 +61,7 @@ class RemoteDevicesController extends Controller
      */
     public function destroy($id)
     {
-        RemoteIOTDevice::findOrFail($id)->delete();
+        DeviceType::findOrFail($id)->delete();
 
         return response()->json(['message' => 'Remote IoT Device removed successfully!']);
     }

@@ -2,7 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\RemoteIOTDevice;
+use App\Models\Device;
+use App\Models\DeviceType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -47,19 +48,43 @@ class RemoteDeviceStoreRequest extends FormRequest
 
 
     /**
-     * @param $device
-     * @return RemoteIOTDevice
+     * @param $id
+     * @return Device
      */
-    public function save($device): RemoteIOTDevice
+    public function save($id): Device
     {
+        $device_type_id = $this->getDeviceType();
+
+        $device = $this->getDevice($id);
         $device->name = $this->name;
         $device->device_id = $this->device_id;
         $device->device_group_id = $this->device_group_id;
-        $device->auth_code = $this->auth_code;
         $device->description = $this->description;
-        $device->active = $this->active;
+        $device->device_type_id = $device_type_id;
         $device->save();
 
         return $device;
+    }
+
+    /**
+     * @param $id
+     * @return Device
+     */
+    private function getDevice($id): Device
+    {
+        return $this->method() == 'POST' ? new Device() : Device::findOrFail($id);
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getDeviceType()
+    {
+        return DeviceType::firstOrCreate([
+            'attributes' => [
+                'auth_code' => $this->auth_code,
+                'active' => $this->active
+            ]
+        ]);
     }
 }

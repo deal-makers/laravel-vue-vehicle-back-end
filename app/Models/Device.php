@@ -4,8 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Device
+ * @package App\Models
+ */
 class Device extends Model
 {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function deviceType()
+    {
+        return $this->hasOne(DeviceType::class);
+    }
+
     public function token()
     {
         return $this->hasOne(DeviceToken::class);
