@@ -23,16 +23,26 @@ class RemoteDevicesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage Or
+     * Update the specified resource in storage.
      *
      * @param RemoteDeviceStoreRequest $request
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(RemoteDeviceStoreRequest $request)
+    public function storeOrUpdate(RemoteDeviceStoreRequest $request, $id = null)
     {
-        $request->save()->roles()->attach($request->role_id);
+        $request->createOrUpdateDevice(
+            $request->method() == 'POST'
+                ? new RemoteIOTDevice()
+                : RemoteIOTDevice::findOrFail($id)
+        )
+            ->roles()->sync($request->role_id);
 
-        return response()->json(['message' => 'Remote IoT Device stored successfully!']);
+        if ($request->method() == 'POST')
+            return response()->json(['message' => 'Remote IoT Device stored successfully!']);
+
+        return response()->json(['message' => 'Remote IoT Device updated successfully!']);
     }
 
     /**
@@ -48,20 +58,6 @@ class RemoteDevicesController extends Controller
         $device->role_id = optional($device->roles->first())->id;
 
         return response()->json($device);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param RemoteDeviceStoreRequest $request
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(RemoteDeviceStoreRequest $request, $id)
-    {
-        $request->update($id)->roles()->sync($request->role_id);
-
-        return response()->json(['message' => 'Remote IoT Device updated successfully!']);
     }
 
     /**

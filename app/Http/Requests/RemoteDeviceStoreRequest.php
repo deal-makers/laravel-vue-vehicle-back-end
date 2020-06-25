@@ -45,28 +45,12 @@ class RemoteDeviceStoreRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return RemoteIOTDevice
-     */
-    public function save()
-    {
-        return $this->createOrUpdateDevice(new RemoteIOTDevice());
-    }
-
-    /**
-     * @param $id
-     * @return RemoteIOTDevice
-     */
-    public function update($id)
-    {
-        return $this->createOrUpdateDevice(RemoteIOTDevice::findOrFail($id));
-    }
 
     /**
      * @param $device
      * @return RemoteIOTDevice
      */
-    private function createOrUpdateDevice($device): RemoteIOTDevice
+    public function createOrUpdateDevice($device): RemoteIOTDevice
     {
         $device->name = $this->name;
         $device->device_id = $this->device_id;
