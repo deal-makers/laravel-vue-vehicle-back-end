@@ -30,19 +30,16 @@ class RemoteDevicesController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function storeOrUpdate(RemoteDeviceStoreRequest $request, $id = null)
+    public function save(RemoteDeviceStoreRequest $request, $id = null)
     {
-        $request->createOrUpdateDevice(
+        $request->save(
             $request->method() == 'POST'
                 ? new RemoteIOTDevice()
                 : RemoteIOTDevice::findOrFail($id)
         )
             ->roles()->sync($request->role_id);
 
-        if ($request->method() == 'POST')
-            return response()->json(['message' => 'Remote IoT Device stored successfully!']);
-
-        return response()->json(['message' => 'Remote IoT Device updated successfully!']);
+        return response()->json(['message' => "Remote IoT Device saved successfully!"]);
     }
 
     /**

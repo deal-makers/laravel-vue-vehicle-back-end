@@ -46,5 +46,5 @@ Route::prefix('admin')->group(function() {
      * REMOTE IOT DEVICES management routes
      */
     Route::apiResource('remote_devices', 'API\Admin\RemoteDevicesController')->except(['store', 'update']);
-    Route::match(['post', 'put'], 'remote_devices/{id?}', 'API\Admin\RemoteDevicesController@storeOrUpdate');
+    Route::match(['post', 'put'], 'remote_devices/{id?}', 'API\Admin\RemoteDevicesController@save');
 });

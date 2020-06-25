@@ -50,7 +50,7 @@ class RemoteDeviceStoreRequest extends FormRequest
      * @param $device
      * @return RemoteIOTDevice
      */
-    public function createOrUpdateDevice($device): RemoteIOTDevice
+    public function save($device): RemoteIOTDevice
     {
         $device->name = $this->name;
         $device->device_id = $this->device_id;
