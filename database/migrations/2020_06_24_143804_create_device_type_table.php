@@ -19,7 +19,6 @@ class CreateDeviceTypeTable extends Migration
             $table->string('attributes')->nullable();
             $table->unsignedBigInteger('device_id');
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('device_id')->references('id')
                 ->on('devices')->onDelete('cascade');

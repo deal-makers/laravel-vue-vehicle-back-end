@@ -55,7 +55,7 @@ class RemoteDeviceStoreRequest extends FormRequest
         $device->description = $this->description;
         $device->save();
 
-        $this->getDeviceAttributes($device);
+        $this->saveDeviceAttributes($device);
 
         return $device;
     }
@@ -89,7 +89,7 @@ class RemoteDeviceStoreRequest extends FormRequest
     /**
      * @param $device
      */
-    private function getDeviceAttributes($device): void
+    private function saveDeviceAttributes($device): void
     {
         $deviceType = $this->getDeviceType($device);
 

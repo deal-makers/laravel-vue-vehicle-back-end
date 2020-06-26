@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class RemoteIOTDevice
@@ -11,8 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class DeviceType extends Model
 {
-    use SoftDeletes;
-
     /**
      * @var string
      */

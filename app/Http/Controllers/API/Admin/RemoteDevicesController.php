@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RemoteDeviceStoreRequest;
 use App\Models\Device;
-use App\Models\DeviceType;
 
 /**
  * Class RemoteDevicesController
@@ -83,7 +82,7 @@ class RemoteDevicesController extends Controller
      */
     public function destroy($id)
     {
-        DeviceType::findOrFail($id)->delete();
+        Device::findOrFail($id)->delete();
 
         return response()->json(['message' => 'Remote IoT Device removed successfully!']);
     }
