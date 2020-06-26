@@ -65,12 +65,12 @@ const router = new Router({
                 {
                     path: 'remote_devices/add',
                     name: 'add_remote_device',
-                    component: () => import('./views/remote-devices/add-device.vue'),
+                    component: () => import('./views/remote-devices/save-device.vue'),
                 },
                 {
                     path: 'remote_devices/edit/:id',
                     name: 'edit_remote_device',
-                    component: () => import('./views/remote-devices/edit-device.vue'),
+                    component: () => import('./views/remote-devices/save-device.vue'),
                 },
             ]
         },

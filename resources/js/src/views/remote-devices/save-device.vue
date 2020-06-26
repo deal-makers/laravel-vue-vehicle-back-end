@@ -1,7 +1,8 @@
 <template>
     <div class="max-width-500">
-        <vs-alert color="danger" v-if="data.name.length < 3 && data.name !== ''" style="margin-bottom:20px;">
-            Device name must me longer that three letters!
+        <vs-alert color="danger" v-if="data.name !== '' && data.name.length < 3"
+                  style="margin-bottom:20px;">
+            Device name must me longer than three letters!
         </vs-alert>
         <vs-alert color="success" v-if="alert" style="margin-bottom:20px;">
             {{alert}}
@@ -14,7 +15,7 @@
                 </li>
             </ul>
         </vs-alert>
-        <h2 class="style-title">Edit device</h2>
+        <h2 class="style-title">{{$route.name.split('_')[0]|capitalize}} device</h2>
         <div class="vx-row mb-6">
             <div class="vx-col w-full">
                 <vs-select class="w-full" label="Device group" v-model="data.device_group_id">
@@ -30,7 +31,7 @@
         </div>
         <div class="vx-row mb-6">
             <div class="vx-col w-full">
-                <vs-input v-model="data.device_id" class="w-full" type="text" label="Device ID"/>
+                <vs-input v-model="data.device_id" class="w-full" type="text" label="Device ID" required/>
             </div>
         </div>
         <div class="vx-row mb-6">
@@ -70,7 +71,6 @@
 </template>
 
 <script>
-
     export default {
         data() {
             return {
@@ -86,19 +86,20 @@
                 device_groups: [],
                 roles: [],
                 alert: '',
-                errors: null,
+                errors: null
             }
         },
         computed: {
             token() {
                 return JSON.parse(localStorage.user).api_token
+            },
+            isEdit() {
+                return this.$route.name === 'edit_remote_device';
             }
         },
         methods: {
             generateAuthCode() {
-                if (confirm("Do you really want to generate new Auth Code?")) {
-                    this.data.auth_code = Math.random().toString(36).substring(2)
-                }
+                this.data.auth_code = Math.random().toString(36).substring(2)
             },
             getDeviceGroups() {
                 this.$axios.get('/api/admin/device_groups', {params: {'api_token': this.token}})
@@ -113,22 +114,22 @@
                     })
             },
             getData() {
-                this.$axios.get('/api/admin/remote_devices/' + this.$route.params.id, {params: {api_token: this.token}})
+                this.$axios.get(`/api/admin/remote_devices/${this.$route.params.id}`, {params: {api_token: this.token}})
                     .then((res) => {
                         this.data = res.data
                     })
                     .catch(console.log)
             },
             postRequest() {
-                this.$axios
-                    .put('/api/admin/remote_devices/' + this.$route.params.id,
-                        this.data,
-                        {params: {'api_token': this.token}}
-                    )
+                const method = this.isEdit ? 'put' : 'post';
+
+                this.$axios[method](`/api/admin/remote_devices${this.isEdit ? `/${this.$route.params.id}` : ''}`,
+                    this.data, {params: {api_token: this.token}}
+                )
                     .then(() => {
                         this.errors = null
                         this.alert = 'Device successfully updated'
-                        setTimeout(() => this.$router.push({name:'remote_devices'}), 1000)
+                        setTimeout(() => this.$router.push({name: 'remote_devices'}), 1000)
                     })
                     .catch((err) => {
                         this.errors = err.response.data.errors
@@ -136,9 +137,9 @@
             }
         },
         beforeMount() {
-            this.getDeviceGroups()
-            this.getRoles()
-            this.getData()
+            this.getDeviceGroups();
+            this.getRoles();
+            if (this.isEdit) this.getData();
         }
     }
 </script>
