@@ -23,9 +23,9 @@
                     <vs-td>{{item.name}}</vs-td>
                     <vs-td>{{item.description}}</vs-td>
                     <vs-td>{{item.auth_code}}</vs-td>
-                    <vs-td>{{item.roles[0].name}}</vs-td>
-                    <vs-td>{{item.device_group.name}}</vs-td>
-                    <vs-td>{{!!item.active}}</vs-td>
+                    <vs-td>{{item.role}}</vs-td>
+                    <vs-td>{{item.device_group}}</vs-td>
+                    <vs-td>{{item.active}}</vs-td>
                     <vs-td>
                         <vs-button v-on:click="edit(item.id)" class="mr-3 mb-2">Edit</vs-button>
                         <vs-button color="danger" @click="openPopup(item.id)" class="mr-3 mb-2">Delete</vs-button>

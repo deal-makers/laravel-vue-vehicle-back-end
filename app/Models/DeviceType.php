@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class RemoteIOTDevice
@@ -12,7 +11,12 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class DeviceType extends Model
 {
-    use HasRoles, SoftDeletes;
+    use SoftDeletes;
+
+    /**
+     * @var string
+     */
+    protected $table = 'device_type';
 
     /**
      * @var string[]

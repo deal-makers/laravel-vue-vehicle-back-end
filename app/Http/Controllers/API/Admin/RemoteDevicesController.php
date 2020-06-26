@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RemoteDeviceStoreRequest;
+use App\Models\Device;
 use App\Models\DeviceType;
 
 /**
@@ -19,7 +20,22 @@ class RemoteDevicesController extends Controller
      */
     public function index()
     {
-        return response()->json(DeviceType::with(['roles:id,name', 'device_group:id,name'])->get());
+        $devices = Device::has('deviceType')
+            ->with(['attributes:device_id,name,value', 'roles:id,name', 'deviceGroup:id,name'])
+            ->get()->map(function ($device) {
+                return [
+                    'id' => $device->id,
+                    'device_id' => $device->device_id,
+                    'name' => $device->name,
+                    'description' => $device->description,
+                    'device_group' => $device->deviceGroup->name,
+                    'role' => $device->roles[0]->name,
+                    'auth_code' => $device->attributes->firstWhere('name', 'auth_code')->value,
+                    'active' => (boolean)$device->attributes->firstWhere('name', 'active')->value
+                ];
+            });
+
+        return response()->json($devices);
     }
 
     /**

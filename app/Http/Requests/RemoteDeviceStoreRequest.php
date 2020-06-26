@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Models\Device;
-use App\Models\DeviceType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -13,11 +12,6 @@ use Illuminate\Validation\Rule;
  */
 class RemoteDeviceStoreRequest extends FormRequest
 {
-    /**
-     * Table Name for RemoteIOTDevice Model
-     */
-    const TABLE = 'remote_i_o_t_devices';
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -36,8 +30,9 @@ class RemoteDeviceStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'device_id' => ['required', 'min:6', Rule::unique(self::TABLE, 'device_id')->ignore($this->id)],
-            'auth_code' => ['required', 'min:6', Rule::unique(self::TABLE, 'auth_code')->ignore($this->id)],
+            'device_id' => ['required', 'min:6', Rule::unique('devices', 'device_id')->ignore($this->id)],
+            'auth_code' => ['required', 'min:6', Rule::unique('device_attributes', 'value')
+                ->where('name', 'auth_code')->ignore($this->id)],
             'name' => 'required|min:3',
             'device_group_id' => 'required|exists:device_groups,id',
             'role_id' => 'required|exists:roles,id',
@@ -53,15 +48,14 @@ class RemoteDeviceStoreRequest extends FormRequest
      */
     public function save($id): Device
     {
-        $device_type_id = $this->getDeviceType();
-
         $device = $this->getDevice($id);
         $device->name = $this->name;
         $device->device_id = $this->device_id;
         $device->device_group_id = $this->device_group_id;
         $device->description = $this->description;
-        $device->device_type_id = $device_type_id;
         $device->save();
+
+        $this->getDeviceAttributes($device);
 
         return $device;
     }
@@ -76,15 +70,33 @@ class RemoteDeviceStoreRequest extends FormRequest
     }
 
     /**
+     * @param $device
      * @return mixed
      */
-    private function getDeviceType()
+    private function getDeviceType($device)
     {
-        return DeviceType::firstOrCreate([
+        return $device->deviceType()->firstOrCreate([
+            'name' => 'RFID Reader Compute Module',
             'attributes' => [
-                'auth_code' => $this->auth_code,
-                'active' => $this->active
+                'auth_code' => 'unique_string',
+                'active' => 'boolean'
             ]
         ]);
+    }
+
+    /**
+     * @param $device
+     */
+    private function getDeviceAttributes($device): void
+    {
+        $deviceType = $this->getDeviceType($device);
+
+        foreach ($deviceType->attributes as $attribute => $value) {
+
+            $device->attributes()->create([
+                'name' => $attribute,
+                'value' => $this->get($attribute)
+            ]);
+        }
     }
 }

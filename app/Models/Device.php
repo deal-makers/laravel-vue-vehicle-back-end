@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class Device
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Device extends Model
 {
+    use HasRoles;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
