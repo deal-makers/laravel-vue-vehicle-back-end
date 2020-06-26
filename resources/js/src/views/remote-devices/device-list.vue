@@ -42,7 +42,6 @@
 </template>
 
 <script>
-    import axios from "axios";
 
     export default {
         name: "device-list",
@@ -63,7 +62,7 @@
         },
         methods: {
             getData() {
-                axios.get('/api/admin/remote_devices', {params: {api_token: this.token}})
+                this.$axios.get('/api/admin/remote_devices', {params: {api_token: this.token}})
                     .then((res) => {
                         this.data = res.data
                     })
@@ -77,7 +76,7 @@
                 this.popupActive = true
             },
             deleteDevice() {
-                axios.delete('/api/admin/remote_devices/' + this.id, {params: {'api_token': this.token}})
+                this.$axios.delete('/api/admin/remote_devices/' + this.id, {params: {'api_token': this.token}})
                     .then(() => {
                         this.popupActive = false
                         this.getData()
