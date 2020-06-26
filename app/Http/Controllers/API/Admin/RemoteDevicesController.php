@@ -62,9 +62,15 @@ class RemoteDevicesController extends Controller
      */
     public function show($id)
     {
-        $device = DeviceType::with('roles')->findOrFail($id);
+        $device = Device::with(['attributes:device_id,name,value', 'roles:id'])->findOrFail($id);
 
         $device->role_id = optional($device->roles->first())->id;
+
+        foreach ($device->attributes as $attribute){
+            $device->{$attribute->name} = $attribute->value;
+        }
+
+        unset($device->roles, $device->attributes);
 
         return response()->json($device);
     }

@@ -32,7 +32,7 @@ class RemoteDeviceStoreRequest extends FormRequest
         return [
             'device_id' => ['required', 'min:6', Rule::unique('devices', 'device_id')->ignore($this->id)],
             'auth_code' => ['required', 'min:6', Rule::unique('device_attributes', 'value')
-                ->where('name', 'auth_code')->ignore($this->id)],
+                ->where('name', 'auth_code')->ignore($this->id, 'device_id')],
             'name' => 'required|min:3',
             'device_group_id' => 'required|exists:device_groups,id',
             'role_id' => 'required|exists:roles,id',
@@ -75,7 +75,9 @@ class RemoteDeviceStoreRequest extends FormRequest
      */
     private function getDeviceType($device)
     {
-        return $device->deviceType()->firstOrCreate([
+        if ($deviceType = $device->deviceType()->first()) return $deviceType;
+
+        return $device->deviceType()->create([
             'name' => 'RFID Reader Compute Module',
             'attributes' => [
                 'auth_code' => 'unique_string',
@@ -93,10 +95,10 @@ class RemoteDeviceStoreRequest extends FormRequest
 
         foreach ($deviceType->attributes as $attribute => $value) {
 
-            $device->attributes()->create([
-                'name' => $attribute,
-                'value' => $this->get($attribute)
-            ]);
+            $device->attributes()->updateOrCreate(
+                ['name' => $attribute],
+                ['value' => $this->get($attribute)]
+            );
         }
     }
 }

@@ -136,9 +136,9 @@
             }
         },
         beforeMount() {
-            this.getData()
             this.getDeviceGroups()
             this.getRoles()
+            this.getData()
         }
     }
 </script>
