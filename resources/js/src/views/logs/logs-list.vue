@@ -53,7 +53,6 @@
 </template>
 <script>
 
-import axios from 'axios'
 import Datepicker from 'vuejs-datepicker';
 
 export default {
@@ -85,7 +84,7 @@ export default {
             this.data = []
             let user = JSON.parse(localStorage.user)
             let token = user.api_token
-            axios.get('/api/admin/logs', {params:{api_token:token, date_from: this.search_params.date_from, date_to: this.search_params.date_to, device_group_id: this.search_params.device_group_id, device_id: this.search_params.device_id}}).then((res) =>{
+            this.$axios.get('/api/admin/logs', {params:{api_token:token, date_from: this.search_params.date_from, date_to: this.search_params.date_to, device_group_id: this.search_params.device_group_id, device_id: this.search_params.device_id}}).then((res) =>{
                 this.data = res.data.logs
                 this.device_groups = res.data.device_groups
             }).catch((err) => {
@@ -105,7 +104,7 @@ export default {
         exportData(){
             let user = JSON.parse(localStorage.user)
             let token = user.api_token
-            axios({
+            this.$axios({
                 method: 'GET',
                 url: '/api/admin/export/logs/csv',
                 responseType: 'blob',
@@ -132,7 +131,7 @@ export default {
             let user = JSON.parse(localStorage.user)
             let token = user.api_token
             if (this.search_params.device_group_id) {
-                axios.get('/api/admin/devices/' + this.search_params.device_group_id, {params:{api_token:token}}).then((res) =>{
+                this.$axios.get('/api/admin/devices/' + this.search_params.device_group_id, {params:{api_token:token}}).then((res) =>{
                     this.devices = res.data;
                 }).catch((err) => {
                     console.log(err);

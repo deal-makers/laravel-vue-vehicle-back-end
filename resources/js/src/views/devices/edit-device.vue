@@ -62,8 +62,6 @@
 
 <script>
 
-import axios from 'axios'
-
 export default {
     data(){
         return {
@@ -82,7 +80,7 @@ export default {
             let user = JSON.parse(localStorage.user)
             let token = user.api_token
 
-            axios({
+            this.$axios({
                 method: 'GET',
                 url: '/api/admin/device_groups',
                 params: {
@@ -99,7 +97,7 @@ export default {
             let token = user.api_token
 
             if(confirm("Do you really want to generate new API token?")) {
-                axios({
+                this.$axios({
                     method: 'POST',
                     url: '/api/admin/device/renew_api_token',
                     params: {
@@ -116,7 +114,7 @@ export default {
         getData(){
             let user = JSON.parse(localStorage.user)
             let token = user.api_token
-            axios.get('/api/admin/device/' + this.$route.params.id, {params:{'api_token':token}})
+            this.$axios.get('/api/admin/device/' + this.$route.params.id, {params:{'api_token':token}})
                 .then((res) => {
                     this.data = res.data
                 }).catch((err) => {
@@ -127,7 +125,7 @@ export default {
 			let user = JSON.parse(localStorage.user)
 			let token = user.api_token
 			let url = '/api/admin/device/update/' + this.$route.params.id
-			axios({
+			this.$axios({
 				method: 'PUT',
                 url: url,
                 data: this.data,

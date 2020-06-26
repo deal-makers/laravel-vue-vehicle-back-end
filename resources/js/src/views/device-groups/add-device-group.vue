@@ -41,8 +41,6 @@
 
 <script>
 
-import axios from 'axios'
-
 export default {
 	data(){
     return {
@@ -57,7 +55,7 @@ export default {
 		postRequest(){
 				let user = JSON.parse(localStorage.user)
 				let token = user.api_token
-				axios({
+				this.$axios({
 					method: 'POST',
 					url: '/api/admin/device_group/store',
 					data: this.data.device_group,

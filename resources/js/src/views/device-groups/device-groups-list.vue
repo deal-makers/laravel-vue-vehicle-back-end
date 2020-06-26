@@ -34,8 +34,6 @@
 
 <script>
 
-import axios from 'axios'
-
 export default {
     data(){
       return {
@@ -48,7 +46,7 @@ export default {
       getData(){
         let user = JSON.parse(localStorage.user)
         let token = user.api_token
-        axios.get('/api/admin/device_groups', {params:{api_token:token}}).then((res) =>{
+        this.$axios.get('/api/admin/device_groups', {params:{api_token:token}}).then((res) =>{
           this.data = res.data
         }).catch((err) => {
           console.log(err);
@@ -65,7 +63,7 @@ export default {
         let user = JSON.parse(localStorage.user)
   			let token = user.api_token
   			let url = '/api/admin/device_group/delete/' + this.id
-  			axios({
+  			this.$axios({
   				method: 'DELETE',
                   url: url,
   								params: {

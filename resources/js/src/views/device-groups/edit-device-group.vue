@@ -44,8 +44,6 @@
 
 <script>
 
-import axios from 'axios'
-
 export default {
   data(){
     return {
@@ -59,7 +57,7 @@ export default {
     getData(){
 			let user = JSON.parse(localStorage.user)
 			let token = user.api_token
-      axios.get('/api/admin/device_group/' + this.$route.params.id, {params:{'api_token':token}})
+      this.$axios.get('/api/admin/device_group/' + this.$route.params.id, {params:{'api_token':token}})
 			.then((res) =>{
         this.data = res.data
       }).catch((err) => {
@@ -70,7 +68,7 @@ export default {
 			let user = JSON.parse(localStorage.user)
 			let token = user.api_token
 			let url = '/api/admin/device_group/update/' + this.$route.params.id
-			axios({
+			this.$axios({
 				method: 'PUT',
                 url: url,
                 data: this.data,
