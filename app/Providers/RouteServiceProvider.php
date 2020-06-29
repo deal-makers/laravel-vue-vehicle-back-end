@@ -50,6 +50,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapLogRoutes();
 
+        $this->mapAlertRoutes();
+
         $this->mapWebRoutes();
 
         //
@@ -108,6 +110,19 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/log.php'));
+    }
+
+    /**
+     * Define the "api/alerts" routes for the application.
+     *
+     * @return void
+     */
+    protected function mapAlertRoutes()
+    {
+        Route::prefix($this->apiPrefix)
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api/alert.php'));
     }
 
     /**
