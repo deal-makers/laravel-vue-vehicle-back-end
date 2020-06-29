@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             DeviceTableSeeder::class,
             DeviceGroupSeeder::class,
             DeviceAttributesTableSeeder::class,
-            RolesTableSeeder::class
+            RolesTableSeeder::class,
+            CompaniesTableSeeder::class
         ]);
     }
 }
