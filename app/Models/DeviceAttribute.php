@@ -31,4 +31,13 @@ class DeviceAttribute extends Model
     {
         return self::where('name', 'api_token')->where('value', $api_token)->exists();
     }
+
+    /**
+     * @param $token
+     * @return mixed
+     */
+    public static function reportedBy($token)
+    {
+        return self::where(['name' => 'api_token', 'value' => $token])->pluck('device_id')->first();
+    }
 }

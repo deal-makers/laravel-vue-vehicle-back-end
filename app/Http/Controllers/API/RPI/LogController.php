@@ -57,8 +57,7 @@ class LogController extends Controller
             'data.*.event_time' => 'required|date'
         ]);
         // Getting the request sender's ID
-        $reportedBy = DeviceAttribute::where(['name' => 'api_token', 'value' => $request->api_token])
-            ->pluck('device_id')->first();
+        $reportedBy = DeviceAttribute::reportedBy($request->api_token);
 
         foreach ($request->get('data') as $item) {
             $newLog = new Log();
