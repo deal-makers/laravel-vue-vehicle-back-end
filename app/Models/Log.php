@@ -11,6 +11,11 @@ class Log extends Model
         return $this->belongsTo(Device::class);
     }
 
+    public function reportedBy()
+    {
+        return $this->belongsTo(Device::class, 'reported_by');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -49,8 +49,6 @@
 
 <script>
 
-import axios from 'axios'
-
 export default {
     data() {
         return {
@@ -61,7 +59,7 @@ export default {
     },
     methods:{
       postRequest(){
-        axios.post('/api/login', {
+        this.$axios.post('/api/login', {
           email:this.email,
           password:this.password
         }).then((res) =>{

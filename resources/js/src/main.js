@@ -30,6 +30,10 @@ Vue.use(VueHammer)
 import 'prismjs'
 // import 'prismjs/themes/prism-tomorrow.css'
 
+import axios from "axios";
+
+Vue.prototype.$axios = axios
+
 Vue.config.productionTip = false
 
 new Vue({

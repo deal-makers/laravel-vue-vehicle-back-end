@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-let tailwindcss = require('tailwindcss');
+const tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -23,9 +23,8 @@ mix.js('resources/js/app.js', 'public/js')
         },
     })
     .sass('resources/sass/app.scss', 'public/css').options({
-        postCss:[require('autoprefixer')]
-    })
-    .postCss('resources/assets/css/main.css', 'public/css', [
+        postCss: [require('autoprefixer')]
+    }).postCss('resources/assets/css/main.css', 'public/css', [
         tailwindcss('tailwind.js'),
     ])
     .copy('node_modules/vuesax/dist/vuesax.css', 'public/css/vuesax.css') // Vuesax framework css

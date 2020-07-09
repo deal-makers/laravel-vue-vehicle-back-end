@@ -18,14 +18,14 @@ class CheckApiToken
      */
     public function handle($request, Closure $next)
     {
-        if(!$request->api_token) {
+        if(!($api_token = $request->get('api_token'))) {
             return response()->json([
                 'Error' => 'Not allowed. You must provide valid auth credentials.'
             ], 401);
         }
 
-        $checkUser = User::checkApiToken($request->api_token);
-        $checkDevice = DeviceAttribute::checkApiToken($request->api_token);
+        $checkUser = User::checkApiToken($api_token);
+        $checkDevice = DeviceAttribute::checkApiToken($api_token);
 
         if(!$checkUser && !$checkDevice) {
             return response()->json([

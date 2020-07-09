@@ -29,8 +29,6 @@
 </template>
 <script>
 
-import axios from 'axios'
-
 export default {
 data(){
     return {
@@ -43,14 +41,14 @@ methods:{
     getData(){
         let user = JSON.parse(localStorage.user)
         let token = user.api_token
-        axios.get('/api/admin/devices', {params:{api_token:token}}).then((res) =>{
+        this.$axios.get('/api/admin/devices', {params:{api_token:token}}).then((res) =>{
             this.data = res.data
         }).catch((err) => {
             console.log(err);
         })
     },
     edit(id){
-        window.location.href = "/app/devices/edit/" + id
+        this.$router.push({name:'edit_device', params: {id}})
     },
     openPopup(id){
         this.id = id
@@ -60,7 +58,7 @@ methods:{
         let user = JSON.parse(localStorage.user)
         let token = user.api_token
         let url = '/api/admin/device/delete/' + this.id
-        axios({
+        this.$axios({
             method: 'DELETE',
             url: url,
             params: {

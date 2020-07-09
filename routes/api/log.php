@@ -9,6 +9,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::prefix('logs')->middleware('allowed')->group(function() {
     Route::get('get/{device_id}', 'API\RPI\LogController@getLogByDeviceId');
     Route::post('create', 'API\RPI\LogController@storeLogData');
