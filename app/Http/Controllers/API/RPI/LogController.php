@@ -12,75 +12,62 @@ use Illuminate\Support\Facades\Validator;
 
 class LogController extends Controller
 {
-	/**
-	* Get Device Log file
-	*
-	* @param $device_id
-	* @param Request $request
-	* @return JsonResponse
-	*
-	**/
+    /**
+     * Get Device Log file
+     *
+     * @param $device_id
+     * @param Request $request
+     * @return JsonResponse
+     *
+     **/
     public function getLogByDeviceId(Request $request, $device_id)
     {
-    	try {
-	    	$logs = Log::where('device_id', $device_id)->orderBy('created_at', 'DESC')->get();
+        try {
+            $logs = Log::where('device_id', $device_id)->orderBy('created_at', 'DESC')->get();
 
-	    	if(is_null($logs) || count($logs) < 1) {
-	    		return response()->json([
-	    			'Message' => 'No data.'
-	    		], 404);
-	    	} else {
-	    		return response()->json(['Logs:', $logs], 201);
-	    	}
+            if (is_null($logs) || count($logs) < 1) {
+                return response()->json([
+                    'Message' => 'No data.'
+                ], 404);
+            } else {
+                return response()->json(['Logs:', $logs], 201);
+            }
 
-    	} catch(\Exception $e) {
-    		return response()->json([
-    			'message' => 'Error handling request!',
-    			'error' => $e->getMessage()
-    		], 500);
-    	}
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error handling request!',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
-	/**
-	* Store device Log file
-	*
-	* @param Request $request
-	* @return JsonResponse
-	*
-	**/
-    public function storeLogData(Request $request)
+    /**
+     * Store device Log file
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function storeLogData(Request $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'device_id' => 'required'
+        $this->validate($request, [
+            'data.*.device_id' => 'required|numeric',
+            'data.*.device_group_id' => 'required|numeric',
+            'data.*.event_description' => 'required|string',
+            'data.*.event_time' => 'required|date'
         ]);
+        // Getting the request sender's ID
+        $reportedBy = DeviceAttribute::reportedBy($request->api_token);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'Errors' => $validator->errors()
-            ], 400);
+        foreach ($request->get('data') as $item) {
+            $newLog = new Log();
+            $newLog->device_id = @$item['device_id'];
+            $newLog->event_desc = @$item['event_description'];
+            $newLog->reported_by = $reportedBy;
+            $newLog->reported_at = \Carbon\Carbon::parse(@$item['event_time']);
+            $newLog->save();
         }
 
-        // Getting the request sender's ID
-        $reportedBy = DeviceAttribute::where('value', $request->api_token)->pluck('device_id');
-
-    	try {
-            $newLog = new Log();
-            $newLog->device_id = $request->json('device_id');
-            $newLog->event_desc = $request->json('event_description');
-            $newLog->reported_by = $reportedBy[0];
-            $newLog->reported_at = ($request->json('event_time')) ? \Carbon\Carbon::parse($request->json('event_time')) : null;
-            $newLog->save();
-
-	    	return response()->json([
-    			'message' => 'Log saved successfully!',
-    			'status_code' => 201
-    		], 201);
-
-	    } catch(\Exception $e) {
-	    	return response()->json([
-	    		'message' => 'Log not saved!',
-	    		'error' => $e->getMessage()
-	    	], 500);
-	    }
+        return response()->json(['message' => 'Logs saved successfully!'], 201);
     }
 }

@@ -22,7 +22,7 @@
 	  </div>
 		<div class="vx-row mb-6">
 	    <div class="vx-col w-full">
-	      <vs-input v-model="data.device_group.trigger_duration_ms" class="w-full" type="number" label="Trigger duration ms" />
+	      <vs-input v-model="data.device_group.trigger_duration_seconds" class="w-full" type="number" label="Trigger duration seconds" />
 	    </div>
 	  </div>
 		<div class="vx-row mb-6">
@@ -41,8 +41,6 @@
 
 <script>
 
-import axios from 'axios'
-
 export default {
 	data(){
     return {
@@ -57,7 +55,7 @@ export default {
 		postRequest(){
 				let user = JSON.parse(localStorage.user)
 				let token = user.api_token
-				axios({
+				this.$axios({
 					method: 'POST',
 					url: '/api/admin/device_group/store',
 					data: this.data.device_group,

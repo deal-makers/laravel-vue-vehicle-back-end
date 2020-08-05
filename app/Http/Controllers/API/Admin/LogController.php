@@ -22,62 +22,29 @@ class LogController extends Controller
      */
     public function searchLogs(Request $request)
     {
-        // Handle datetimes if selected or not
-        $dateFrom = ($request->date_from !== null)
-            ? Carbon::createFromTimeString($request->date_from)->setHour(0)->setMinute(0)->setSecond(0)
-            : Carbon::now()->subYears(100);
+        // Handle date times if selected or not
+        $dateFrom = $request->filled('date_from') ? $request->input('date_from') : Carbon::today();
+        $dateTo = $request->filled('date_to') ? $request->input('date_to') : Carbon::tomorrow();
 
-        $dateTo = ($request->date_to !== null)
-            ? Carbon::createFromTimeString($request->date_to)->setHour(23)->setMinute(59)->setSecond(59)
-            : Carbon::now();
+        $device_group = $request->input('device_group_id');
+        $device_id = $request->input('device_id');
 
-        // store parameters
-        $device_group = $request->device_group_id;
-        $device = $request->device_id;
+        $query = Log::whereBetween('reported_at', [$dateFrom, $dateTo])
+            ->with(['device.deviceGroup', 'reportedBy']);
 
-        // get enabled Device Grooups and Devices which are not RPi's
-        $deviceGroups = DeviceGroup::where('enabled', 1)->get();
-        $devices = Device::where('name', 'RPi')->pluck('id');
+        if ($device_group != null) {
+            $query = $query->whereHas('device.deviceGroup', function ($q) use ($device_group) {
+                $q->where('device_groups.id', $device_group);
+            });
+        }
 
-        if ($device_group === null) {
-
-            $logs = Log::whereNotIn('device_id', $devices)
-                ->where('reported_at', '>=', $dateFrom)
-                ->where('reported_at', '<=', $dateTo)
-                ->with('device')
-                ->with('device.deviceGroup')
-                ->get();
-
-        } elseif($device_group !== null && $device === null) {
-
-            $logs = Log::whereNotIn('device_id', $devices)
-                ->where('reported_at', '>=', $dateFrom)
-                ->where('reported_at', '<=', $dateTo)
-                ->with('device')
-                ->with('device.deviceGroup')
-                ->whereHas('device.deviceGroup', function($q) use ($device_group){
-                    $q->where('id', $device_group);
-                })
-                ->get();
-
-        } else {
-
-            $logs = Log::whereNotIn('device_id', $devices)
-                ->where('device_id', intval($device))
-                ->where('reported_at', '>=', $dateFrom)
-                ->where('reported_at', '<=', $dateTo)
-                ->with('device')
-                ->with('device.deviceGroup')
-                ->whereHas('device.deviceGroup', function($q) use ($device_group){
-                    $q->where('id', $device_group);
-                })
-                ->get();
-
+        if ($device_id != null) {
+            $query = $query->where('device_id', $device_id);
         }
 
         return response()->json([
-            'logs' => $logs,
-            'device_groups' => $deviceGroups
+            'logs' => $query->get(),
+            'device_groups' => DeviceGroup::where('enabled', 1)->get()
         ], 200);
     }
 

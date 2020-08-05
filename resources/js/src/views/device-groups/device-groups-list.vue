@@ -18,8 +18,8 @@
           <vs-td>{{item.enabled ? 'True' : 'False'}}</vs-td>
   				<vs-td>{{item.type}}</vs-td>
   				<vs-td>{{item.name}}</vs-td>
-          <vs-td>{{item.trigger_duration_ms}} ms</vs-td>
-          <vs-td>{{item.time_between_trigger}} ms</vs-td>
+          <vs-td>{{item.trigger_duration_seconds}} sec</vs-td>
+          <vs-td>{{item.time_between_trigger}} sec</vs-td>
           <vs-td><vs-button v-on:click="edit(item.id)" class="mr-3 mb-2">Edit</vs-button><vs-button color="danger" @click="openPopup(item.id)"  class="mr-3 mb-2">Delete</vs-button></vs-td>
         </vs-tr>
       </template>
@@ -34,8 +34,6 @@
 
 <script>
 
-import axios from 'axios'
-
 export default {
     data(){
       return {
@@ -48,7 +46,7 @@ export default {
       getData(){
         let user = JSON.parse(localStorage.user)
         let token = user.api_token
-        axios.get('/api/admin/device_groups', {params:{api_token:token}}).then((res) =>{
+        this.$axios.get('/api/admin/device_groups', {params:{api_token:token}}).then((res) =>{
           this.data = res.data
         }).catch((err) => {
           console.log(err);
@@ -65,7 +63,7 @@ export default {
         let user = JSON.parse(localStorage.user)
   			let token = user.api_token
   			let url = '/api/admin/device_group/delete/' + this.id
-  			axios({
+  			this.$axios({
   				method: 'DELETE',
                   url: url,
   								params: {

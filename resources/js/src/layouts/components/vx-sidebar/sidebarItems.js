@@ -22,5 +22,11 @@ export default [
         name: "Logs",
         slug: "logs",
         icon: "FileIcon"
+    },
+    {
+        url: "/remote_devices",
+        name: "Remote IoT devices",
+        slug: "remote",
+        icon: "FileIcon"
     }
 ]
