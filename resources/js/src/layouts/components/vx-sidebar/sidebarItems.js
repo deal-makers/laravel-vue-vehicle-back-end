@@ -6,27 +6,98 @@ export default [
         icon: "HomeIcon",
     },
     {
-        url: "/devices",
-        name: "Devices",
-        slug: "devices",
-        icon: "FileIcon",
+        name: "Sanitation",
+        slug: "sanitation",
+        icon: "DropletIcon",
+        submenu: [
+            {
+                url: "/vehicle-groups",
+                name: "Vehicle Groups",
+                slug: "vehicle-groups",
+                icon: "CodeSandboxIcon",
+            },
+            {
+                url: "#",
+                name: "Vehicles",
+                slug: "vehicles",
+                icon: "TruckIcon",
+            },
+            {
+                url: "#",
+                name: "Compute Modules",
+                slug: "compute-modules",
+                icon: "HardDriveIcon",
+            }
+        ]
     },
     {
-        url: "/device_groups",
-        name: "Device Groups",
-        slug: "device_groups",
-        icon: "FileIcon",
+        name: "Kiosks",
+        slug: "kiosks",
+        icon: "TabletIcon",
+        submenu: [
+            {
+                url: "",
+                name: "Tablets",
+                slug: "tablets",
+                icon: "TabletIcon",
+            },
+        ]
     },
     {
-        url: "/logs",
-        name: "Logs",
-        slug: "logs",
-        icon: "FileIcon"
+        name: "Reports",
+        slug: "reports",
+        icon: "BarChartIcon",
+        submenu: [
+            {
+                url: "#",
+                name: "Status",
+                slug: "status",
+                icon: "SunIcon",
+            },
+            {
+                url: "#",
+                name: "Sanitation Activity",
+                slug: "sanitation-activity",
+                icon: "BarChart2Icon",
+            }
+        ]
     },
     {
-        url: "/remote_devices",
-        name: "Remote IoT devices",
-        slug: "remote",
-        icon: "FileIcon"
-    }
+        name: "Global Admin",
+        slug: "global-admin",
+        icon: 'CommandIcon',
+        submenu: [
+            {
+                url: "/devices",
+                name: "Devices",
+                slug: "devices",
+                icon: "FileIcon",
+            },
+            {
+                url: "/device_groups",
+                name: "Device Groups",
+                slug: "device_groups",
+                icon: "FileIcon",
+            },
+            {
+                url: "/logs",
+                name: "Logs",
+                slug: "logs",
+                icon: "FileIcon"
+            },
+            {
+                url: "/remote_devices",
+                name: "Remote IoT devices",
+                slug: "remote",
+                icon: "FileIcon"
+            },
+            {
+                url: "/users",
+                name: "Users",
+                slug: "users",
+                icon: "UsersIcon"
+            }
+        ]
+    },
+
 ]

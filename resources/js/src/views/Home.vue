@@ -1,3 +1,3 @@
 <template>
-	<h4>You are in home 123.</h4>
+	<h4>Dashboard.</h4>
 </template>

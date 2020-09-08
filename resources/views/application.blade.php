@@ -18,7 +18,7 @@
   </head>
   <body>
     <noscript>
-        <strong>We are sorry, but Olympus needs JavaScript to be enabled in order to run. Please turn on JavaScript to continue.</strong>
+        <strong>We are sorry, but we need JavaScript to be enabled in order to run. Please turn on JavaScript to continue.</strong>
     </noscript>
     <div id="app">
     </div>

@@ -9,7 +9,7 @@
                         </div>
                         <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
                             <div v-if="alert" class="alert-danger">
-                                  Bad Credentials. Please try again or contact administrator!
+                                  Bad Credentials. Please try again or contact administrator.
                             </div>
                             <div class="p-8">
                                 <div class="vx-card__title mb-8">
