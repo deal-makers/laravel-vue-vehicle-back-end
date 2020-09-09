@@ -114,4 +114,6 @@ return [
 
     'password_timeout' => 10800,
 
+    'api_token_length' => 20,
+
 ];

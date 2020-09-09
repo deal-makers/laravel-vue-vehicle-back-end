@@ -19,7 +19,7 @@ class DeviceAttributesTableSeeder extends Seeder
             ],[
                 'device_id' => 1,
                 'name' => 'api_token',
-                'value' => Str::random(15)
+                'value' => Str::random(\Config::get('auth.api_token_length'))
             ],[
                 'device_id' => 2,
                 'name' => 'rfid_tag',

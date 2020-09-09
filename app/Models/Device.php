@@ -45,6 +45,6 @@ class Device extends Model
     public static function generateApiToken()
     {
         //TODO Implement proper api_token generation
-        return \Str::random(15);
+        return \Str::random(\Config::get('auth.api_token_length'));
     }
 }

@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('pass'),
-            'api_token' => Str::random(20),
+            'api_token' => Str::random(\Config::get('auth.api_token_length')),
         ]);
     }
 }

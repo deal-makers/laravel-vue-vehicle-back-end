@@ -24,14 +24,14 @@ class DeviceTableSeeder extends Seeder
             'device_group_id' => 1,
             'device_rfid' => '0007935148',
             'device_id' => 22,
-            'description' => Str::random('20'),
+            'description' => Str::random(\Config::get('auth.api_token_length')),
         ]);
         DB::table('devices')->insert([
             'name' => 'random2',
             'device_group_id' => 1,
             'device_rfid' => '0007939547',
             'device_id' => 123,
-            'description' => Str::random('20'),
+            'description' => Str::random(\Config::get('auth.api_token_length')),
         ]);
     }
 }
