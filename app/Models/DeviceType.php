@@ -19,7 +19,7 @@ class DeviceType extends Model
      * @var string[]
      */
     protected $fillable = [
-        'id', 'name', 'attributes', 'device_id'
+        'id', 'name', 'attributes'
     ];
 
     /**
@@ -35,5 +35,10 @@ class DeviceType extends Model
     public function device()
     {
         return $this->belongsTo(Device::class, 'device_id');
+    }
+
+    public function deviceGroups()
+    {
+        return $this->hasMany(DeviceGroup::class, 'device_type_id');
     }
 }

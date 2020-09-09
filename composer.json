@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "phpoffice/phpspreadsheet": "^1.14",
-        "spatie/laravel-permission": "^3.13"
+        "spatie/laravel-permission": "^3.13",
+        "doctrine/dbal": "^2.4.2"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.4",

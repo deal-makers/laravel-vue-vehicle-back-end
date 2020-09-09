@@ -11,7 +11,7 @@ export default [
         icon: "DropletIcon",
         submenu: [
             {
-                url: "/vehicle-groups",
+                url: "/vehicle_groups",
                 name: "Vehicle Groups",
                 slug: "vehicle-groups",
                 icon: "CodeSandboxIcon",

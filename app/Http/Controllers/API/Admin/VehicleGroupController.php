@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\DeviceGroup;
 use Illuminate\Http\Request;
 
-class DeviceGroupController extends Controller
+class VehicleGroupController extends Controller
 {
+
+    private $device_type_id = '1'; // TODO: Not hard code this.
+
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +18,11 @@ class DeviceGroupController extends Controller
      */
     public function index()
     {
-        $deviceGroups = DeviceGroup::all();
+        $deviceGroups = DeviceGroup::whereHas('device_type', function($q) {
+            $q->where('name', '=', 'rfid');
+        })->get();
 
-        return response()->json($deviceGroups,200);
+        return response()->json($deviceGroups, 200);
     }
 
     /**
@@ -32,14 +37,14 @@ class DeviceGroupController extends Controller
         try {
             $newDeviceGroup = new DeviceGroup();
             $newDeviceGroup->enabled = ($request->has('enabled')) ? $request->enabled : false;
-            $newDeviceGroup->type = $request->type;
+            $newDeviceGroup->device_type_id = $this->device_type_id;
             $newDeviceGroup->name = $request->name;
             $newDeviceGroup->trigger_duration_seconds = $request->trigger_duration_seconds;
             $newDeviceGroup->time_between_trigger = $request->time_between_trigger;
             $newDeviceGroup->save();
 
             return response()->json([
-                'Message' => 'Device group created successfully!'
+                'Message' => 'Vehicle group created successfully!'
             ],200);
 
         } catch(\Exception $e) {
@@ -67,6 +72,7 @@ class DeviceGroupController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -74,14 +80,14 @@ class DeviceGroupController extends Controller
         try {
             $editDeviceGroup = DeviceGroup::findOrFail($id);
             $editDeviceGroup->enabled = ($request->has('enabled')) ? $request->enabled : $editDeviceGroup->enabled;
-            $editDeviceGroup->type = $request->type;
+            //$editDeviceGroup->device_type_id = $this->device_type_id;
             $editDeviceGroup->name = $request->name;
             $editDeviceGroup->trigger_duration_seconds = $request->trigger_duration_seconds;
             $editDeviceGroup->time_between_trigger = $request->time_between_trigger;
             $editDeviceGroup->save();
 
             return response()->json([
-                'Message' => 'Device group updated successfully!'
+                'Message' => 'Vehicle group updated successfully!'
             ],200);
 
         } catch(\Exception $e) {
@@ -104,7 +110,7 @@ class DeviceGroupController extends Controller
             $device->delete();
 
             return response()->json([
-                'Message' => 'Device group removed successfully!'
+                'Message' => 'Vehicle group removed successfully!'
             ], 200);
 
         } catch (\Exception $e) {

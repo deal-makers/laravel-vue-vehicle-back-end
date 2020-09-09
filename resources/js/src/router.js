@@ -22,6 +22,24 @@ const router = new Router({
                     name: 'home',
                     component: () => import('./views/Home.vue'),
                 },
+
+                // SANITATION SECTION
+                {
+                    path: 'vehicle_groups',
+                    name: 'vehicle_groups',
+                    component: () => import('./views/sanitation/vehicle-groups/vehicle-groups-list.vue'),
+                },
+                {
+                    path: 'vehicle_groups/add',
+                    name: 'add_vehicle_group',
+                    component: () => import('./views/sanitation/vehicle-groups/add-vehicle-group.vue'),
+                },
+                {
+                    path: 'vehicle_groups/edit/:id',
+                    name: 'edit_vehicle_group',
+                    component: () => import('./views/sanitation/vehicle-groups/edit-vehicle-group.vue'),
+                },
+
                 {
                     path: 'devices',
                     name: 'devices',

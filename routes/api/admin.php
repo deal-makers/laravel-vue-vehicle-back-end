@@ -49,4 +49,11 @@ Route::prefix('admin')->group(function() {
      */
     Route::apiResource('remote_devices', 'RemoteDevicesController')->except(['store', 'update']);
     Route::match(['post', 'put'], 'remote_devices/{id?}', 'RemoteDevicesController@save');
+
+
+    Route::get('vehicle_groups', 'VehicleGroupController@index');
+    Route::get('vehicle_group/{id}', 'VehicleGroupController@show');
+    Route::post('vehicle_group/store', 'VehicleGroupController@store');
+    Route::put('vehicle_group/update/{id}', 'VehicleGroupController@update');
+    Route::delete('vehicle_group/delete/{id}', 'VehicleGroupController@destroy');
 });
