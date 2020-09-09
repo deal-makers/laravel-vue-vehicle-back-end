@@ -39,6 +39,16 @@ class Device extends Model
         return $this->hasMany(DeviceAttribute::class);
     }
 
+    public function pulses()
+    {
+        return $this->hasMany(DevicePulse::class);
+    }
+
+    public function latestPulse()
+    {
+        return $this->pulses()->latest();
+    }
+
     public static function generateApiToken()
     {
         //TODO Implement proper api_token generation

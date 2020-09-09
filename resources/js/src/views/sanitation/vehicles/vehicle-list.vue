@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="style-title">Vehicles</h2>
+    <h2 class="style-title">Vehicle Tags</h2>
     <p>Vehicles inherit their options from the Vehicle Group they belong to.</p>
     <p>&nbsp;</p>
     <vs-button color="primary" type="filled" to="/vehicles/add" style="margin-bottom:20px;">Add vehicle tag</vs-button>
@@ -15,7 +15,7 @@
 
       <template>
         <vs-tr v-for="item in data" v-bind:key="item.id">
-          <vs-td>{{item.name}}</vs-td>
+          <vs-td data="item.name">{{item.name}}</vs-td>
           <vs-td>{{item.device_group.name}}</vs-td>
           <vs-td>{{item.description}}</vs-td>
           <vs-td><vs-button v-on:click="edit(item.id)" class="mr-3 mb-2">Edit</vs-button><vs-button color="danger" @click="openPopup(item.id)"  class="mr-3 mb-2">Delete</vs-button></vs-td>

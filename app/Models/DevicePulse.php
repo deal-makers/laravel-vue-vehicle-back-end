@@ -15,4 +15,9 @@ class DevicePulse extends Model
 
     /** @var bool */
     public $timestamps = true;
+
+    public function device()
+    {
+        return $this->belongsTo(Device::class);
+    }
 }

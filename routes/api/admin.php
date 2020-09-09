@@ -73,4 +73,19 @@ Route::prefix('admin')->group(function() {
     Route::delete('compute_module/delete/{id}', 'ComputeModuleController@destroy');
     Route::get('compute_modules/{device_group}', 'ComputeModuleController@getDevicesByGroup');
     Route::post('compute_module/renew_api_token', 'ComputeModuleController@renewApiToken');
+
+    /*
+     * KIOSKS SECTION
+     */
+    Route::prefix('kiosk')->group(function() {
+        Route::get('tablets', 'TabletController@index');
+    });
+
+    /*
+     * REPORTS SECTION
+     */
+    Route::prefix('reports')->group(function() {
+        Route::get('status', 'ReportStatusController@index');
+        Route::get('sanitation-activity', 'SanitationActivityController@index');
+    });
 });

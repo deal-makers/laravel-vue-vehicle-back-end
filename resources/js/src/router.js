@@ -70,10 +70,29 @@ const router = new Router({
                     component: () => import('./views/sanitation/compute-modules/edit-compute.vue'),
                 },
 
+                // KIOSKS SECTION
+                {
+                    path: 'kiosk/tablets',
+                    name: 'tablets',
+                    component: () => import('./views/kiosks/tablet-list.vue'),
+                },
+
+                // REPORTS SECTION
+                {
+                    path: 'reports/status',
+                    name: 'status',
+                    component: () => import('./views/reports/status.vue'),
+                },
+                {
+                    path: 'reports/sanitation-activity',
+                    name: 'sanitation-activity',
+                    component: () => import('./views/reports/sanitation-activity.vue'),
+                },
+
                 // GLOBAL ADMIN SECION
 
                 {
-                    path: 'devices',
+                    path: '#',//'devices',
                     name: 'devices',
                     component: () => import('./views/devices/device-list.vue'),
                 },
@@ -88,7 +107,7 @@ const router = new Router({
                     component: () => import('./views/devices/edit-device.vue'),
                 },
                 {
-                    path: 'device_groups',
+                    path: '#',//'device_groups',
                     name: 'device_groups',
                     component: () => import('./views/device-groups/device-groups-list.vue'),
                 },
@@ -103,12 +122,12 @@ const router = new Router({
                     component: () => import('./views/device-groups/edit-device-group.vue'),
                 },
                 {
-                    path: 'logs',
+                    path: '#',//'logs',
                     name: 'logs',
                     component: () => import('./views/logs/logs-list'),
                 },
                 {
-                    path: 'remote_devices',
+                    path: '#',//'remote_devices',
                     name: 'remote_devices',
                     component: () => import('./views/remote-devices/device-list.vue'),
                 },

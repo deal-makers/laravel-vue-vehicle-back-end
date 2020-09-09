@@ -6,7 +6,7 @@ export default [
         icon: "HomeIcon",
     },
     {
-        name: "Sanitation",
+        name: "ADS Sanitation",
         slug: "sanitation",
         icon: "DropletIcon",
         submenu: [
@@ -18,7 +18,7 @@ export default [
             },
             {
                 url: "/vehicles",
-                name: "Vehicles",
+                name: "Vehicle Tags",
                 slug: "vehicles",
                 icon: "TruckIcon",
             },
@@ -36,7 +36,7 @@ export default [
         icon: "TabletIcon",
         submenu: [
             {
-                url: "",
+                url: "/kiosk/tablets",
                 name: "Tablets",
                 slug: "tablets",
                 icon: "TabletIcon",
@@ -49,13 +49,13 @@ export default [
         icon: "BarChartIcon",
         submenu: [
             {
-                url: "#",
+                url: "/reports/status",
                 name: "Status",
                 slug: "status",
                 icon: "SunIcon",
             },
             {
-                url: "#",
+                url: "/reports/sanitation-activity",
                 name: "Sanitation Activity",
                 slug: "sanitation-activity",
                 icon: "BarChart2Icon",
@@ -68,25 +68,25 @@ export default [
         icon: 'CommandIcon',
         submenu: [
             {
-                url: "/devices",
+                url: '#a',//"/devices",
                 name: "Devices",
                 slug: "devices",
                 icon: "FileIcon",
             },
             {
-                url: "/device_groups",
+                url: '#s',//"/device_groups",
                 name: "Device Groups",
                 slug: "device_groups",
                 icon: "FileIcon",
             },
             {
-                url: "/remote_devices",
+                url: '#d',//"/remote_devices",
                 name: "Remote IoT devices",
                 slug: "remote",
                 icon: "FileIcon"
             },
             {
-                url: "/logs",
+                url: '#e',//"/logs",
                 name: "Logs",
                 slug: "logs",
                 icon: "FileIcon"

@@ -60,7 +60,7 @@ methods:{
     deleteDevice() {
         let user = JSON.parse(localStorage.user)
         let token = user.api_token
-        let url = '/api/admin/compute_modules/delete/' + this.id
+        let url = '/api/admin/compute_module/delete/' + this.id
         this.$axios({
             method: 'DELETE',
             url: url,
