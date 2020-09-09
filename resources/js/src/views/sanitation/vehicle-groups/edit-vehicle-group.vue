@@ -77,7 +77,7 @@ export default {
                 },
             })
             .then((res) => {
-                this.alert = 'Vehicle group successfully updated'
+                window.location.href = "/app/vehicle_groups"
             })
             .catch((err) => {
                 this.alert = 'Vehicle group failed to update'

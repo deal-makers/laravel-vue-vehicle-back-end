@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="style-title">Remoter IoT Devices</h2>
+        <h2 class="style-title">Remote IoT Devices</h2>
         <vs-button color="primary" type="filled" :to="{name:'add_remote_device'}" style="margin-bottom:20px;">Add IoT
             device
         </vs-button>

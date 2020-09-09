@@ -14,14 +14,6 @@ class Device extends Model
 {
     use HasRoles, SoftDeletes;
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function deviceType()
-    {
-        return $this->hasOne(DeviceType::class);
-    }
-
     public function token()
     {
         return $this->hasOne(DeviceToken::class);
@@ -35,6 +27,11 @@ class Device extends Model
     public function deviceGroup()
     {
         return $this->belongsTo(DeviceGroup::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function attributes()

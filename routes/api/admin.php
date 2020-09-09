@@ -50,10 +50,27 @@ Route::prefix('admin')->group(function() {
     Route::apiResource('remote_devices', 'RemoteDevicesController')->except(['store', 'update']);
     Route::match(['post', 'put'], 'remote_devices/{id?}', 'RemoteDevicesController@save');
 
+    /*
+     * SANITATION SECTION
+     */
 
     Route::get('vehicle_groups', 'VehicleGroupController@index');
     Route::get('vehicle_group/{id}', 'VehicleGroupController@show');
     Route::post('vehicle_group/store', 'VehicleGroupController@store');
     Route::put('vehicle_group/update/{id}', 'VehicleGroupController@update');
     Route::delete('vehicle_group/delete/{id}', 'VehicleGroupController@destroy');
+
+    Route::get('vehicles', 'VehicleController@index');
+    Route::get('vehicle/{id}', 'VehicleController@show');
+    Route::post('vehicle/store', 'VehicleController@store');
+    Route::put('vehicle/update/{id}', 'VehicleController@update');
+    Route::delete('vehicle/delete/{id}', 'VehicleController@destroy');
+
+    Route::get('compute_modules', 'ComputeModuleController@index');
+    Route::get('compute_module/{id}', 'ComputeModuleController@show');
+    Route::post('compute_module/store', 'ComputeModuleController@store');
+    Route::put('compute_module/update/{id}', 'ComputeModuleController@update');
+    Route::delete('compute_module/delete/{id}', 'ComputeModuleController@destroy');
+    Route::get('compute_modules/{device_group}', 'ComputeModuleController@getDevicesByGroup');
+    Route::post('compute_module/renew_api_token', 'ComputeModuleController@renewApiToken');
 });

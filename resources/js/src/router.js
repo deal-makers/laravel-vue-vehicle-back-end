@@ -39,6 +39,38 @@ const router = new Router({
                     name: 'edit_vehicle_group',
                     component: () => import('./views/sanitation/vehicle-groups/edit-vehicle-group.vue'),
                 },
+                {
+                    path: 'vehicles',
+                    name: 'vehicles',
+                    component: () => import('./views/sanitation/vehicles/vehicle-list.vue'),
+                },
+                {
+                    path: 'vehicles/add',
+                    name: 'add_vehicle',
+                    component: () => import('./views/sanitation/vehicles/add-vehicle.vue'),
+                },
+                {
+                    path: 'vehicles/edit/:id',
+                    name: 'edit_vehicle',
+                    component: () => import('./views/sanitation/vehicles/edit-vehicle.vue'),
+                },
+                {
+                    path: 'compute-modules',
+                    name: 'compute-modules',
+                    component: () => import('./views/sanitation/compute-modules/compute-list.vue'),
+                },
+                {
+                    path: 'compute-modules/add',
+                    name: 'add_compute',
+                    component: () => import('./views/sanitation/compute-modules/add-compute.vue'),
+                },
+                {
+                    path: 'compute-modules/edit/:id',
+                    name: 'edit_compute',
+                    component: () => import('./views/sanitation/compute-modules/edit-compute.vue'),
+                },
+
+                // GLOBAL ADMIN SECION
 
                 {
                     path: 'devices',

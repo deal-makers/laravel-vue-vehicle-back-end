@@ -17,13 +17,13 @@ export default [
                 icon: "CodeSandboxIcon",
             },
             {
-                url: "#",
+                url: "/vehicles",
                 name: "Vehicles",
                 slug: "vehicles",
                 icon: "TruckIcon",
             },
             {
-                url: "#",
+                url: "/compute-modules",
                 name: "Compute Modules",
                 slug: "compute-modules",
                 icon: "HardDriveIcon",
@@ -80,23 +80,17 @@ export default [
                 icon: "FileIcon",
             },
             {
-                url: "/logs",
-                name: "Logs",
-                slug: "logs",
-                icon: "FileIcon"
-            },
-            {
                 url: "/remote_devices",
                 name: "Remote IoT devices",
                 slug: "remote",
                 icon: "FileIcon"
             },
             {
-                url: "/users",
-                name: "Users",
-                slug: "users",
-                icon: "UsersIcon"
-            }
+                url: "/logs",
+                name: "Logs",
+                slug: "logs",
+                icon: "FileIcon"
+            },
         ]
     },
 
