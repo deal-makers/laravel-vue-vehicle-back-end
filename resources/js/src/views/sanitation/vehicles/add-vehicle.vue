@@ -11,20 +11,26 @@
                 </li>
             </ul>
         </vs-alert>
-		<h2 class="style-title">New device</h2>
-		<div class="vx-row mb-6">
-			<div class="vx-col w-full">
-				<vs-select
+		<h2 class="style-title">New vehicle tag</h2>
+        <div class="vx-row mb-6">
+            <div class="vx-col w-full">
+                <vs-select
                     v-model="data.device.device_group_id"
-                    name="device_group_id"
-					class="w-full"
-					label="Device group"
-					>
+                    name="data.device_group_id"
+                    class="w-full"
+                    label="Vehicle group"
+                    @input="setSelected"
+                >
                     <vs-select-item :key="0" :value="''" :disabled="true" v-show="false"/>
-					<vs-select-item v-for="device_group in data.device_groups" :key="device_group.id" :value="data.device.device_group_id" :text="device_group.name"/>
-				</vs-select>
-			</div>
-		</div>
+                    <vs-select-item
+                        v-for="device_group in data.device_groups"
+                        :key="device_group.id"
+                        :value="device_group.id"
+                        :text="device_group.name"
+                    />
+                </vs-select>
+            </div>
+        </div>
         <div class="vx-row mb-6">
             <div class="vx-col w-full">
                 <vs-input v-model="data.device.name" class="w-full" type="text" label="Vehicle identifier" />
@@ -38,7 +44,7 @@
         <div class="vx-row">
             <div class="vx-col w-full">
                 <vs-button v-on:click="postRequest" class="mr-3 mb-2">Save</vs-button>
-                <vs-button to="/devices" class="mr-3 mb-2" color="danger">Cancel</vs-button>
+                <vs-button to="/vehicles" class="mr-3 mb-2" color="danger">Cancel</vs-button>
             </div>
         </div>
 	</div>
@@ -51,7 +57,7 @@ export default {
         return {
             data:{
                 device: {
-                    device_group_id: '',
+                    device_group_id: 0  ,
                     name: '',
                     description: '',
                 },
@@ -76,8 +82,10 @@ export default {
                 this.data.device_groups = res.data;
             })
         },
+        setSelected(value) {
+            this.data.device.device_group_id = value;
+        },
         postRequest(){
-            console.log(this.data.device);
             let user = JSON.parse(localStorage.user);
             let token = user.api_token;
             this.$axios({
@@ -89,6 +97,7 @@ export default {
                 },
             })
             .then((res) =>{
+                this.alert = 'Vehicle successfully added'
                 setTimeout(function() {
                     window.location.href = "/app/vehicles";
                 }, 750);

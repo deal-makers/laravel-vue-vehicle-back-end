@@ -46,7 +46,6 @@ class VehicleController extends Controller
         }
 
         try {
-            dd($request);
             $newDevice = new Device();
             $newDevice->name = $request->name;
             $newDevice->device_group_id = $request->device_group_id;

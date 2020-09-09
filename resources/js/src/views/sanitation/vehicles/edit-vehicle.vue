@@ -18,10 +18,19 @@
         <div class="vx-row mb-6">
             <div class="vx-col w-full">
                 <vs-select
+                    v-model="data.device_group_id"
+                    name="data.device_group_id"
                     class="w-full"
                     label="Vehicle group"
+                    @input="setSelected"
                 >
-                    <vs-select-item v-for="device_group in device_groups" :key="device_group.id" :value="data.device_group_id" :text="device_group.name"/>
+                    <vs-select-item :key="0" :value="''" :disabled="true" v-show="false"/>
+                    <vs-select-item
+                        v-for="device_group in device_groups"
+                        :key="device_group.id"
+                        :value="device_group.id"
+                        :text="device_group.name"
+                    />
                 </vs-select>
             </div>
         </div>
@@ -51,7 +60,8 @@ export default {
         return {
             data:{
                 name: '',
-                api_token: '',
+                device_group_id: '',
+                description: '',
             },
             device_groups: [],
             alert:'',
@@ -71,6 +81,7 @@ export default {
                 }
             }).then((res) => {
                 this.device_groups = res.data
+                console.log(this.device_groups);
             }).catch((err) => {
                 console.log(err)
             })
@@ -78,12 +89,16 @@ export default {
         getData(){
             let user = JSON.parse(localStorage.user)
             let token = user.api_token
-            this.$axios.get('/api/admin/vehicle/' + this.$route.params.id, {params:{'api_token':token}})
+            this.$axios
+                .get('/api/admin/vehicle/' + this.$route.params.id, {params:{'api_token':token}})
                 .then((res) => {
-                    this.data = res.data
+                    this.data = res.data;
                 }).catch((err) => {
                     this.errors = err
                 })
+        },
+        setSelected(value) {
+            this.data.device_group_id = value;
         },
 		postRequest(){
 			let user = JSON.parse(localStorage.user)
@@ -98,6 +113,7 @@ export default {
                 },
 			})
 			.then((res) =>{
+                this.alert = 'Vehicle successfully updated'
                 setTimeout(function() {
                     window.location.href = "/app/vehicles";
                 }, 750);
@@ -108,8 +124,8 @@ export default {
 		}
 	},
     beforeMount(){
-        this.getData();
         this.getDeviceGroups();
+        this.getData();
     }
 }
 </script>
