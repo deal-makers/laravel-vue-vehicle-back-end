@@ -1,11 +1,14 @@
 <template>
   <div>
     <h2 class="style-title">Compute Modules</h2>
-    <vs-button color="primary" type="filled" to="/devices/add" style="margin-bottom:20px;">Add module</vs-button>
+    <p>To access API, use route: https://dashboard.oneblinktech.com/api/compute_module/</p>
+    <p>&nbsp;</p>
+    <vs-button color="primary" type="filled" to="/compute-modules/add" style="margin-bottom:20px;">Add module</vs-button>
     <vs-table data="users">
 
       <template slot="thead">
         <vs-th>Name</vs-th>
+        <vs-th>IP Address</vs-th>
         <vs-th>API Token</vs-th>
         <vs-th>Options</vs-th>
       </template>
@@ -13,7 +16,8 @@
       <template>
         <vs-tr v-for="item in data" v-bind:key="item.id">
           <vs-td>{{item.name}}</vs-td>
-          <vs-td></vs-td>
+          <vs-td>{{item.description}}</vs-td>
+          <vs-td>{{item.user.api_token}}</vs-td>
           <vs-td><vs-button v-on:click="edit(item.id)" class="mr-3 mb-2">Edit</vs-button><vs-button color="danger" @click="openPopup(item.id)"  class="mr-3 mb-2">Delete</vs-button></vs-td>
         </vs-tr>
       </template>
@@ -41,6 +45,7 @@ methods:{
         let token = user.api_token
         this.$axios.get('/api/admin/compute_modules', {params:{api_token:token}}).then((res) =>{
             this.data = res.data
+            console.log(this.data);
         }).catch((err) => {
             console.log(err);
         })

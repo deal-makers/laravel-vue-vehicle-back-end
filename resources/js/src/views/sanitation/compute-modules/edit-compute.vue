@@ -1,7 +1,7 @@
 <template>
 	<div class="max-width-500">
 		<vs-alert color="danger" v-if="data.name.length < 3 && data.name !== ''" style="margin-bottom:20px;">
-  		    Device name must me longer that three letters!
+  		    Name must me longer that three letters!
 		</vs-alert>
 		<vs-alert color="success" v-if="alert" style="margin-bottom:20px;">
   		    {{alert}}
@@ -27,6 +27,7 @@
         </div>
         <div class="vx-row mb-6">
             <div class="vx-col">
+                <p>Warning! Changing this will break current connections.</p>
                 <vs-checkbox v-model="data.refresh_api_key">Refresh API Key</vs-checkbox>
             </div>
         </div>
@@ -113,8 +114,9 @@ export default {
 			})
 			.then((res) =>{
 				this.alert = 'Device successfully updated';
-				this.delay(250);
-                window.location.href = "/app/compute_modules"
+                setTimeout(function() {
+                    window.location.href = "/app/compute-modules";
+                }, 750);
 			}).catch((err) => {
                 this.errors = null
                 this.errors = err.response.data

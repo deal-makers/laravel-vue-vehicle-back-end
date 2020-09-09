@@ -32,4 +32,11 @@ class DeviceGroup extends Model
         return $this->belongsTo(DeviceType::class);
     }
 
+    public function getByTypeName($name)
+    {
+        return $this->whereHas('device_type', function($q) use ($name) {
+            $q->where('name', '=', $name);
+        });
+    }
+
 }

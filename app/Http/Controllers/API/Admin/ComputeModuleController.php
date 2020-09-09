@@ -39,7 +39,6 @@ class ComputeModuleController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-           'device_id' => 'required',
            'name' => 'required|min:3'
         ]);
         if ($validator->fails()) {
@@ -47,18 +46,21 @@ class ComputeModuleController extends Controller
         }
 
         try {
-            $newDevice = new Device();
-            $newDevice->name = $request->name;
-            $newDevice->description = $request->description;
-            $newDevice->save();
+            $device = new Device();
+            $device->device_group_id = (DeviceGroup::getByTypeName('compute-module'))->id;
+            $device->name = $request->name;
+            $device->description = $request->description;
 
-            if($request->has('api_token')) {
-                $addAttribute = new DeviceAttribute();
-                $addAttribute->device_id = $newDevice->id;
-                $addAttribute->name = 'api_token';
-                $addAttribute->value = Device::generateApiToken();
-                $addAttribute->save();
-            }
+            $user = new User();
+            $user->name = \Str::slug($device->name);
+            $user->email = '';
+            $user->password = '';
+            $user->api_token = \Str::random(\Config::get('auth.api_token_length'));
+            $user->save();
+
+            $device->user_id = $user->id;
+            $device->save();
+
 
             return response()->json([
                 'Message' => 'Device stored successfully!'
@@ -106,16 +108,16 @@ class ComputeModuleController extends Controller
             $device->description = $request->description;
             $device->save();
 
+            $user = User::findOrFail($device->user_id);
+            $user->name = \Str::slug($device->name);
             if ($request->has('refresh_api_key')) {
-                $user = User::findOrFail($device->user_id);
-                $user->name = \Str::slug($device->name);
                 $user->api_token = \Str::random(\Config::get('auth.api_token_length'));
-                $user->save();
             }
+            $user->save();
 
             return response()->json([
                'Message' => 'Device updated successfully!'
-            ]+$user->toArray(), 200);
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'Error' => $e->getMessage()
@@ -133,7 +135,9 @@ class ComputeModuleController extends Controller
     {
         try {
             $device = Device::findOrFail($id);
+            $user = User::findOrFail($device->user_id);
             $device->delete();
+            $user->delete();
 
             return response()->json([
                 'Message' => 'Device removed successfully!'

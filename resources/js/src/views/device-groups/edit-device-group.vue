@@ -78,6 +78,9 @@ export default {
 			})
 			.then((res) =>{
 				this.alert = 'Device group successfully updated'
+                setTimeout(function() {
+                    window.location.href = "/app/device-groups";
+                }, 750);
 			}).catch((err) => {
 				this.alert = 'Device group failed to update'
 				console.log(err);

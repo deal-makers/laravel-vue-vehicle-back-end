@@ -59,7 +59,9 @@ export default {
 					},
 				})
 				.then((res) =>{
-					window.location.href = "/app/vehicle_groups"
+                    setTimeout(function() {
+                        window.location.href = "/app/vehicle-groups";
+                    }, 750);
 				}).catch((err) => {
 					console.log(err);
 				})

@@ -89,7 +89,9 @@ export default {
                 },
             })
             .then((res) =>{
-                //window.location.href = "/app/vehicles"
+                setTimeout(function() {
+                    window.location.href = "/app/vehicles";
+                }, 750);
             }).catch((err) => {
                 this.errors = err.response.data
             })
