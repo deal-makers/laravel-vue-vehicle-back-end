@@ -41,4 +41,13 @@ class DeviceType extends Model
     {
         return $this->hasMany(DeviceGroup::class, 'device_type_id');
     }
+
+    static function doesTypeExist($type = '')
+    {
+        if (empty($type)) {
+            return false;
+        }
+        $types = self::where('name', '=', $type)->get();
+        return $types->count() > 0;
+    }
 }

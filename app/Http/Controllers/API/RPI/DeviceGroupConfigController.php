@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\RPI;
 
 use App\Http\Controllers\Controller;
 use App\Models\DeviceGroup;
+use App\Models\DeviceType;
 use Illuminate\Http\Request;
 
 class DeviceGroupConfigController extends Controller
@@ -14,7 +15,7 @@ class DeviceGroupConfigController extends Controller
      */
     public function getConfig(Request $request)
     {
-        if ($request->type != 'rfid_trigger') {
+        if (!DeviceType::doesTypeExist($request->type)) {
             return response()->json([
                 'message' => 'Unknown device_group type ' . $request->type,
                 'status_code' => 404
