@@ -97,7 +97,7 @@ export default {
                 },
             })
             .then((res) =>{
-                this.alert = 'Vehicle successfully added'
+                this.alert = 'Vehicle successfully added';
                 setTimeout(function() {
                     window.location.href = "/app/vehicles";
                 }, 750);

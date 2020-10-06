@@ -4,16 +4,22 @@
     <p>To access API, use route: https://dashboard.oneblinktech.com/api/compute_module/</p>
     <p>&nbsp;</p>
     <vs-button color="primary" type="filled" to="/compute-modules/add" style="margin-bottom:20px;">Add module</vs-button>
-    <vs-table data="users">
+      <vs-table
+          pagination
+          max-items="12"
+          stripe
+          search
+          v-model="data"
+          :data="data">
 
       <template slot="thead">
-        <vs-th>Name</vs-th>
-        <vs-th>IP Address</vs-th>
+        <vs-th sort-key="name">Name</vs-th>
+        <vs-th sort-key="description">IP Address</vs-th>
         <vs-th>API Token</vs-th>
         <vs-th>Options</vs-th>
       </template>
 
-      <template>
+      <template slot-scope="{data}">
         <vs-tr v-for="item in data" v-bind:key="item.id">
           <vs-td>{{item.name}}</vs-td>
           <vs-td>{{item.description}}</vs-td>

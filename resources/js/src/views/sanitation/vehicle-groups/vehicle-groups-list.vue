@@ -4,17 +4,23 @@
     <p>Each vehicle belongs to a group, and will inherit the same settings.</p>
     <p>&nbsp;</p>
     <vs-button color="primary" type="filled" to="/vehicle_groups/add" style="margin-bottom:20px;">Add vehicle group</vs-button>
-    <vs-table data="users">
+    <vs-table
+        pagination
+        max-items="12"
+        stripe
+        search
+        v-model="data"
+        :data="data">
 
       <template slot="thead">
         <vs-th>Enabled</vs-th>
-        <vs-th>Name</vs-th>
+        <vs-th sort-key="name">Name</vs-th>
         <vs-th>Trigger duration</vs-th>
         <vs-th>Time between triggers</vs-th>
         <vs-th>Options</vs-th>
       </template>
 
-      <template>
+      <template slot-scope="{data}">
         <vs-tr v-for="item in data" v-bind:key="item.id">
           <vs-td>{{item.enabled ? 'Yes' : 'No'}}</vs-td>
           <vs-td>{{item.name}}</vs-td>

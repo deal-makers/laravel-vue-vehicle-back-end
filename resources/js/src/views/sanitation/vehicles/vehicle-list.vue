@@ -1,19 +1,25 @@
 <template>
   <div>
-    <h2 class="style-title">Vehicle Tags</h2>
+    <h2 class="style-title">Vehicle Tags ({{ data.length }})</h2>
     <p>Vehicles inherit their options from the Vehicle Group they belong to.</p>
     <p>&nbsp;</p>
     <vs-button color="primary" type="filled" to="/vehicles/add" style="margin-bottom:20px;">Add vehicle tag</vs-button>
-    <vs-table data="users">
+    <vs-table
+        pagination
+        max-items="12"
+        stripe
+        search
+        v-model="data"
+        :data="data">
 
       <template slot="thead">
-        <vs-th>Name</vs-th>
-        <vs-th>Group</vs-th>
-        <vs-th>Description</vs-th>
+        <vs-th sort-key="name">Name</vs-th>
+        <vs-th sort-key="device_group.name">Group</vs-th>
+        <vs-th sort-key="description">EPC</vs-th>
         <vs-th>Options</vs-th>
       </template>
 
-      <template>
+      <template slot-scope="{data}">
         <vs-tr v-for="item in data" v-bind:key="item.id">
           <vs-td data="item.name">{{item.name}}</vs-td>
           <vs-td>{{item.device_group.name}}</vs-td>

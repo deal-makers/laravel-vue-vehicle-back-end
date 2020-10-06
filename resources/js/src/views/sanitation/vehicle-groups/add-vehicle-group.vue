@@ -28,7 +28,7 @@
 	  <div class="vx-row">
 	    <div class="vx-col w-full">
 	      <vs-button v-on:click="postRequest" class="mr-3 mb-2" v-if="data.device_group.name.length >= 3">Save</vs-button>
-				<vs-button to="/vehicles" class="mr-3 mb-2" color="danger">Cancel</vs-button>
+				<vs-button to="/vehicle_groups" class="mr-3 mb-2" color="danger">Cancel</vs-button>
 	    </div>
 	  </div>
 	</div>
@@ -41,7 +41,9 @@ export default {
     return {
 			data:{
 				device_group:{
-					name:''
+					name:'',
+                    trigger_duration_seconds: 0,
+                    time_between_trigger: 0,
 				}
 			}
     }
@@ -60,7 +62,7 @@ export default {
 				})
 				.then((res) =>{
                     setTimeout(function() {
-                        window.location.href = "/app/vehicle-groups";
+                        window.location.href = "/app/vehicle_groups";
                     }, 750);
 				}).catch((err) => {
 					console.log(err);

@@ -11,11 +11,17 @@
           </template>
 
           <template>
-              <vs-tr v-for="item in data" v-bind:key="item.id">
+              <vs-tr>
                   <vs-td><zap-icon class="text-red " style="color: green;" /></vs-td>
-                  <vs-td>{{item.name}}</vs-td>
-                  <vs-td>{{item.device_group.name}}</vs-td>
-                  <vs-td>Sep 9, 2020 10:14 AM</vs-td>
+                  <vs-td>Compute Module 1</vs-td>
+                  <vs-td>TFNJ Compute Modules</vs-td>
+                  <vs-td>Sep 9, 2020 11:14</vs-td>
+              </vs-tr>
+              <vs-tr>
+                  <vs-td><x-icon class="text-red " style="color: orangered;" /></vs-td>
+                  <vs-td>Compute Module 2</vs-td>
+                  <vs-td>TFNJ Compute Modules</vs-td>
+                  <vs-td>Aug 22, 2020 17:56</vs-td>
               </vs-tr>
           </template>
 
@@ -24,6 +30,7 @@
 </template>
 <script>
 import { ZapIcon } from 'vue-feather-icons'
+import { XIcon } from 'vue-feather-icons'
 export default {
 data(){
     return {
@@ -33,7 +40,8 @@ data(){
     }
 },
 components: {
-    ZapIcon
+    ZapIcon,
+    XIcon
 },
 methods:{
     getData(){
