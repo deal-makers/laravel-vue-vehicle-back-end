@@ -13,7 +13,7 @@ class DeviceType extends Model
     /**
      * @var string
      */
-    protected $table = 'device_type';
+    protected $table = 'device_types';
 
     /**
      * @var string[]
