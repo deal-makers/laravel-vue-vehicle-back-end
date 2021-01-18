@@ -17,4 +17,4 @@ Route::get('/{any}', 'API\Admin\ApplicationController')->where('any', '.*');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');

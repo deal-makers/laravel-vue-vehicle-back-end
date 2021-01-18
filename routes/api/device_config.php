@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('config')->group(function() {
 
-    Route::get('device_group/{type}', 'API\RPI\DeviceGroupConfigController@getConfig');
-    Route::get('compute_module/{type}', 'API\RPI\DeviceGroupConfigController@getConfig');
+    Route::get('device_group/{type}', [API\RPI\DeviceGroupConfigController::class, 'getConfig']);
+    Route::get('compute_module/{type}', [API\RPI\DeviceGroupConfigController::class, 'getConfig']);
 
 });

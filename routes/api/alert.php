@@ -13,7 +13,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('alerts')->group(function () {
-    Route::post('create', 'API\RPI\AlertController@store');
+    Route::post('create', [API\RPI\AlertController::class, 'store']);
 });
 
 Route::post('pulse', 'API\RPI\PulseController')->middleware('allowed');

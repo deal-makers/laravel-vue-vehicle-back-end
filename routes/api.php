@@ -15,20 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Authentication Routes...
-Route::post('login', 'Auth\LoginController@login');
+Route::post('login', [Auth\LoginController::class, 'login']);
 
 // Password Reset Routes...
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+Route::get('password/reset', [Auth\ForgotPasswordController::class, 'showLinkRequestForm']);
+Route::post('password/email', [Auth\ForgotPasswordController::class, 'sendResetLinkEmail']);
+Route::get('password/reset/{token}', [Auth\ResetPasswordController::class, 'showResetForm']);
+Route::post('password/reset', [Auth\ResetPasswordController::class, 'reset']);
 
 Route::middleware('auth:api')->group(function () {
 
-    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-    // Registration Routes...
-    //Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-    //Route::post('register', 'Auth\RegisterController@register');
+    Route::post('logout', [Auth\LoginController::class, 'logout'])->name('logout');
 
 });
