@@ -39,6 +39,11 @@ class Device extends Model
         return $this->hasMany(DeviceAttribute::class);
     }
 
+    public function getAttributeByName($name)
+    {
+        return $this->attributes()->$name;
+    }
+
     public function pulses()
     {
         return $this->hasMany(DevicePulse::class);

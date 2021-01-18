@@ -62,10 +62,11 @@ export default [
             }
         ]
     },
-    {
+    /*{
         name: "Global Admin",
         slug: "global-admin",
         icon: 'CommandIcon',
+        hidden: true,
         submenu: [
             {
                 url: '#a',//"/devices",
@@ -92,6 +93,6 @@ export default [
                 icon: "FileIcon"
             },
         ]
-    },
+    },*/
 
 ]

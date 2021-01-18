@@ -42,7 +42,6 @@ class DeviceGroupConfigController extends Controller
                         return [
                             'name' => $item['name'],
                             'device_group_id' => $item['device_group_id'],
-                            'device_rfid' => $item['device_rfid'],
                             'description' => $item['description']
                         ];
                     })

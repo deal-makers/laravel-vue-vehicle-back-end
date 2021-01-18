@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class RemoteIOTDevice
+ *
  * @package App\Models
+ *
+ * Attributes are defined in a way that is similar to No SQL.
+ * They are defined as
  */
 class DeviceType extends Model
 {
@@ -29,6 +33,14 @@ class DeviceType extends Model
         'attributes' => 'json'
     ];
 
+    //private $attribute_array = stdClass;
+
+    const ATTRIBUTE_TYPES = [
+        'string',
+        'int',
+        'array'
+    ];
+
     /**
      * Get actual device of this type
      */
@@ -49,5 +61,10 @@ class DeviceType extends Model
         }
         $types = self::where('name', '=', $type)->get();
         return $types->count() > 0;
+    }
+
+    public function addAttribute($name, $type)
+    {
+
     }
 }
