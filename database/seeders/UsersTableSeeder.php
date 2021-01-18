@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 class UsersTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeders.
      *
      * @return void
      * @throws Exception
