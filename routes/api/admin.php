@@ -10,6 +10,12 @@
 */
 
 
+use App\Http\Controllers\API\Admin\VehicleGroupController;
+use App\Http\Controllers\API\Admin\DeviceController;
+use App\Http\Controllers\API\Admin\DeviceGroupController;
+use App\Http\Controllers\API\Admin\RemoteDevicesController;
+use App\Http\Controllers\API\Admin\VehicleController;
+use App\Http\Controllers\API\Admin\ComputeModuleController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function() {
