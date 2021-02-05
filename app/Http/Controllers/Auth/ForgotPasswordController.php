@@ -29,4 +29,11 @@ class ForgotPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    public function showLinkRequestForm()
+    {
+        $this->data['title'] = trans('backpack::base.reset_password'); // set the page title
+        dd($this->data);
+        return view('backpack::auth.passwords.email', $this->data);
+    }
 }

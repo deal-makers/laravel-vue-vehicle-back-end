@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,14 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 // Authentication Routes...
-Route::post('login', [Auth\LoginController::class, 'login']);
+Route::post('login', [LoginController::class, 'login']);
 
 // Password Reset Routes...
-Route::get('password/reset', [Auth\ForgotPasswordController::class, 'showLinkRequestForm']);
-Route::post('password/email', [Auth\ForgotPasswordController::class, 'sendResetLinkEmail']);
-Route::get('password/reset/{token}', [Auth\ResetPasswordController::class, 'showResetForm']);
-Route::post('password/reset', [Auth\ResetPasswordController::class, 'reset']);
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm']);
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm']);
+Route::post('password/reset', [ResetPasswordController::class, 'reset']);
 
 Route::middleware('auth:api')->group(function () {
 

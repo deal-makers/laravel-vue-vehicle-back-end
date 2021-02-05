@@ -163,6 +163,22 @@ const router = new Router({
                     name: 'pageError404',
                     component: () => import('@/views/pages/Error404.vue')
                 },
+                { 
+                    path: '/reset-password', 
+                    name: 'reset-password', 
+                    component: () => import('@/views/pages/ForgotPassword.vue'),
+                    meta: { 
+                        auth:false 
+                    } 
+                },
+                { 
+                    path: '/reset-password/:token', 
+                    name: 'reset-password-form', 
+                    component: () => import('@/views/pages/ResetPasswordForm.vue'),
+                    meta: { 
+                        auth:false 
+                    } 
+                }
             ]
         },
         // Redirect to 404 page, if no match found
