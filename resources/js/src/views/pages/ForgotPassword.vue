@@ -17,6 +17,7 @@
                               <h4 class="mb-4">Recover your password</h4>
                               <p>Please enter your email address and we'll send you instructions on how to reset your password.</p>
                               <p class="alert-success text-bold" v-if="success == true">We sent reset password link. Please check your inbox.</p>
+                              <p class="alert-danger text-bold" v-if="has_error == true">We can't find a user or can't send email.</p>
                           </div>
 
                         <vs-input
@@ -55,6 +56,7 @@ export default {
               this.success = true;
           }, error => {
               console.error(error);
+              this.has_error = true;
           });
         }
     }
