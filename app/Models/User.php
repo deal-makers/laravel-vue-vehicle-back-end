@@ -51,4 +51,11 @@ class User extends Authenticatable
     {
         return self::where('api_token', $api_token)->exists();
     }
+    /**
+ * Override the mail body for reset password notification mail.
+ */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new \App\Notifications\MailResetPasswordNotification($token));
+    }
 }

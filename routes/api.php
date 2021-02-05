@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\API\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +24,13 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 Route::post('login', [LoginController::class, 'login']);
 
 // Password Reset Routes...
-Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm']);
-Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
-Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm']);
-Route::post('password/reset', [ResetPasswordController::class, 'reset']);
+Route::post('password/forgot', [AuthController::class, 'postForgotPassword']);
+Route::post('password/reset', [AuthController::class, 'postResetPassword']);
+// Send reset password mail
+Route::post('reset-password', [AuthController::class, 'sendPasswordResetLink']);
 
+// handle reset password form process
+Route::post('reset/password', [AuthController::class, 'callResetPassword']);
 Route::middleware('auth:api')->group(function () {
 
     Route::post('logout', [Auth\LoginController::class, 'logout'])->name('logout');
