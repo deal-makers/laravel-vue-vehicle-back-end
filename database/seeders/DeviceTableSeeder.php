@@ -1,6 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use DB;
+use Illuminate\Support\Str;
 
 class DeviceTableSeeder extends Seeder
 {
@@ -14,23 +18,23 @@ class DeviceTableSeeder extends Seeder
         DB::table('devices')->insert([
             'name' => 'RPi',
             'device_group_id' => null,
-            'device_rfid' => null,
-            'device_id' => 111,
+            // 'device_rfid' => null,
+            // 'device_id' => 111,
             'description' => null,
         ]);
 
         DB::table('devices')->insert([
             'name' => 'random1',
             'device_group_id' => 1,
-            'device_rfid' => '0007935148',
-            'device_id' => 22,
+            // 'device_rfid' => '0007935148',
+            // 'device_id' => 22,
             'description' => Str::random(\Config::get('auth.api_token_length')),
         ]);
         DB::table('devices')->insert([
             'name' => 'random2',
             'device_group_id' => 1,
-            'device_rfid' => '0007939547',
-            'device_id' => 123,
+            // 'device_rfid' => '0007939547',
+            // 'device_id' => 123,
             'description' => Str::random(\Config::get('auth.api_token_length')),
         ]);
     }

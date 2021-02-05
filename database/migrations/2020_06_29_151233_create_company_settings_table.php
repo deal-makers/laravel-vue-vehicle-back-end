@@ -24,7 +24,10 @@ class CreateCompanySettingsTable extends Migration
                 ->on('companies')->onDelete('cascade');
         });
 
-        (new CompaniesTableSeeder())->run();
+        // Artisan::call('db:seed', [
+        //     '--class' => 'CompaniesTableSeeder',
+        //     '--force' => true // <--- add this line
+        // ]);
     }
 
     /**
