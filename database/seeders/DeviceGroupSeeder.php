@@ -1,6 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use DB;
 
 class DeviceGroupSeeder extends Seeder
 {
@@ -14,14 +17,16 @@ class DeviceGroupSeeder extends Seeder
         DB::table('device_groups')->insert([
             'name' => 'group1',
             'enabled' => 1,
-            'type' => 'rfid_trigger',
+            // 'type' => 'rfid_trigger',
+            'device_type_id' => 1,
             'trigger_duration_seconds' => '5',
             'time_between_trigger' => '120'
         ]);
         DB::table('device_groups')->insert([
             'name' => 'test',
             'enabled' => 1,
-            'type' => 'rfid_trigger',
+            // 'type' => 'rfid_trigger',
+            'device_type_id' => 1,
             'trigger_duration_seconds' => '5',
             'time_between_trigger' => '120'
         ]);
