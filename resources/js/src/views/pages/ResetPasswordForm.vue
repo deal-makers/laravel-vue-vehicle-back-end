@@ -8,9 +8,6 @@
                     <img src="@assets/images/pages/login.png" alt="login" class="mx-auto">
                 </div>
                 <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
-                    <div v-if="alert" class="alert-danger">
-                          Bad Credentials. Please try again or contact administrator.
-                    </div>
                     <form autocomplete="off" @submit.prevent="resetPassword" method="post">
                         <div class="p-8">
                           <div class="vx-card__title mb-8">
@@ -26,7 +23,7 @@
                             label-placeholder="Email"
                             v-model="email"
                             class="w-full no-icon-border mb-8"/>
-                          
+
                         <vs-input
                             type="password"
                             icon="icon icon-lock"
@@ -34,7 +31,7 @@
                             label-placeholder="Password"
                             v-model="password"
                             class="w-full mt-6 no-icon-border mb-8" />
-                          
+
                         <vs-input
                             type="password"
                             icon="icon icon-lock"
@@ -42,7 +39,7 @@
                             label-placeholder="Confirm Password"
                             v-model="password_confirmation"
                             class="w-full mt-6 no-icon-border mb-8" />
-                            
+
                           <vs-button type="border" to="/app/login" class="px-4 w-full md:w-auto">Back To Login</vs-button>
                           <vs-button @click="resetPassword" class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0">Recover Password</vs-button>
                       </div>

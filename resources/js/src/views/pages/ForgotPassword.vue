@@ -8,16 +8,17 @@
                     <img src="@assets/images/pages/login.png" alt="login" class="mx-auto">
                 </div>
                 <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
-                    <div v-if="alert" class="alert-danger">
-                          Bad Credentials. Please try again or contact administrator.
-                    </div>
                     <form autocomplete="off" @submit.prevent="requestResetPassword" method="post">
                         <div class="p-8">
                           <div class="vx-card__title mb-8">
                               <h4 class="mb-4">Recover your password</h4>
                               <p>Please enter your email address and we'll send you instructions on how to reset your password.</p>
-                              <p class="alert-success text-bold" v-if="success == true">We sent reset password link. Please check your inbox.</p>
-                              <p class="alert-danger text-bold" v-if="has_error == true">We can't find a user or can't send email.</p>
+                              <vs-alert active="true" color="success" v-if="has_success == true">
+                                  {{ this.success }}
+                              </vs-alert>
+                              <vs-alert active="true" color="danger" v-if="has_error == true">
+                                  {{ this.error }}
+                              </vs-alert>
                           </div>
 
                         <vs-input
@@ -45,7 +46,9 @@ export default {
       return {
         email: null,
         has_error: false,
-        success: false,
+        has_success: false,
+        error: '',
+        success: 'We sent a Reset Password Link to your email.',
       }
     },
     methods: {
@@ -53,9 +56,12 @@ export default {
           this.$axios.post("/api/reset-password", {email: this.email}).then(result => {
               this.response = result.data;
               console.log(result.data);
-              this.success = true;
+              this.has_success = true;
           }, error => {
-              console.error(error);
+              if (error.response.data.errors)
+                  this.error = error.response.data.errors.email[0];
+              else
+                  this.error = error.response.data.message
               this.has_error = true;
           });
         }
