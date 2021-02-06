@@ -33,7 +33,7 @@
                                     class="w-full mt-6 no-icon-border" />
 
                                 <div class="flex flex-wrap justify-between my-5">
-                                    <router-link to="#">Forgot Password?</router-link>
+                                    <router-link to="/reset-password">Forgot Password?</router-link>
                                 </div>
 
                                 <vs-button @click="postRequest()">Login</vs-button>

@@ -195,7 +195,7 @@ router.beforeEach((to, from, next) => {
         let user = JSON.parse(localStorage.user)
         loggedIn = user.api_token
     }
-    if (loggedIn || to.path === '/login') {
+    if (loggedIn || to.path === '/login' || to.path === '/reset-password' || to.name === 'reset-password-form') {
         next()
     } else {
         next('/login')
